@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE TranscendenceModule
+    [
+    <!ENTITY msSiegeLordXortekMissionDestroy                "0xD012000D">
+    ]>
+
+<TranscendenceModule>
+    
+    <!-- Heated negotiations ================================
+    
+    EXTRA DATA
+    
+        reward:             Reward (in credits) for completing mission
+        targetID:           Id of station to destroy
+
+    NOTES
+    
+        
+    ======================================================================== -->
+    
+    <MissionType UNID="&msSiegeLordXortekMissionDestroy;"
+            name=               "Heated Negotiations"
+            attributes=         "xortek"
+
+            level=              "1-4"
+            scope=              "system"
+            >
+
+        <Events>
+            <OnCreate>
+                ; Called when mission object is created. This adds the mission
+                ; to the list of available missions, but it does not necessarily
+                ; start the mission.
+                ;
+                ; The script may call msnDestroy to abort creation of the mission.
+                ;
+                ; gSource is mission object
+                ; gData is arbitrary data passed in to msnCreate
+                ; aOwnerObj is the object that created the mission (or nil)
+
+                (block (enemyStations)
+
+                    (switch
+
+                        ; Get a list of enemy stations in the region. If we cannot find any
+                        ; suitable targets then we don't have a mission.
+
+                        (not (setq enemyStations (sysFindObject aOwnerObj "TAE +populated; -questTarget; -uncharted;")))
+                            (msnDestroy gSource)
+
+                        ; Otherwise we can create a mission
+
+                        (block (targetObj)
+
+                            ; Pick a random enemy station to destroy
+                            (setq targetObj (seededRandom (objGetDestiny aOwnerObj) enemyStations))
+
+                            ; Remember it
+                            (msnSetData gSource 'targetID (objGetID targetObj))
+
+                            ; Register for events so we know when the target is destroyed
+                            (msnRegisterForEvents gSource targetObj)
+
+                            ; Compute reward
+                            (msnSetData gSource 'reward (add 2000 (multiply (objGetLevel targetObj) 2000)))
+                            )
+                        )
+                    )
+            </OnCreate>
+
+            <OnAccepted>
+                ; Called if the player accepts the mission. The mission is 
+                ; already running (OnStarted has been called).
+                ;
+                ; gSource is mission object
+
+            </OnAccepted>
+
+            <OnDeclined>
+                ; Called if the player rejects the mission. The mission is already
+                ; running (OnStarted has been called).
+                ;
+                ; gSource is mission object.
+
+            </OnDeclined>
+
+            <OnStarted>
+                ; Called when the mission starts. This is called if the mission
+                ; starts running (either because the player accepted or some other
+                ; reason).
+                ;
+                ; gSource is mission object.
+
+            </OnStarted>
+
+            <OnSetPlayerTarget>
+                ; Called to refresh the player's target. Always called right after
+                ; the player accepts the mission. May be called at other times
+                ; (e.g., after the player returns to the system).
+                ;
+                ; gSource is mission object
+                ; aReason is:
+                ;       'accepted: Mission has been accepted
+                ;       'debriefed: Player has been debriefed
+                ;       'failure: Mission failed
+                ;       'inProgress: Player visited station while mission in progress
+                ;       'newSystem: Player is in a new system
+                ;       'success: Mission completed successfully
+
+                (rpgSetTarget gSource aReason (objGetObjByID (msnGetData gSource 'targetID)))
+            </OnSetPlayerTarget>
+
+            <OnObjDestroyed>
+                (switch
+                    (eq (objGetID aObjDestroyed) (msnGetData gSource 'targetID))
+                        (msnSuccess gSource)
+                    )
+            </OnObjDestroyed>
+
+            <OnCompleted>
+                ; Called when the mission ends (generally because msnSuccess or
+                ; msnFailure were called).
+                ;
+                ; gSource is mission object
+                ; gData is arbitrary data passed in to msnSuccess or msnFailure
+                ; aReason is:
+                ;       'failure: Mission failed
+                ;       'success: Mission completed successfully
+
+            </OnCompleted>
+
+            <OnReward>
+                ; Called by msnReward, generally during debrief.
+                ;
+                ; gSource is mission object
+                ; gData is data passed to msnReward
+
+                (rpgMissionRewardPayment (msnGetData gSource 'reward))
+            </OnReward>
+
+            <OnDestroy>
+                ; Called when mission object is destroyed (generally only non-player
+                ; missions are removed when the player changes system. Player
+                ; missions are not normally destroyed)
+                ;
+                ; gSource is mission object
+                ;
+                ; NOTE: No need to unregister for events because we automatically
+                ; unregister when the mission is complete.
+
+            </OnDestroy>
+        </Events>
+
+        <Language>
+            <Text id="Summary">
+                (cat
+                    (msnTranslate gSource 'descSummary {
+                        targetName: (objGetName (objGetObjByID (msnGetData gSource 'targetID)) 'article)
+                        systemName: (sysGetName)
+                        })
+                    "\n\n"
+                    (typTranslate &dsRPGMission; 'mission.rewardSummary {
+                        systemName: (sysGetName)
+                        payment: (fmtCurrency 'credit (msnGetData gSource 'reward))
+                        })
+                    )
+            </Text>
+
+            <Text id="Briefing">
+                (msnTranslate gSource 'textBriefing {
+                    targetName: (objGetName (objGetObjByID (msnGetData gSource 'targetID)) '(capitalize article))
+                    payment: (fmtCurrency 'credit (msnGetData gSource 'reward))
+                    })
+            </Text>
+            
+            <Text id="textBriefing">
+                "A certain competitor in this system has been very 
+                uncooperative. We are confident your negotiation 
+                skills can be of help here. Would you be willing to 
+                travel to %targetName% and synergize some 
+                resolution? We have budgeted a bonus of %payment% 
+                for this mission."
+            </Text>
+
+            <Text id="SuccessDebrief">
+                (msnTranslate gSource 'textSuccessDebrief {
+                    payment: (fmtCurrency 'credit (msnGetData gSource 'reward))
+                    })
+            </Text>
+
+            <Text id="textSuccessDebrief">
+                "I trust the negotations went well? Wonderful! 
+                Please accept %payment% as a reward for your 
+                services."
+            </Text>
+
+            <Text id="Name">
+                Heated Negotiations
+            </Text>
+
+            <Text id="descSummary">
+                Your mission is to destroy %targetName% in the %systemName% system.
+            </Text>
+            
+            <Text id="Intro">
+                The darkened hall is sparsely populated by pilots of 
+                the docked ships. Some glance at you and smirk. A 
+                woman approaches you. Lower half of her face and 
+                neck are covered with horrible burn scars. Her 
+                mutilated lips coalesce into a smile and she begins 
+                to speak through a cyber-larynx in a crystal clear 
+                voice:
+
+                "Xortek Corporation can use a %man% of your skills. 
+                Our bonus plan is unrivaled in Human space."
+            </Text>
+
+            <Text id="AcceptReply">
+                The liason's eyes light up with ashen cruelty:
+                
+                "Give them our warmest regards!"
+            </Text>
+            <String id="DeclineReply">
+                
+                The liason raises her eyebrow:
+                
+                "Not your cup of synth-tea? Come back if you warm up to our offer." 
+                
+            </String>
+            <Text id="InProgress">
+                The liason notices you and looks at you quizzically:
+
+                "Are the negotiations giving your trouble?"
+            </Text>
+            <Text id="SuccessMsg">
+                Mission complete!
+            </Text>
+            <String id="AlreadyDebriefed">
+                "Ah, you've returned! Please wait, we don't have any tasks available just yet."
+            </String>
+            <String id="Unavailable">
+                "Sorry, there are no missions available."
+            </String>
+        </Language>
+    </MissionType>
+
+</TranscendenceModule>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE TranscendenceExtension
+    [
+        <!ENTITY exSiegeLordGarnetPlayerShipExt       "0xD0120008">
+    ]>
+
+<TranscendenceExtension UNID= "&exSiegeLordGarnetPlayerShipExt;" apiVersion= "28" name= "Garnet Playership v0.1" >
+    <Library UNID="&unidHumanSpaceLibrary;"/>
+
+    <Module filename="SiegeLordXortekWeapons.xml"/>
+    <Module filename="SiegeLordGarnetShip.xml"/>
+    <Module filename="SiegeLordGarnetPlayerShip.xml"/>
+</TranscendenceExtension>

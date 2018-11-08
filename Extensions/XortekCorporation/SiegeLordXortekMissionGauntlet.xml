@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE TranscendenceModule
+    [
+    <!ENTITY msSiegeLordXortekMissionGauntlet                "0xD0120019">
+    <!--
+      External
+    -->
+    <!ENTITY scSiegeLordGarnet                               "0xD0120001">
+    ]>
+
+<TranscendenceModule>
+    
+    <!-- Gauntlet ================================
+    
+    EXTRA DATA
+    
+        beaconID:           ID of the central beacon
+        reward:             Reward (in credits) for completing mission
+        attackerIDs:        Id of station to destroy
+        status:             Nil - not started, 'started - started via the beacon, 'stopped - stopped in some way
+        oobCounter:         Out-of-bounds counter
+
+    NOTES
+    
+        
+    ======================================================================== -->
+    
+    <MissionType UNID="&msSiegeLordXortekMissionGauntlet;"
+            name=               "Heated Negotiations"
+            attributes=         "xortek gauntlet"
+
+            level=              "1-4"
+            scope=              "system"
+            >
+
+        <Events>
+            <OnCreate>
+                ; Called when mission object is created. This adds the mission
+                ; to the list of available missions, but it does not necessarily
+                ; start the mission.
+                ;
+                ; The script may call msnDestroy to abort creation of the mission.
+                ;
+                ; gSource is mission object
+                ; gData is arbitrary data passed in to msnCreate
+                ; aOwnerObj is the object that created the mission (or nil)
+
+                (block ((beaconID (objGetData aOwnerObj 'provingGroundsID)))
+                    (msnSetData gSource 'beaconID beaconID)
+                    ; Compute reward
+                    (msnSetData gSource 'reward 4000)
+                    (msnSetData gSource 'status 'created)
+                    (msnSetData gSource 'oobCounter 0)
+                    )
+            </OnCreate>
+
+            <OnAccepted>
+                ; Called if the player accepts the mission. The mission is 
+                ; already running (OnStarted has been called).
+                ;
+                ; gSource is mission object
+
+
+                (block (
+                        attacker
+                        attackerIDs
+                        (beacon (objGetObjByID (msnGetData gSource 'beaconID)))
+                        )
+                    (setq attackerIDs
+                        (map (slRange 3) i
+                            (block ((angle (* i 120)))
+                                (setq attacker (sysCreateShip 
+                                    ;&scSiegeLordGarnet;
+                                    &scHornet;
+                                    (sysVectorPolarOffset (objGetPos beacon) angle 35)
+                                    &svCorporate;
+                                    ))
+                                
+                                (shpOrder attacker 'turnTo (modulo (+ angle 180) 360))
+                                (shpOrder attacker 'hold)
+                                (msnRegisterForEvents gSource attacker)
+                                (objGetID attacker)
+                                )
+                            )
+                        )
+                    (msnSetData gSource 'attackerIDs attackerIDs)
+                    )
+            </OnAccepted>
+
+            <OnDeclined>
+                ; Called if the player rejects the mission. The mission is already
+                ; running (OnStarted has been called).
+                ;
+                ; gSource is mission object.
+
+            </OnDeclined>
+
+            <OnStarted>
+                ; Called when the mission starts. This is called if the mission
+                ; starts running (either because the player accepted or some other
+                ; reason).
+                ;
+                ; gSource is mission object.
+
+            </OnStarted>
+
+            <OnSetPlayerTarget>
+                ; Called to refresh the player's target. Always called right after
+                ; the player accepts the mission. May be called at other times
+                ; (e.g., after the player returns to the system).
+                ;
+                ; gSource is mission object
+                ; aReason is:
+                ;       'accepted: Mission has been accepted
+                ;       'debriefed: Player has been debriefed
+                ;       'failure: Mission failed
+                ;       'inProgress: Player visited station while mission in progress
+                ;       'newSystem: Player is in a new system
+                ;       'success: Mission completed successfully
+
+                (block ((beacon (objGetObjByID (msnGetData gSource 'beaconID))))
+                    (objSetKnown beacon)
+                    (rpgSetTarget gSource aReason beacon)
+                    )
+            </OnSetPlayerTarget>
+
+            <OnObjDestroyed>
+                (if
+                    (or (not gPlayerShip) (!= aOrderGiver gPlayerShip))
+                        Nil
+                    (enum (msnGetData gSource 'attackerIDs) attackerID
+                        (if (eq (objGetID aObjDestroyed) attackerID)
+                            (block Nil
+                                (msnFailure gSource)
+                                (slGauntletStopMission gSource)
+                                )
+                            )
+                        )
+                )
+            </OnObjDestroyed>
+
+            <OnCompleted>
+                ; Called when the mission ends (generally because msnSuccess or
+                ; msnFailure were called).
+                ;
+                ; gSource is mission object
+                ; gData is arbitrary data passed in to msnSuccess or msnFailure
+                ; aReason is:
+                ;       'failure: Mission failed
+                ;       'success: Mission completed successfully
+
+            </OnCompleted>
+
+            <OnReward>
+                ; Called by msnReward, generally during debrief.
+                ;
+                ; gSource is mission object
+                ; gData is data passed to msnReward
+
+                (rpgMissionRewardPayment (msnGetData gSource 'reward))
+            </OnReward>
+
+            <OnDestroy>
+                ; Called when mission object is destroyed (generally only non-player
+                ; missions are removed when the player changes system. Player
+                ; missions are not normally destroyed)
+                ;
+                ; gSource is mission object
+                ;
+                ; NOTE: No need to unregister for events because we automatically
+                ; unregister when the mission is complete.
+
+            </OnDestroy>
+            
+            <OnBeginExercise>
+                (block Nil
+                    (msnSetData gSource 'status 'started)
+                    (msnAddTimerEvent gSource 700 "OnEndExercise")
+                    (msnAddRecurringTimerEvent gSource 20 "OnCheckBounds") 
+                    (enum (msnGetData gSource 'attackerIDs) attackerID
+                        (block ((attacker (objGetObjByID attackerID)))
+                            (shpCancelOrders attacker) 
+                            (shpOrder attacker 'attack gPlayerShip)
+                            )
+                        )
+                    )
+            </OnBeginExercise>
+            
+            <OnEndExercise>
+                (block Nil
+                    (msnSuccess gSource)
+                    (slGauntletStopMission gSource)
+                    )
+            </OnEndExercise>
+            
+            <OnCheckBounds>
+                (block (
+                        (beacon (objGetObjByID (msnGetData gSource 'beaconID)))
+                        (oobCounter (msnGetData gSource 'oobCounter))
+                        )
+                        (if
+                            (geq (objGetDistance beacon gPlayerShip) 41)
+                                (block Nil
+                                    (setq oobCounter (+ oobCounter 1))
+                                    (if
+                                        (gr oobCounter 4)
+                                            (block Nil
+                                                (msnFailure gSource)
+                                                (slGauntletStopMission gSource)
+                                                )
+                                        (objSendMessage gPlayerShip Nil "Get back to the proving grounds!")
+                                        )
+                                    )
+                            (setq oobCounter 0)
+                            )
+                        (msnSetData gSource 'oobCounter oobCounter)
+                    )
+            </OnCheckBounds>
+        </Events>
+
+        <Language>
+            <Text id="Summary">
+                (cat
+                    (msnTranslate gSource 'descSummary {
+                        systemName: (sysGetName)
+                        })
+                    "\n\n"
+                    (typTranslate &dsRPGMission; 'mission.rewardSummary {
+                        systemName: (sysGetName)
+                        payment: (fmtCurrency 'credit (msnGetData gSource 'reward))
+                        })
+                    )
+            </Text>
+
+            <Text id="Briefing">
+                (msnTranslate gSource 'textBriefing {
+                    payment: (fmtCurrency 'credit (msnGetData gSource 'reward))
+                    })
+            </Text>
+            
+            <Text id="textBriefing">
+                "As you may know, Xortek Corporation invests heavily 
+                into weapons and combat ship research. Our scientists maintain that no invention 
+                can be declared a success without extensive testing!"
+                
+                Liason opens her eyes ever so wider:
+                
+                "The best combat data can be obtained on live 
+                targets, with live ammunition! We need you to be 
+                that live target! It is a dangerous mission, so we 
+                have budgeted a bonus of %payment% if you are 
+                successful."
+            </Text>
+
+            <Text id="SuccessDebrief">
+                (msnTranslate gSource 'textSuccessDebrief {
+                    payment: (fmtCurrency 'credit (msnGetData gSource 'reward))
+                    })
+            </Text>
+
+            <Text id="textSuccessDebrief">
+                The liason runs up to you, and excitedly says:
+                
+                "The exercise went incredibly well! The combat data 
+                was of the highest quality! Please accept %payment% 
+                as a reward for your services."
+            </Text>
+
+            <Text id="Name">
+                Gauntlet
+            </Text>
+
+            <Text id="descSummary">
+                Your mission is to participate in a weapons 
+                testing exercise at the Xortek Proving Grounds in 
+                the %systemName% system.
+                
+                Make sure to stay within the boundaries of the 
+                testing area for the duration of the exercise. Do 
+                not retailate against the attacking ships.
+            </Text>
+            
+            <Text id="Intro">
+                The darkened hall is sparsely populated by pilots of 
+                the docked ships. Some glance at you and smirk. A 
+                woman approaches you. Lower half of her face and 
+                neck are covered with horrible burn scars. Her 
+                mutilated lips coalesce into a smile and she begins 
+                to speak through a cyber-larynx in a crystal clear 
+                voice:
+
+                "Xortek Corporation can use a %man% of your skills. 
+                Our bonus plan is unrivaled in Human space."
+            </Text>
+
+            <Text id="AcceptReply">
+                The liason replies warmly:
+                
+                "Wonderful! Please travel to our proving grounds and 
+                make sure not to destroy our ships!"
+            </Text>
+            
+            <String id="DeclineReply">
+                The liason frowns:
+                
+                "Our weapons research cannot continue without more testing!" 
+            </String>
+            <String id="FailureDebrief">
+                You find the liason reviewing some figures on a data display.
+                She turns to you:
+                
+                "The combat data is incomplete! Please follow the 
+                exercise parameters more closely next time."
+            </String>
+            <Text id="InProgress">
+                The liason is surprised beyond compare:
+
+                "How could you be here while the exercise is in progress?"
+            </Text>
+            <Text id="SuccessMsg">
+                Mission complete!
+            </Text>
+            <String id="AlreadyDebriefed">
+                "Ah, you've returned! Please wait, we don't have any tasks available just yet."
+            </String>
+            <String id="Unavailable">
+                "Sorry, there are no missions available."
+            </String>
+        </Language>
+    </MissionType>
+    <Globals>
+        (block Nil
+            (setq slGauntletStopMission (lambda (gSource)
+                    (block Nil
+                        (msnSetData gSource 'status 'stopped)
+                        (msnCancelTimerEvent gSource "OnCheckBounds")
+                        (enum (msnGetData gSource 'attackerIDs) attackerID
+                            (block ((attacker (objGetObjByID attackerID)))
+                                (shpCancelOrders attacker)
+                                (shpOrder attacker 'gate)
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+    </Globals>
+
+</TranscendenceModule>

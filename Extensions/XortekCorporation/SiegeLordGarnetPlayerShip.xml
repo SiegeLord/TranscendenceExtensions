@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE TranscendenceModule
+    [
+    <!ENTITY scSiegeLordGarnetPlayer              "0xD0120009">
+<!--
+  External  
+-->
+    <!ENTITY scSiegeLordGarnet                    "0xD0120001">
+    ]>
+
+<!--
+TransData /extensions:0xD0120009 /extensionFolder:Extensions /weaponimages /output:test.bmp /criteria:"p +xortek"
+-->
+
+<TranscendenceModule>   
+    <ShipClass UNID="&scSiegeLordGarnetPlayer;"
+            inherit=            "&scSiegeLordGarnet;"
+
+            attributes=         "xortek 00200000_PlayerShip"
+            characterClass=     "&unidPilgrimClass;"
+            >       
+    </ShipClass>
+</TranscendenceModule>

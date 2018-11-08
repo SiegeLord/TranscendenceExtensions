@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE TranscendenceModule
+    [
+    <!ENTITY rsSiegeLordGarnetGameImage           "0xD0120002">
+    <!ENTITY rsSiegeLordGarnetBlueJet             "0xD0120004">
+    ]>
+
+<TranscendenceModule>
+    <Image UNID="&rsSiegeLordGarnetGameImage;" bitmap="Resources/SiegeLordGarnetGame.png" loadOnUse="true"/>
+
+    <ShipClass UNID="&scSiegeLordGarnet;"
+            manufacturer=       "Xortek Corporation"
+            class=              "Garnet"
+            type=               "corvette"
+            >
+
+        <Hull
+            size=               "24"
+            mass=               "32"
+            cargoSpace=         "50"
+
+            maxReactorPower=    "10000"
+            maxCargoSpace=      "175"
+            maxDevices=         "7"
+            maxWeapons=         "3"
+
+            stdArmor=           "4000"
+            maxArmor=           "8000"
+            maxArmorSpeed=      "25"
+            minArmorSpeed=      "18"
+            />
+
+        <Drive
+            drivePowerUse=      "20"
+            thrustRatio=        "8.2"
+            maxSpeed=           "22"
+            />
+
+        <Armor
+            armorID=            "&itReactiveArmor;"
+            count=              "4"
+            />
+
+        <Devices>
+            <DeviceSlot criteria="w +property:multiShot;" posAngle="0" posRadius="15"/>
+            <DeviceSlot criteria="w" posAngle="0" posRadius="25"/>
+            <DeviceSlot criteria="r">
+                <EnhancementAbilities>
+                    <Enhance type=          "efficiencyBoost"
+                             criteria=      "r"
+                             enhancement=   "0x0f01"
+                             />
+                </EnhancementAbilities>
+            </DeviceSlot>
+            <Device deviceID="&itFastFireLaserCannon;"/>
+            <Device deviceID="&itClass1Deflector;"/>
+            <Device deviceID="&it15MWReactor;"/>
+        </Devices>
+
+        <Maneuver
+            maxRotationRate=    "11.0"
+            rotationAccel=      "2.5"
+            rotationStopAccel=  "12.0"
+            />
+
+        <Items>
+            <Item count="4d6" item="&itHelium3FuelRod;"/>
+        </Items>
+
+        <Image imageID="&rsSiegeLordGarnetGameImage;"      imageWidth="64" imageHeight="64" rotationCount="120"/>
+        
+        <Effects>
+            <Effect type="thrustMain" posAngle="188" posRadius="23" posZ="3" rotation="180" effect="&rsSiegeLordGarnetBlueJet;"/>
+            <Effect type="thrustMain" posAngle="180" posRadius="23" posZ="-4" rotation="180" effect="&rsSiegeLordGarnetBlueJet;"/>
+            <Effect type="thrustMain" posAngle="172" posRadius="23" posZ="3" rotation="180" effect="&rsSiegeLordGarnetBlueJet;"/>
+        </Effects>
+        
+        <AISettings
+            fireRateAdj=        "50"
+            fireAccuracy=       "90"
+            perception=         "4"
+            />
+        
+    </ShipClass>
+
+    <EffectType UNID="&rsSiegeLordGarnetBlueJet;"
+            instance="creator"
+            >
+        <Effect>
+            <ParticleJet
+                    emitRate=           "20"
+                    emitSpeed=          "20-30"
+                    particleLifetime=   "3-6"
+                    spreadAngle=        "4"
+                    >
+                <ParticleEffect>
+                    <Particle
+                            style=          "plain"
+                            minWidth=       "1"
+                            maxWidth=       "3"
+                            primaryColor=   "#ffc041"
+                            secondaryColor= "#812617"
+                            />
+                </ParticleEffect>
+            </ParticleJet>
+            
+            <Ray    style=          "smooth"
+                    shape=          "tapered"
+                    blendMode=      "screen"
+                    >
+                <Events>
+                    <GetParameters>
+                        (block (thrusterPower maxSpeed primaryTable)
+                            (setq thrusterPower (@ gData 'thrusterPower))
+                            (setq maxSpeed (@ gData 'maxSpeed))
+                            (setq primaryTable (list "#388FFF" "#467BFF" "#5479FF" "#6593FF" "#75ABFF" "#86ACFF" "#97B8FF" "#A7C9FF" "#B8CCFF" "#B8CCFF" "#C0D8FD" "#C8DDFD" "#D0DEFC" "#D8E8FB" "#DFF1FB" "#E0F2FA" "#DAEFF9" "#D5F9F7" "#D0F8FF" "#D0F8FF"))
+
+                            {
+                                length: (mathScale maxSpeed 12 35 30 80 50)
+                                width: (mathScale thrusterPower 50 1000 16 52 50)
+                                intensity: (mathScale maxSpeed 12 35 40 60 50)
+                                primaryColor: "#D0DEFC"
+                                secondaryColor: "#1D1781"
+                                }
+                            )
+                    </GetParameters>
+                </Events>
+            </Ray>
+        </Effect>
+    </EffectType>
+</TranscendenceModule>

@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE TranscendenceModule
+    [
+    <!ENTITY msSiegeLordXortekMissionSolarPlasma                "0xD012000E">
+    <!ENTITY itSunPlasma                                        "0xD012000F">
+    ]>
+
+<TranscendenceModule>
+    <ItemType UNID="&itSunPlasma;"
+            name=               "Sun Flare Plasma"
+            virtual=            "true"
+            >
+
+        <Weapon
+                type=           "particles"
+                count=          "1d4+4"
+
+                configuration=  "spread5"
+                damage=         "plasma:1; WMD5"
+                fireRate=       "20"
+                powerUse=       "6000"
+                noWorldHits=    "true"
+                >
+            
+            <ParticleSystem
+                    style=              "spray"
+                    emitLifetime=       "5-12"
+                    emitRate=           "5d6"
+                    emitSpeed=          "20-40"
+                    emitWidth=          "50"
+                    
+                    particleLifetime=   "24-48"
+                    particleEffect=     "&efPlasmaParticleDefault;"
+                    >
+            </ParticleSystem>
+        </Weapon>
+    </ItemType>
+    
+    <!-- A Trip to Tartarus ================================
+    
+    EXTRA DATA
+    
+        reward:             Reward (in credits) for completing mission
+        targetID:           Id of the star
+        plasmaCollected:    How much plasma has been collected
+        plasmaReported:     How much plasma has been reported (via messages)
+        needPlasma:         Whether we still need plasma
+
+    NOTES
+    
+        ;
+    ======================================================================== -->
+    
+    <MissionType UNID="&msSiegeLordXortekMissionSolarPlasma;"
+            name=               "A Trip to Tartarus"
+            attributes=         "xortek"
+
+            level=              "1-4"
+            scope=              "system"
+            >
+
+        <Events>
+            <OnCreate>
+                ; Called when mission object is created. This adds the mission
+                ; to the list of available missions, but it does not necessarily
+                ; start the mission.
+                ;
+                ; The script may call msnDestroy to abort creation of the mission.
+                ;
+                ; gSource is mission object
+                ; gData is arbitrary data passed in to msnCreate
+                ; aOwnerObj is the object that created the mission (or nil)
+
+                (block (targetObj)
+
+                    (switch
+
+                        ; Find the nearest star.
+
+                        (not (setq targetObj (sysFindObject aOwnerObj "t +star; N")))
+                            (msnDestroy gSource)
+
+                        ; Otherwise we can create a mission
+
+                        (block Nil
+                            (msnSetData gSource 'targetID (objGetID targetObj))
+                            (msnSetData gSource 'reward 4000)
+                            (msnSetData gSource 'plasmaCollected 0)
+                            (msnSetData gSource 'plasmaReported 0)
+                            (msnSetData gSource 'needPlasma 1)
+                            )
+                        )
+                    )
+            </OnCreate>
+
+            <OnAccepted>
+                ; Called if the player accepts the mission. The mission is 
+                ; already running (OnStarted has been called).
+                ;
+                ; gSource is mission object
+
+            </OnAccepted>
+
+            <OnDeclined>
+                ; Called if the player rejects the mission. The mission is already
+                ; running (OnStarted has been called).
+                ;
+                ; gSource is mission object.
+
+            </OnDeclined>
+
+            <OnStarted>
+                ; Called when the mission starts. This is called if the mission
+                ; starts running (either because the player accepted or some other
+                ; reason).
+                ;
+                ; gSource is mission object.
+
+                (block Nil
+                    (msnAddRecurringTimerEvent gSource 20 "OnFirePlasma") 
+                    (msnAddTimerEvent gSource 5400 "OnStopPlasma") 
+                    (objSetKnown (objGetObjByID (msnGetData gSource 'targetID)))
+                    )
+            </OnStarted>
+            
+            <OnFirePlasma>
+                (block (
+                    (plasmaCollected (msnGetData gSource 'plasmaCollected))
+                    (plasmaReported (msnGetData gSource 'plasmaReported))
+                    (starObj (objGetObjByID (msnGetData gSource 'targetID)))
+                    )
+                    
+                    (block Nil
+                        (switch;
+                            (msnGetData gSource 'needPlasma)
+                            (block Nil
+                                (switch
+                                    (ls (objGetDistance gPlayerShip starObj) 20)
+                                    (setq plasmaCollected (min 100 (+ plasmaCollected 1)))
+                                    )
+                                
+                                (loop (leq (+ plasmaReported 10) plasmaCollected)
+                                    (block Nil
+                                        (setq plasmaReported (+ plasmaReported 10))
+                                        (objSendMessage gPlayerShip Nil (msnTranslate gSource 'PlasmaMsg
+                                            {
+                                                plasma: plasmaCollected
+                                            }
+                                        ))
+                                        )
+                                    )
+                                
+                                (msnSetData gSource 'plasmaCollected plasmaCollected)
+                                (msnSetData gSource 'plasmaReported plasmaReported)
+                                
+                                (switch
+                                    (geq plasmaCollected 100)
+                                        (block Nil
+                                            (msnSuccess gSource)
+                                            (msnSetData gSource 'needPlasma Nil)
+                                            )
+                                    )
+                                )
+                            )
+                        
+                        (for i 1 15
+                            (sysCreateWeaponFire
+                                    &itSunPlasma;
+                                    starObj
+                                    (objGetPos gSource)
+                                    (random 0 360) ; dir
+                                    (random 40 50) ; speed
+                                    Nil
+                                )
+                            )
+                        )
+                    )
+            </OnFirePlasma>
+            
+            <OnStopPlasma>
+                (block Nil
+                    (msnCancelTimerEvent gSource "OnFirePlasma")
+                    (switch
+                        (msnGetData gSource 'needPlasma)
+                            (msnFailure gSource)
+                        )
+                    )
+            </OnStopPlasma>
+
+            <OnSetPlayerTarget>
+                ; Called to refresh the player's target. Always called right after
+                ; the player accepts the mission. May be called at other times
+                ; (e.g., after the player returns to the system).
+                ;
+                ; gSource is mission object
+                ; aReason is:
+                ;       'accepted: Mission has been accepted
+                ;       'debriefed: Player has been debriefed
+                ;       'failure: Mission failed
+                ;       'inProgress: Player visited station while mission in progress
+                ;       'newSystem: Player is in a new system
+                ;       'success: Mission completed successfully
+
+                (rpgSetTarget gSource aReason (objGetObjByID (msnGetData gSource 'targetID)))
+            </OnSetPlayerTarget>
+
+            <OnCompleted>
+                ; Called when the mission ends (generally because msnSuccess or
+                ; msnFailure were called).
+                ;
+                ; gSource is mission object
+                ; gData is arbitrary data passed in to msnSuccess or msnFailure
+                ; aReason is:
+                ;       'failure: Mission failed
+                ;       'success: Mission completed successfully
+
+            </OnCompleted>
+
+            <OnReward>
+                ; Called by msnReward, generally during debrief.
+                ;
+                ; gSource is mission object
+                ; gData is data passed to msnReward
+
+                (rpgMissionRewardPayment (msnGetData gSource 'reward))
+            </OnReward>
+
+            <OnDestroy>
+                ; Called when mission object is destroyed (generally only non-player
+                ; missions are removed when the player changes system. Player
+                ; missions are not normally destroyed)
+                ;
+                ; gSource is mission object
+                ;
+                ; NOTE: No need to unregister for events because we automatically
+                ; unregister when the mission is complete.
+
+            </OnDestroy>
+        </Events>
+
+        <Language>
+            <Text id="Summary">
+                (cat
+                    (msnTranslate gSource 'descSummary {
+                        targetName: (objGetName (objGetObjByID (msnGetData gSource 'targetID)) 'article)
+                        systemName: (sysGetName)
+                        })
+                    "\n\n"
+                    (typTranslate &dsRPGMission; 'mission.rewardSummary {
+                        systemName: (sysGetName)
+                        payment: (fmtCurrency 'credit (msnGetData gSource 'reward))
+                        })
+                    )
+            </Text>
+
+            <Text id="Briefing">
+                (msnTranslate gSource 'textBriefing {
+                    targetName: (objGetName (objGetObjByID (msnGetData gSource 'targetID)) '(capitalize article))
+                    payment: (fmtCurrency 'credit (msnGetData gSource 'reward))
+                    })
+            </Text>
+            
+            <Text id="textBriefing">
+                "The local star, %targetName%, is forecasted to 
+                begin a mass coronal ejection event soon. This is a 
+                valuable opportunity for our weaponsmiths to study 
+                some corona plasma. Fly out to the star, and collect 
+                a sample for us to study. We have budgeted a bonus 
+                of %payment% for this mission."
+            </Text>
+
+            <Text id="SuccessDebrief">
+                (msnTranslate gSource 'textSuccessDebrief {
+                    payment: (fmtCurrency 'credit (msnGetData gSource 'reward))
+                    })
+            </Text>
+
+            <Text id="textSuccessDebrief">
+                "Only mildly singed, I see!"
+                
+                The liason gently brushes her burned cheek:
+                
+                "I once flew a mission just like this one. An errant 
+                plasma jet burned right through my cockpit! Stars 
+                can be cruel up close."
+                
+                She pauses for a moment, and then continues:
+                
+                "We've deposited %payment% to your account!"
+            </Text>
+            
+            <String id="FailureDebrief">
+                You find the liason looking at the star on local 
+                display. She becomes aware of your presense:
+                
+                "The star ceased shedding its plasma, it is a shame 
+                you weren't able to collect enough of it for our 
+                weaponsmiths to study."
+                
+                She closes her eyes and turns away from you.
+            </String>
+
+            <Text id="Name">
+                A Trip to Tartarus
+            </Text>
+
+            <Text id="descSummary">
+                Your mission is to orbit %targetName% in the 
+                %systemName% system closely, while it is ejecting 
+                plasma from its corona.
+            </Text>
+            
+            <Text id="Intro">
+                The darkened hall is sparsely populated by pilots of 
+                the docked ships. Some glance at you and smirk. A 
+                woman approaches you. Lower half of her face and 
+                neck are covered with horrible burn scars. Her 
+                mutilated lips coalesce into a smile and she begins 
+                to speak through a cyber-larynx in a crystal clear 
+                voice:
+
+                "Xortek Corporation can use a %man% of your skills. 
+                Our bonus plan is unrivaled in Human space."
+            </Text>
+
+            <Text id="AcceptReply">
+                "How wonderful! This is a rare event, wish I could 
+                come with you and see it up close!"
+            </Text>
+            <String id="DeclineReply">
+                The liason's scarred smile disappears:
+                
+                "Mindful of the tale of Deadalus? Fear would not 
+                find solace in your heart if your soul was ablaze!" 
+            </String>
+            <Text id="InProgress">
+                The liason notices you and stops talking to another mercenary mid-sentence. She runs up to you:
+
+                "What of the plasma collection? Why are you here while the star dances in flames?"
+            </Text>
+            <Text id="SuccessMsg">
+                Mission complete!
+            </Text>
+            <String id="AlreadyDebriefed">
+                "Ah, you've returned! Please wait, we don't have any tasks available just yet."
+            </String>
+            <String id="Unavailable">
+                "Sorry, there are no missions available."
+            </String>
+            <String id="PlasmaMsg">
+                Plasma collection %plasma%%% complete!
+            </String>
+        </Language>
+    </MissionType>
+
+</TranscendenceModule>

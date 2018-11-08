@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE TranscendenceModule
+    [
+    <!ENTITY itSiegeLordPlasmaCapsuleCannon       "0xD0120010">
+    <!ENTITY itSiegeLordPlasmaCapsule             "0xD0120011">
+    <!ENTITY efSiegeLordXortekPlasmaProj          "0xD0120012">
+    <!ENTITY efSiegeLordXortekPlasmaFire          "0xD0120013">
+    <!ENTITY itSiegeLordPlasmaTorpedoLauncher     "0xD0120016">
+    <!ENTITY itSiegeLordPlasmaTorpedo             "0xD0120017">
+    <!ENTITY efSiegeLordXortekPlasmaProjBig       "0xD0120018">
+    ]>
+
+<TranscendenceModule>
+    <ItemType UNID="&itSiegeLordPlasmaCapsuleCannon;"
+            name=               "Plasma Capsule Cannon"
+            attributes=         "majorItem, specialty, xortek"
+
+            level=              "3"
+            frequency=          "uncommon"
+
+            value=              "1300"
+            mass=               "3000"
+
+            description=        "A miniaturized version of the Xortek plasma torpedo launcher, small enough to fit in standard weapon mounts. Uses magnetic capsules to contain plasma. Venting minute amounts of plasma allows the capsules to home in on their targets."
+            >
+
+        <Image imageID="&rsItemsRasiermesser1;" imageX="288" imageY="0" imageWidth="96" imageHeight="96"/>
+
+        <Weapon
+                type=               "missile"
+                fireRate=           "15"
+                powerUse=           "5"
+                reportAmmo=         "true"
+
+                counter=            "capacitor"
+                counterActivate=    "-15"
+                counterUpdate=      "2"
+                counterUpdateRate=  "5"
+                >
+            <Missiles>
+                <Missile ammoID="&itSiegeLordPlasmaCapsule;"
+                        type=           "missile"
+
+                        damage=         "plasma:3d8+1; WMD1"
+                        missileSpeed=   "50"
+                        lifetime=       "60"
+                        interaction=    "50"
+                        maneuverRate=   "6"
+                        hitPoints=      "20"
+
+                        sound=          "&snRecoillessCannon;"
+                        effect=         "&efSiegeLordXortekPlasmaProj;"
+                        hitEffect=      "&efPlasmaHitDefault;"
+                        fireEffect=     "&efSiegeLordXortekPlasmaFire;"
+                        >
+                    <Events>
+<!--
+                        <OnDamageShields>
+                            (block (
+                                        (lifeLeft (objGetProperty aCause 'lifeLeft))
+                                        (lifetime (objGetProperty aCause 'lifetime))
+                                        scaledDamage
+                                        )
+                                (setq scaledDamage (mathScale lifeLeft 0 lifetime 0 aDamageHP 50))
+                                (dbgOutput "Shields damaged by " scaledDamage " lifeLeft " lifeLeft "lifetime " lifetime)
+                                scaledDamage
+                            )
+                        </OnDamageShields>
+                        <OnDamageArmor>
+                            (block (
+                                        (lifeLeft (objGetProperty aCause 'lifeLeft))
+                                        (lifetime (objGetProperty aCause 'lifetime))
+                                        scaledDamage
+                                        )
+                                (setq scaledDamage (mathScale lifeLeft 0 lifetime 0 aDamageHP 50))
+                                (dbgOutput "Armor damaged by " scaledDamage " lifeLeft " lifeLeft "lifetime " lifetime)
+                                scaledDamage
+                            )
+                        </OnDamageArmor>
+-->
+                    </Events>
+                </Missile>
+            </Missiles>
+        </Weapon>
+    </ItemType>
+
+    <ItemType UNID="&itSiegeLordPlasmaCapsule;"
+            name=               "Plasma Capsule"
+            attributes=         "premiumAmmo, consumable, missile, xortek"
+
+            level=              "2"
+            frequency=          "uncommon"
+            numberAppearing=    "12d40"
+
+            value=              "1"
+            mass=               "10"
+
+            description=        "Plasma capsules are filled with plasma by the Xortek plasma capsule cannon. Venting minute amounts of plasma allows the capsules to home in on their targets."
+            >
+
+        <Image imageID="&rsItemsRasiermesser1;" imageX="0" imageY="96" imageWidth="96" imageHeight="96"/>
+    </ItemType>
+    
+    <ItemType UNID="&itSiegeLordPlasmaTorpedoLauncher;"
+            name=               "Plasma Torpedo Launcher"
+            attributes=         "majorItem, specialty, xortek"
+
+            level=              "3"
+            frequency=          "uncommon"
+
+            value=              "1300"
+            mass=               "3000"
+
+            description=        "The fearsome Xortek plasma torpedo launcher is the pinnacle of Xortek corporation weapon and plasma research. Venting minute amounts of plasma allows the torpedoes to home in on their targets."
+            >
+
+        <Image imageID="&rsItemsRasiermesser1;" imageX="288" imageY="0" imageWidth="96" imageHeight="96"/>
+
+        <Weapon
+                type=               "missile"
+                launcher=           "true"
+                fireRate=           "45"
+                powerUse=           "5"
+                reportAmmo=         "true"
+
+                counter=            "capacitor"
+                counterActivate=    "-30"
+                counterUpdate=      "2"
+                counterUpdateRate=  "5"
+                >
+            <Missiles>
+                <Missile ammoID="&itSiegeLordPlasmaTorpedo;"
+                        type=           "missile"
+
+                        damage=         "plasma:10d8+5; WMD1"
+                        missileSpeed=   "20"
+                        lifetime=       "80"
+                        interaction=    "50"
+                        maneuverRate=   "3"
+                        hitPoints=      "30"
+
+                        sound=          "&snRecoillessCannon;"
+                        effect=         "&efSiegeLordXortekPlasmaProjBig;"
+                        hitEffect=      "&efPlasmaHitDefault;"
+                        fireEffect=     "&efSiegeLordXortekPlasmaFire;"
+                        >
+                </Missile>
+            </Missiles>
+        </Weapon>
+    </ItemType>
+
+    <ItemType UNID="&itSiegeLordPlasmaTorpedo;"
+            name=               "Plasma Torpedo"
+            attributes=         "premiumAmmo, consumable, missile, xortek"
+
+            level=              "2"
+            frequency=          "uncommon"
+            numberAppearing=    "12d40"
+
+            value=              "1"
+            mass=               "10"
+
+            description=        "Plasma torpedoes are filled with plasma by the Xortek plasma torpedo launcher. Venting minute amounts of plasma allows the torpedoes to home in on their targets."
+            >
+
+        <Image imageID="&rsItemsRasiermesser1;" imageX="0" imageY="96" imageWidth="96" imageHeight="96"/>
+    </ItemType>
+    
+    <EffectType UNID="&efSiegeLordXortekPlasmaProjBig;"
+            instance=           "owner"
+            >
+        <Effect>
+            <Ray
+                style=          "smooth"
+                shape=          "tapered"
+                primaryColor=   "#FFBE7D"
+                secondaryColor= "#ff7f00"
+                >
+        
+                <Events>
+                    <GetParameters>
+                        (block (damageHP primaryColor secondaryColor)
+                            (setq damageHP (@ gData 'damageHP))
+
+                            {
+                                length: (mathScale damageHP 5 64 60 220 50)
+                                width: (mathScale damageHP 5 64 6 22 50)
+                                intensity: 30
+                                }
+                            )
+                    </GetParameters>
+                </Events>
+            </Ray>
+            <Orb
+                    style=              "fireblast"
+                    spikeCount=         "6"
+                        
+                    blendMode=          "screen"
+                    primaryColor=       "#feff00"
+                    secondaryColor=     "#ff7f00"
+                    >
+                <Events>
+                    <GetParameters>
+                        (block (
+                            (damageHP (@ gData 'damageHP))
+                            )
+                            {
+                                radius: (mathScale damageHP 50 680 30 180 50)
+                                intensity: (mathScale damageHP 50 680 20 50 50)
+                                }
+                            )
+                    </GetParameters>
+                </Events>
+            </Orb>
+            <Orb
+                    style=              "smooth"
+                        
+                    blendMode=          "screen"
+                    primaryColor=       "#feff00"
+                    secondaryColor=     "#ff7f00"
+                    >
+                <Events>
+                    <GetParameters>
+                        (block (
+                            (damageHP (@ gData 'damageHP))
+                            )
+                            {
+                                radius: (mathScale damageHP 50 680 30 180 50)
+                                intensity: (mathScale damageHP 50 680 20 50 50)
+                                }
+                            )
+                    </GetParameters>
+                </Events>
+            </Orb>
+        </Effect>
+    </EffectType>
+    
+    <EffectType UNID="&efSiegeLordXortekPlasmaProj;"
+            instance=           "owner"
+            >
+        <Effect>
+            <Ray
+                style=          "smooth"
+                shape=          "tapered"
+                primaryColor=   "#FFBE7D"
+                secondaryColor= "#ff7f00"
+                >
+        
+                <Events>
+                    <GetParameters>
+                        (block (damageHP primaryColor secondaryColor)
+                            (setq damageHP (@ gData 'damageHP))
+
+                            {
+                                length: (mathScale damageHP 5 64 60 220 50)
+                                width: (mathScale damageHP 5 64 6 22 50)
+                                intensity: 30
+                                }
+                            )
+                    </GetParameters>
+                </Events>
+            </Ray>
+            <Orb
+                    style=              "smooth"
+                    spikeCount=         "6"
+                        
+                    blendMode=          "screen"
+                    primaryColor=       "#feff00"
+                    secondaryColor=     "#ff7f00"
+                    >
+                <Events>
+                    <GetParameters>
+                        (block (
+                            (damageHP (@ gData 'damageHP))
+                            )
+                            {
+                                radius: (mathScale damageHP 50 680 20 120 50)
+                                intensity: (mathScale damageHP 50 680 20 50 50)
+                                }
+                            )
+                    </GetParameters>
+                </Events>
+            </Orb>
+        </Effect>
+    </EffectType>
+    
+    <EffectType UNID="&efSiegeLordXortekPlasmaFire;"
+            instance=           "owner"
+            >
+        <Effect>
+            <Ray    style=          "smooth"
+                    shape=          "tapered"
+                    primaryColor=   "#FFBE7D"
+                    secondaryColor= "#ff7f00"
+                    xformRotation=  "180"
+                    
+                    lifetime=       "3"
+                    animate=        "fade"
+                    >
+                <Events>
+                    <GetParameters>
+                        (block (damageHP)
+                            (setq damageHP (@ gData 'damageHP))
+
+                            {
+                                length: (mathScale damageHP 5 64 16 64 50)
+                                width: (mathScale damageHP 5 64 16 64 50)
+                                intensity: 70
+                                }
+                            )
+                    </GetParameters>
+                </Events>
+            </Ray>
+        </Effect>
+    </EffectType>
+</TranscendenceModule>

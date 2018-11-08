@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE TranscendenceModule
+    [
+    <!ENTITY rsSiegeLordRedFlash                     "0xD0120014">
+    <!ENTITY ovSiegeLordRedFlash                     "0xD0120015">
+    ]>
+
+<TranscendenceModule>
+    <Image UNID="&rsSiegeLordRedFlash;" bitmap="Resources/SiegeLordRedFlash.png" loadOnUse="true"/>
+    
+    <OverlayType UNID="&ovSiegeLordRedFlash;"
+            attributes=         "temporary"
+            >
+        <Effect UNID="&ovSiegeLordRedFlash;">
+            <Image imageID="&rsSiegeLordRedFlash;" 
+                    imageX="0" 
+                    imageY="0" 
+                    imageWidth="32" 
+                    imageHeight="32"
+                    imageFrameCount="2"
+                    imageTicksPerFrame="30"/>
+        </Effect>
+    </OverlayType>
+
+    <Globals>
+        (block Nil
+            (setq fnSiegeLordRedFlash (lambda (source offX offY)
+                (objAddOverlay source &ovSiegeLordRedFlash; (sysVectorPixelOffset (objGetPos source) offX offY) 0 60)))
+                )
+            (setq slScreenToWorld (lambda (screenX screenY)
+                (block (
+                        rX
+                        rY
+                        (rD 2)
+                        rXp
+                        rYp
+                        (g_KlicksPerPixel)
+                        rDen
+                        (g_rK1)
+                        (g_rK2)
+                        )
+                    )
+                ))
+            )
+    </Globals>
+</TranscendenceModule>

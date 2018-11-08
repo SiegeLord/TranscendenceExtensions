@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE TranscendenceModule
+    [
+    <!ENTITY stSiegeLordXortekFoundry                "0xD012000A">
+    <!ENTITY rsSiegeLordXortekFoundryImage           "0xD012000B">
+    <!ENTITY rsSiegeLordXortekFoundryImageHero       "0xD012000C">
+    <!ENTITY stSiegeLordXortekProvingGroundsBeacon   "0xD012001A">
+<!--
+  External
+-->
+    <!ENTITY scSiegeLordGarnet                       "0xD0120001">
+    <!ENTITY itSiegeLordPlasmaCapsuleCannon          "0xD0120010">
+    <!ENTITY itSiegeLordPlasmaCapsule                "0xD0120011">
+    <!ENTITY itSiegeLordPlasmaTorpedoLauncher        "0xD0120016">
+    <!ENTITY itSiegeLordPlasmaTorpedo                "0xD0120017">
+    ]>
+
+<TranscendenceModule>
+    <Image UNID="&rsSiegeLordXortekFoundryImage;" bitmap="Resources/SiegeLordXortekFoundry.png" loadOnUse="true"/>
+    <Image UNID="&rsSiegeLordXortekFoundryImageHero;" bitmap="Resources/SiegeLordXortekFoundryHero.png" loadOnUse="true"/>
+    
+    <StationType UNID="&stSiegeLordXortekProvingGroundsBeacon;"
+            name="Xortek Proving Grounds"
+            inherit="&stNavBeacon;"
+            dockScreen="Main"
+            noMapLabel="false"
+            >
+        <DockScreens>
+            <Main>
+                <Panes>
+                    <Default descID="descWelcome">
+                        <Actions>
+                            <Action id="actionBeginExercise" default="1">
+                                (block ((mission (@ (msnFind "a +gauntlet") 0)) status)
+                                    (if mission
+                                        (setq status (msnGetData mission 'status))
+                                        )
+                                    (switch
+                                        (= status 'created)
+                                            (block Nil
+                                                (objSetData gSource 'beginExercise 1)
+                                                (scrShowScreen gScreen &dsRPGMessage; { textID:'descBeginExercise })
+                                                )
+                                        (= status 'started)
+                                            (scrShowScreen gScreen &dsRPGMessage; { textID:'descExerciseInProgress })
+                                        (scrShowScreen gScreen &dsRPGMessage; { textID:'descNoExercises })
+                                        )
+                                    )
+                            </Action>
+                            <Action id="actionUndock" cancel="1">
+                                (block ((mission (@ (msnFind "a +gauntlet") 0)))
+                                        (if (objGetData gSource 'beginExercise)
+                                            (msnFireEvent mission "OnBeginExercise")
+                                            )
+                                        (scrExitScreen gScreen 'forceUndock)
+                                    )
+                            </Action>
+                        </Actions>
+                    </Default>
+                </Panes>
+            </Main>
+        </DockScreens>
+        
+        <Language>
+            <Text id="actionBeginExercise">[B]egin exercise</Text>
+            <Text id="actionUndock">[U]ndock</Text>
+            <Text id="descWelcome">
+                Welcome to the Xortek Corporation Proving Grounds!
+            </Text>
+            <Text id="descBeginExercise">
+                Commencing exercise!
+                
+                Please stay within the boundaries of the proving grounds for the duration of the exercise!
+                
+                Have a nice day! 
+            </Text>
+            <Text id="descExerciseInProgress">
+                Exercise is already in progress!
+                
+                Please stay within the boundaries of the proving grounds for the duration of the exercise!
+                
+                Have a nice day! 
+            </Text>
+            <Text id="descNoExercises">
+                No exercises are scheduled for today!
+                
+                Have a nice day!
+            </Text>
+        </Language>
+    </StationType>
+
+    <StationType UNID="&stSiegeLordXortekFoundry;"
+            name=               "Xortek Foundry"
+            sovereign=          "&svCorporate;"
+            inherit=            "&baCorporateStation;"
+
+            dockScreen=         "Main"
+            abandonedScreen=    "&dsAbandonedStation;"
+            canAttack=          "true"
+
+            multiHull=          "true"
+            armorID=            "&itLightGusokuArmor;"
+            hitPoints=          "300"
+            regen=              "4"
+            fireRateAdj=        "20"
+            explosionType=      "&vtPlasmaExplosion3;"
+            ejectaType=         "&vtWreckEjecta;"
+
+            attributes=         "xortek, corporate, corporateArms, corporateCustoms, envAir, envEarth, envFire, envWater, friendly, independent, generic, human, populated"
+            enemyExclusionRadius="50"
+            >
+        
+        <Encounter
+                levelFrequency=     "---ru rv--- ----- ----- -----"
+                locationCriteria=   "+planetary"
+                unique=             "inSystem"
+                enemyExclusionRadius="75"
+                />
+
+        <Image          imageID="&rsSiegeLordXortekFoundryImage;" imageWidth="840" imageHeight="840" />
+        <HeroImage      imageID="&rsSiegeLordXortekFoundryImageHero;" imageWidth="840" imageHeight="840" />
+
+        <DockingPorts>
+            <Port posAngle="270"   posRadius="210" />
+            <Port posAngle="292.5" posRadius="210" />
+            <Port posAngle="315"   posRadius="210" />
+
+            <Port posAngle="150"   posRadius="210" sendToBack="true" />
+            <Port posAngle="172.5" posRadius="210" />
+            <Port posAngle="195"   posRadius="210" />
+
+            <Port posAngle="30"    posRadius="210" sendToBack="true" />
+            <Port posAngle="52.5"  posRadius="210" sendToBack="true" />
+            <Port posAngle="75"    posRadius="210" sendToBack="true" />
+        </DockingPorts>
+
+        <Ships>
+            <Ship count="4" class="&scSiegeLordGarnet;" orders="guard"/>
+            <Lookup count="1d4" table="&tbCommPrivateCrafts;"/>
+        </Ships>
+
+        <Reinforcements minShips="4">
+            <Table>
+                <Ship chance="75" class="&scSiegeLordGarnet;" orders="guard"/>
+                <Lookup chance="25" table="&tbCommPrivateCrafts;"/>
+            </Table>
+        </Reinforcements>
+
+        <Devices>
+            <Device deviceID="&itSiegeLordPlasmaTorpedoLauncher;"
+                fireAngle="292.5" fireArc="270" posAngle="292.5" posRadius="170" posZ="0"/>
+            <Device deviceID="&itSiegeLordPlasmaTorpedoLauncher;"
+                fireAngle="172.5" fireArc="270" posAngle="172.5" posRadius="170" posZ="0"/>
+            <Device deviceID="&itSiegeLordPlasmaTorpedoLauncher;"
+                fireAngle="52.5" fireArc="270" posAngle="52.5" posRadius="170" posZ="0"/>
+
+            <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"
+                fireAngle="270" fireArc="120" posAngle="270" posRadius="170" posZ="0"/>
+            <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"
+                fireAngle="315" fireArc="120" posAngle="315" posRadius="170" posZ="0"/>
+
+            <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"
+                fireAngle="150" fireArc="120" posAngle="150" posRadius="170" posZ="0"/>
+            <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"
+                fireAngle="195" fireArc="120" posAngle="195" posRadius="170" posZ="0"/>
+
+            <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"
+                fireAngle="30" fireArc="120" posAngle="30" posRadius="170" posZ="0"/>
+            <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"
+                fireAngle="75" fireArc="120" posAngle="75" posRadius="170" posZ="0"/>
+        </Devices>
+
+        <Items>
+            <Item count="100" item="&itSiegeLordPlasmaCapsule;"/>
+            <Item count="100" item="&itSiegeLordPlasmaTorpedo;"/>
+
+            <RandomItem count="10"
+                    criteria=       "ad L:1-5; -Illegal; -Military; -Alien; -Specialty; -NotStandard; -NotForSale;"
+                    levelFrequency= "systemLevel:r|c|cur"
+                    />
+            <RandomItem count="10"
+                    criteria=       "*~ad -Illegal; -Military; -Alien; -Specialty; -NotStandard; -NotForSale;"
+                    levelFrequency= "systemLevel:ru|c|cur"
+                    />
+        </Items>
+
+        <Trade currency="credit" max="50000" replenish="2500">
+            <Sell   criteria="m +bushido; -illegal; -notForSale;" priceAdj="100" inventoryAdj="300" levelFrequency="systemLevel:ruc|c|cur"/>
+            <Sell   criteria="*NU -Illegal; -ID; -NotForSale;"  priceAdj="100"/>
+
+            <RepairArmor    criteria="a L:1-9;" priceAdj="100"/>
+            <ReplaceArmor   criteria="a +bushido; L:1-10;" priceAdj="100"/>
+            <InstallDevice  criteria="d +bushido; L:1-10;" priceAdj="100"/>
+            <RemoveDevice   criteria="d L:1-10;" priceAdj="100"/>
+
+            <ReplaceArmor   criteria="a L:1-10;" priceAdj="unavailable" messageID="descNoInstall"/>
+            <InstallDevice  criteria="d L:1-10;" priceAdj="unavailable" messageID="descNoInstall"/>
+        </Trade>
+
+        <StaticData>
+            <LongName>"a Xortek foundry"</LongName>
+        </StaticData>
+
+        <DockScreens>
+            <Main>
+                <Panes>
+                    <Default descID="descWelcome">
+                        <Actions>
+                            <Action id="actionPhasedSmeltingWorks" default="1">
+                                (scrShowScreen gScreen &dsRPGMessage; { textID:'descPhasedSmeltingWorksDenied })
+                            </Action>
+
+                            <Action id="actionPlasmaCore">
+                                (scrShowScreen gScreen &dsRPGMessage; { textID:'descPlasmaCoreDenied })
+                            </Action>
+
+                            <Action id="actionMercenaryLiason">
+                                (rpgMissionAssignment {
+                                    missionCriteria: "n +xortek;"
+                                    maxActive: 1
+                                    intervalPerType: (+ 5400 (* (objGetDestiny gSource) 10))
+                                    noMissionTextID: 'descMercenaryLiasonNoMissions
+                                    })
+                            </Action>
+
+                            <Action id="actionDockServices">
+                                (rpgDockServices gPlayerShip {
+                                    checkMilitaryID: True
+                                    })
+                            </Action>
+
+                            <Action id="actionUndock" cancel="1">
+                                <Exit/>
+                            </Action>
+                        </Actions>
+                    </Default>
+                </Panes>
+            </Main>
+        </DockScreens>
+        
+        <Events>
+            <OnCreate>
+                (block (stars firstStar planets bestDist groundsPos beacon)
+                    ; Set up flashers.
+                    (sysAddObjRecurringTimerEvent 120 gSource "OnFlash1")
+                    (sysAddObjTimerEvent 30 gSource "OnStartFlash2")
+                    
+                    ; Place the proving grounds.
+
+                    ; Find the closest star
+                    (setq stars (sysFindObject gSource "t +star; S:d;"))
+                    (setq firstStar (@ stars 0))
+                    
+                    ; Find the most distant planet in that star's system
+                    (setq planets (sysFindObject firstStar "t +isPlanet:true; S:D;"))
+                    (enumWhile planets (not bestDist) thePlanet
+                        (if (eq firstStar (sysFindObject thePlanet "tN +star;"))
+                            (setq bestDist (sysVectorDistance thePlanet firstStar))
+                            )
+                        )
+                        
+                    (if (ls bestDist 480)
+                        (setq bestDist (random 480 600))
+                        (setq bestDist (add bestDist (random 120 240)))
+                        )
+                    
+                    (setq groundsPos (sysVectorRandom firstStar bestDist 180 "t"))
+
+                    (setq beacon (sysCreateStation &stSiegeLordXortekProvingGroundsBeacon; groundsPos))
+                    (staSetImageVariant beacon 0)
+                    (objSetName beacon "Xortek Proving Grounds")
+                    (objSetData gSource 'provingGroundsID (objGetID beacon)) 
+                    
+                    (for i 0 12
+                        (block Nil
+                            (setq beacon
+                                    (sysCreateStation &stNavBeacon;
+                                        (sysVectorPolarOffset groundsPos (* i 30) 40)
+                                    )
+                                )
+                            (objSetName beacon "Proving Grounds Boundary")
+                            (staSetImageVariant beacon 1)
+                            )
+                        )
+                    (for i 0 (random 5 10)
+                        (block ((shipClass (random '(&scSapphireYacht; &scEI500; &scRoninA; &scWolfen;))))
+                            (sysCreateShipwreck shipClass (sysVectorPolarOffset groundsPos (random 0 359) (random 5 45)) &svNeutral;)
+                            )
+                        )
+                    )
+            </OnCreate>
+            
+            <OnFlash1>
+                (block Nil
+                    ;(fnSiegeLordRedFlash gSource 48 312)
+                    (fnSiegeLordRedFlash gSource 0 128)
+                    (fnSiegeLordRedFlash gSource 128 128)
+                    (fnSiegeLordRedFlash gSource 128 -128)
+                    (fnSiegeLordRedFlash gSource 0 -128)
+                    (fnSiegeLordRedFlash gSource -128 -128)
+                    (fnSiegeLordRedFlash gSource -128 128)
+                    (fnSiegeLordRedFlash gSource 128 0)
+                    (fnSiegeLordRedFlash gSource -128 0)
+                    )
+            </OnFlash1>
+            
+            <OnStartFlash2>
+                (sysAddObjRecurringTimerEvent 120 gSource "OnFlash2")
+            </OnStartFlash2>
+            
+            <OnFlash2>
+                (block Nil
+                    ;(fnSiegeLordRedFlash gSource 26 199)
+                    )
+            </OnFlash2>
+        </Events>
+
+        <Language>
+            <Text id="actionPhasedSmeltingWorks">[P]hased Smelting Works</Text>
+            <Text id="actionPlasmaCore">Plasma [C]ore</Text>
+            <Text id="actionMercenaryLiason">[M]ercenary Liason</Text>
+            <Text id="actionDockServices">[D]ock Services</Text>
+            <Text id="actionUndock">[U]ndock</Text>
+
+            <Text id="descWelcome">
+                Oppressive heat surrounds you, radiating from plasma
+                conduits protruding from most surfaces. You find it
+                difficult to breathe, but the inhabitants of the
+                station seem unaffected. They move deliberately and
+                with a sense of urgency, paying no attention to
+                you.
+
+                The Xortek corporation logo on the holodisplay on 
+                the wall is the only thing greeting you in this 
+                hadean place.
+            </Text>
+
+            <Text id="descPhasedSmeltingWorksDenied">
+                The entryway to the phased smelting works is blocked
+                by a very large man, his arms enclosed by a powered
+                exoskeleton. Sweat drips from his large mustache. He
+                turns his eyes towards you, but makes no effort to
+                speak. You ask if you can enter, but get no
+                response. You turn to leave. The man's eyes follow
+                you as a bead of sweat rolls down his brow.
+            </Text>
+
+            <Text id="descMercenaryLiasonNoMissions">
+                The darkened hall is sparsely populated by pilots of
+                the docked ships. Some glance at you and smirk. A
+                woman approaches you. Lower half of her face and
+                neck are covered with horrible burn scars. She
+                speaks through her cyber-larynx:
+
+                "Xortek Corporation has a bonus plan that is
+                unrivaled in Human space."
+
+                Her eyes glow dimly, like dying embers devoid of a
+                source of fuel. She sighs:
+
+                "Sadly, we have no tasks available for you at this
+                time."
+            </Text>
+
+            <Text id="descPlasmaCoreDenied">descPlasmaCoreDenied
+            </Text>
+        </Language>
+    </StationType>
+
+    <Globals>
+        (block Nil
+            (setq slXorStation (lambda () (sysCreateStation &stSiegeLordXortekFoundry; gPlayerShip)))
+            (setq slRange (lambda (end) (block (ret)
+                    (setq ret (list))
+                    (for i 0 end
+                        (setq ret (append ret i))
+                        )
+                )))
+            )
+    </Globals>
+</TranscendenceModule>

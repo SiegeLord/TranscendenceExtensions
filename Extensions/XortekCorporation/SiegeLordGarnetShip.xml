@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE TranscendenceModule
+    [
+    <!ENTITY scSiegeLordGarnet                    "0xD0120001">
+    <!ENTITY rsSiegeLordGarnetGameImage           "0xD0120002">
+    <!ENTITY rsSiegeLordGarnetLargeImage          "0xD0120003">
+    <!ENTITY rsSiegeLordGarnetBlueJet             "0xD0120004">
+    <!ENTITY rsSiegeLordGarnetArmorHUDCenter      "0xD0120005">
+    <!ENTITY rsSiegeLordGarnetArmorHUDSides       "0xD0120006">
+<!--
+    External
+-->
+    <!ENTITY itSiegeLordPlasmaCapsuleCannon       "0xD0120010">
+    <!ENTITY itSiegeLordPlasmaCapsule             "0xD0120011">
+    <!ENTITY itSiegeLordPlasmaTorpedoLauncher     "0xD0120016">
+    <!ENTITY itSiegeLordPlasmaTorpedo             "0xD0120017">
+    ]>
+
+<TranscendenceModule>
+    <Image UNID="&rsSiegeLordGarnetGameImage;" bitmap="Resources/SiegeLordGarnetGame.png" loadOnUse="true"/>
+    <Image UNID="&rsSiegeLordGarnetLargeImage;" bitmap="Resources/SiegeLordGarnetLarge.png" loadOnUse="true"/>
+    <Image UNID="&rsSiegeLordGarnetArmorHUDCenter;" bitmap="Resources/SiegeLordGarnetArmorHudCenter.png" loadOnUse="true"/>
+    <Image UNID="&rsSiegeLordGarnetArmorHUDSides;" bitmap="Resources/SiegeLordGarnetArmorHudSides.png" loadOnUse="true"/>
+
+    <ShipClass UNID="&scSiegeLordGarnet;"
+            manufacturer=       "Xortek Corporation"
+            class=              "Garnet"
+            type=               "gunship"
+            attributes=         "xortek, genericClass"
+            inherit=            "&baHumanTechShip;"
+            >
+
+        <Hull
+            size=               "24"
+            mass=               "32"
+            cargoSpace=         "50"
+
+            maxReactorPower=    "10000"
+            maxCargoSpace=      "175"
+            maxDevices=         "7"
+            maxWeapons=         "3"
+
+            stdArmor=           "4000"
+            maxArmor=           "8000"
+            maxArmorSpeedAdj=   "-3"
+            minArmorSpeedAdj=   "+3"
+            />
+
+        <Drive
+            PowerUse=      "20"
+            thrustRatio=        "8.2"
+            maxSpeed=           "22"
+            />
+
+        <Armor
+            armorID=            "&itReactiveArmor;"
+            count=              "4"
+            />
+
+        <Devices>
+            <DeviceSlot criteria="w +property:multiShot;" posAngle="0" posRadius="15"/>
+            <DeviceSlot criteria="w" posAngle="0" posRadius="25"/>
+            <DeviceSlot criteria="r">
+                <EnhancementAbilities>
+                    <Enhance type=          "efficiencyBoost"
+                             criteria=      "r"
+                             enhancement=   "0x0f01"
+                             />
+                </EnhancementAbilities>
+            </DeviceSlot>
+<!--
+            <Device deviceID="&itFastFireLaserCannon;"/>
+-->
+            <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"/>
+            <Device deviceID="&itSiegeLordPlasmaTorpedoLauncher;"/>
+<!--
+            <Device deviceID="&itClass1Deflector;"/>
+-->
+            <Device deviceID="&itTaikon200Deflector;"/>
+            <Device deviceID="&it1GWReactor;"/>
+<!--
+            <Device deviceID="&it15MWReactor;"/>
+-->
+        </Devices>
+
+        <Maneuver
+            maxRotationRate=    "11.0"
+            rotationAccel=      "2.5"
+            rotationStopAccel=  "12.0"
+            />
+
+        <Items>
+            <Item count="4d6" item="&itHelium3FuelRod;"/>
+            <Item count="100" item="&itSiegeLordPlasmaCapsule;"/>
+            <Item count="100" item="&itSiegeLordPlasmaTorpedo;"/>
+            <Item count="1" item="&itTargetingComputerROM;"/>
+        </Items>
+
+        <Image imageID="&rsSiegeLordGarnetGameImage;"      imageWidth="64" imageHeight="64" rotationCount="120"/>
+        <HeroImage imageID="&rsSiegeLordGarnetLargeImage;" imageWidth="320" imageHeight="320"/>
+
+        <Effects>
+            <Effect type="thrustMain" posAngle="188" posRadius="23" posZ="3" rotation="180" effect="&rsSiegeLordGarnetBlueJet;"/>
+            <Effect type="thrustMain" posAngle="180" posRadius="23" posZ="-4" rotation="180" effect="&rsSiegeLordGarnetBlueJet;"/>
+            <Effect type="thrustMain" posAngle="172" posRadius="23" posZ="3" rotation="180" effect="&rsSiegeLordGarnetBlueJet;"/>
+        </Effects>
+
+        <AISettings
+            fireRateAdj=        "50"
+            fireAccuracy=       "90"
+            perception=         "4"
+            />
+        
+        <PlayerSettings
+            desc=               "Garnet's large radiator vanes let it run installed generators with increased efficiency."
+            largeImage=         "&rsSiegeLordGarnetLargeImage;"
+            initialClass=       "true"
+            startingCredits=    "10d100+1300"
+            >
+            
+            <ArmorDisplay>
+                <ShipImage imageID="&rsSiegeLordGarnetArmorHUDCenter;" imageWidth="136" imageHeight="136"/>
+                
+                <ArmorSection name="forward"
+                        segment="0"
+                        imageID="&rsSiegeLordGarnetArmorHUDSides;" 
+                        imageX="0" imageY="0" imageWidth="43" imageHeight="26"
+                        destX="46" destY="13" hpX="55" hpY="14"
+                        nameY="8" nameBreakWidth="200" nameDestX="0" nameDestY="10" />
+
+                <ArmorSection name="starboard"
+                        segment="3"
+                        imageID="&rsSiegeLordGarnetArmorHUDSides;" 
+                        imageX="97" imageY="0" imageWidth="19" imageHeight="61"
+                        destX="31" destY="42" hpX="95" hpY="60"
+                        nameY="30" nameBreakWidth="360" nameDestX="12" nameDestY="0" />
+
+                <ArmorSection name="port"
+                        segment="1"
+                        imageID="&rsSiegeLordGarnetArmorHUDSides;" 
+                        imageX="116" imageY="0" imageWidth="19" imageHeight="61"
+                        destX="85" destY="42" hpX="15" hpY="60"
+                        nameY="52" nameBreakWidth="200" nameDestX="0" nameDestY="8" />
+
+                <ArmorSection name="aft"
+                        segment="2"
+                        imageID="&rsSiegeLordGarnetArmorHUDSides;" 
+                        imageX="43" imageY="0" imageWidth="54" imageHeight="10"
+                        destX="41" destY="104" hpX="55" hpY="105"
+                        nameY="74" nameBreakWidth="360" nameDestX="12" nameDestY="0" />
+            </ArmorDisplay>
+
+            <ShieldDisplay shieldLevelEffect="&efShieldHUDDefault;">
+            </ShieldDisplay>
+
+            <ReactorDisplay>
+                <Image imageID="&rsZubrinReactor;" 
+                        imageX="0" imageY="0" imageWidth="256" imageHeight="60"/>
+
+                <PowerLevelImage imageID="&rsZubrinReactor;"
+                        imageX="0" imageY="60" imageWidth="202" imageHeight="14"
+                        destX="54" destY="9"/>
+
+                <FuelLevelImage imageID="&rsZubrinReactor;"
+                        imageX="0" imageY="74" imageWidth="194" imageHeight="14"
+                        destX="54" destY="37"/>
+
+                <FuelLowLevelImage imageID="&rsZubrinReactor;"
+                        imageX="0" imageY="88" imageWidth="194" imageHeight="14"/>
+
+                <ReactorText x="62" y="22" width="154" height="14"/>
+                <PowerLevelText x="62" y="0" width="154" height="9"/>
+                <FuelLevelText x="62" y="51" width="154" height="9"/>
+            </ReactorDisplay>
+            
+            <WeaponDisplay>
+                <Image imageID="&rsZubrinTargeting;" imageX="0" imageY="0" imageWidth="360" imageHeight="120"/>
+            </WeaponDisplay>
+            
+        </PlayerSettings>
+    </ShipClass>
+
+    <EffectType UNID="&rsSiegeLordGarnetBlueJet;"
+            instance="creator"
+            >
+        <Effect>
+            <ParticleJet
+                    emitRate=           "20"
+                    emitSpeed=          "20-30"
+                    particleLifetime=   "3-6"
+                    spreadAngle=        "4"
+                    >
+                <ParticleEffect>
+                    <Particle
+                            style=          "plain"
+                            minWidth=       "1"
+                            maxWidth=       "3"
+                            primaryColor=   "#ffc041"
+                            secondaryColor= "#812617"
+                            />
+                </ParticleEffect>
+            </ParticleJet>
+
+            <Ray    style=          "smooth"
+                    shape=          "tapered"
+                    blendMode=      "screen"
+                    >
+                <Events>
+                    <GetParameters>
+                        (block (thrusterPower maxSpeed)
+                            (setq thrusterPower (@ gData 'thrusterPower))
+                            (setq maxSpeed (@ gData 'maxSpeed))
+
+                            {
+                                length: (mathScale maxSpeed 12 35 30 80 50)
+                                width: (mathScale thrusterPower 50 1000 16 52 50)
+                                intensity: (mathScale maxSpeed 12 35 40 60 50)
+                                primaryColor: "#D0DEFC"
+                                secondaryColor: "#1D1781"
+                            }
+                        )
+                    </GetParameters>
+                </Events>
+            </Ray>
+        </Effect>
+    </EffectType>
+</TranscendenceModule>
