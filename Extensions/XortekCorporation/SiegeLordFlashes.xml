@@ -25,7 +25,7 @@
 
     <Globals>
         (block Nil
-            (setq fnSiegeLordRedFlash (lambda (source offX offY)
+            (setq slRedFlash (lambda (source offX offY)
                 (objAddOverlay source &ovSiegeLordRedFlash; (sysVectorPixelOffset (objGetPos source) offX offY) 0 60)))
                 )
             (setq slScreenToWorld (lambda (screenX screenY)

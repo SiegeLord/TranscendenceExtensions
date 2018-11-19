@@ -119,7 +119,7 @@
                 />
 
         <Image          imageID="&rsSiegeLordXortekFoundryImage;" imageWidth="840" imageHeight="840" />
-        <HeroImage      imageID="&rsSiegeLordXortekFoundryImageHero;" imageWidth="840" imageHeight="840" />
+        <HeroImage      imageID="&rsSiegeLordXortekFoundryImageHero;" imageWidth="712" imageHeight="528" />
 
         <DockingPorts>
             <Port posAngle="270"   posRadius="210" />
@@ -293,15 +293,15 @@
             
             <OnFlash1>
                 (block Nil
-                    ;(fnSiegeLordRedFlash gSource 48 312)
-                    (fnSiegeLordRedFlash gSource 0 128)
-                    (fnSiegeLordRedFlash gSource 128 128)
-                    (fnSiegeLordRedFlash gSource 128 -128)
-                    (fnSiegeLordRedFlash gSource 0 -128)
-                    (fnSiegeLordRedFlash gSource -128 -128)
-                    (fnSiegeLordRedFlash gSource -128 128)
-                    (fnSiegeLordRedFlash gSource 128 0)
-                    (fnSiegeLordRedFlash gSource -128 0)
+                    ;(slRedFlash gSource 48 312)
+                    (slRedFlash gSource 0 128)
+                    (slRedFlash gSource 128 128)
+                    (slRedFlash gSource 128 -128)
+                    (slRedFlash gSource 0 -128)
+                    (slRedFlash gSource -128 -128)
+                    (slRedFlash gSource -128 128)
+                    (slRedFlash gSource 128 0)
+                    (slRedFlash gSource -128 0)
                     )
             </OnFlash1>
             
@@ -311,7 +311,7 @@
             
             <OnFlash2>
                 (block Nil
-                    ;(fnSiegeLordRedFlash gSource 26 199)
+                    ;(slRedFlash gSource 26 199)
                     )
             </OnFlash2>
         </Events>

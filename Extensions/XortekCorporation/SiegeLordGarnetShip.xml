@@ -53,8 +53,14 @@
             maxSpeed=           "22"
             />
 
+<!--
         <Armor
             armorID=            "&itReactiveArmor;"
+            count=              "4"
+            />
+-->
+        <Armor
+            armorID=            "&itP210HexphaseArmor;"
             count=              "4"
             />
 
@@ -72,13 +78,14 @@
 <!--
             <Device deviceID="&itFastFireLaserCannon;"/>
 -->
+            <Device deviceID="&itSmartCannon;"/>
             <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"/>
             <Device deviceID="&itSiegeLordPlasmaTorpedoLauncher;"/>
 <!--
             <Device deviceID="&itClass1Deflector;"/>
 -->
-            <Device deviceID="&itTaikon200Deflector;"/>
-            <Device deviceID="&it1GWReactor;"/>
+            <Device deviceID="&itPlasmaShieldGenerator;"/>
+            <Device deviceID="&it150MWReactor;"/>
 <!--
             <Device deviceID="&it15MWReactor;"/>
 -->
@@ -94,6 +101,7 @@
             <Item count="4d6" item="&itHelium3FuelRod;"/>
             <Item count="100" item="&itSiegeLordPlasmaCapsule;"/>
             <Item count="100" item="&itSiegeLordPlasmaTorpedo;"/>
+            <Item count="100" item="&itSmartCannonShell;"/>
             <Item count="1" item="&itTargetingComputerROM;"/>
         </Items>
 

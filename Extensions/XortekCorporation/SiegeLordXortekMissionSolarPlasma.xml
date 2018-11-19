@@ -14,7 +14,7 @@
 
         <Weapon
                 type=           "particles"
-                count=          "1d4+4"
+                count=          "5d4+4"
 
                 configuration=  "spread5"
                 damage=         "plasma:1; WMD5"
@@ -56,7 +56,7 @@
             name=               "A Trip to Tartarus"
             attributes=         "xortek"
 
-            level=              "1-4"
+            level=              "1-10"
             scope=              "system"
             >
 

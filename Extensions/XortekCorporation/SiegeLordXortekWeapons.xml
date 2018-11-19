@@ -16,7 +16,7 @@
             name=               "Plasma Capsule Cannon"
             attributes=         "majorItem, specialty, xortek"
 
-            level=              "3"
+            level=              "8"
             frequency=          "uncommon"
 
             value=              "1300"
@@ -30,7 +30,7 @@
         <Weapon
                 type=               "missile"
                 fireRate=           "15"
-                powerUse=           "5"
+                powerUse=           "30"
                 reportAmmo=         "true"
 
                 counter=            "capacitor"
@@ -42,7 +42,7 @@
                 <Missile ammoID="&itSiegeLordPlasmaCapsule;"
                         type=           "missile"
 
-                        damage=         "plasma:3d8+1; WMD1"
+                        damage=         "plasma:10d8+20; WMD1"
                         missileSpeed=   "50"
                         lifetime=       "60"
                         interaction=    "50"
@@ -89,7 +89,7 @@
             name=               "Plasma Capsule"
             attributes=         "premiumAmmo, consumable, missile, xortek"
 
-            level=              "2"
+            level=              "8"
             frequency=          "uncommon"
             numberAppearing=    "12d40"
 
@@ -106,7 +106,7 @@
             name=               "Plasma Torpedo Launcher"
             attributes=         "majorItem, specialty, xortek"
 
-            level=              "3"
+            level=              "8"
             frequency=          "uncommon"
 
             value=              "1300"
@@ -115,13 +115,13 @@
             description=        "The fearsome Xortek plasma torpedo launcher is the pinnacle of Xortek corporation weapon and plasma research. Venting minute amounts of plasma allows the torpedoes to home in on their targets."
             >
 
-        <Image imageID="&rsItemsRasiermesser1;" imageX="288" imageY="0" imageWidth="96" imageHeight="96"/>
+        <Image imageID="&rsItemsNAMI4;" imageX="0" imageY="96" imageWidth="96" imageHeight="96"/>
 
         <Weapon
                 type=               "missile"
                 launcher=           "true"
                 fireRate=           "45"
-                powerUse=           "5"
+                powerUse=           "50"
                 reportAmmo=         "true"
 
                 counter=            "capacitor"
@@ -133,14 +133,14 @@
                 <Missile ammoID="&itSiegeLordPlasmaTorpedo;"
                         type=           "missile"
 
-                        damage=         "plasma:10d8+5; WMD1"
+                        damage=         "plasma:15d12+50; WMD5"
                         missileSpeed=   "20"
                         lifetime=       "80"
                         interaction=    "50"
                         maneuverRate=   "3"
                         hitPoints=      "30"
 
-                        sound=          "&snRecoillessCannon;"
+                        sound=          "&snMissileLauncher;"
                         effect=         "&efSiegeLordXortekPlasmaProjBig;"
                         hitEffect=      "&efPlasmaHitDefault;"
                         fireEffect=     "&efSiegeLordXortekPlasmaFire;"
@@ -154,9 +154,9 @@
             name=               "Plasma Torpedo"
             attributes=         "premiumAmmo, consumable, missile, xortek"
 
-            level=              "2"
+            level=              "8"
             frequency=          "uncommon"
-            numberAppearing=    "12d40"
+            numberAppearing=    "10d40"
 
             value=              "1"
             mass=               "10"
@@ -168,30 +168,27 @@
     </ItemType>
     
     <EffectType UNID="&efSiegeLordXortekPlasmaProjBig;"
-            instance=           "owner"
+            instance=           "creator"
             >
         <Effect>
-            <Ray
-                style=          "smooth"
-                shape=          "tapered"
-                primaryColor=   "#FFBE7D"
-                secondaryColor= "#ff7f00"
-                >
-        
-                <Events>
-                    <GetParameters>
-                        (block (damageHP primaryColor secondaryColor)
-                            (setq damageHP (@ gData 'damageHP))
-
-                            {
-                                length: (mathScale damageHP 5 64 60 220 50)
-                                width: (mathScale damageHP 5 64 6 22 50)
-                                intensity: 30
-                                }
-                            )
-                    </GetParameters>
-                </Events>
-            </Ray>
+            <ParticleSystem
+                    style=              "jet"
+                    fixedPos=           "true"
+                    emitRate=           "40"
+                    tangentSpeed=       "-12-12"
+                    particleLifetime=   "1-6"
+                    XformTime=          "0"
+                    >
+                <ParticleEffect>
+                    <Particle
+                            style=          "plain"
+                            minWidth=       "1"
+                            maxWidth=       "4"
+                            primaryColor=   "#FFECD8"
+                            secondaryColor= "#ff7f00"
+                            />
+                </ParticleEffect>
+            </ParticleSystem>
             <Orb
                     style=              "fireblast"
                     spikeCount=         "6"
@@ -206,8 +203,8 @@
                             (damageHP (@ gData 'damageHP))
                             )
                             {
-                                radius: (mathScale damageHP 50 680 30 180 50)
-                                intensity: (mathScale damageHP 50 680 20 50 50)
+                                radius: (mathScale damageHP 50 680 30 60 50)
+                                intensity: (mathScale damageHP 50 680 20 25 50)
                                 }
                             )
                     </GetParameters>
@@ -226,8 +223,8 @@
                             (damageHP (@ gData 'damageHP))
                             )
                             {
-                                radius: (mathScale damageHP 50 680 30 180 50)
-                                intensity: (mathScale damageHP 50 680 20 50 50)
+                                radius: (mathScale damageHP 50 680 30 60 50)
+                                intensity: (mathScale damageHP 50 680 20 25 50)
                                 }
                             )
                     </GetParameters>
@@ -237,30 +234,27 @@
     </EffectType>
     
     <EffectType UNID="&efSiegeLordXortekPlasmaProj;"
-            instance=           "owner"
+            instance=           "creator"
             >
         <Effect>
-            <Ray
-                style=          "smooth"
-                shape=          "tapered"
-                primaryColor=   "#FFBE7D"
-                secondaryColor= "#ff7f00"
-                >
-        
-                <Events>
-                    <GetParameters>
-                        (block (damageHP primaryColor secondaryColor)
-                            (setq damageHP (@ gData 'damageHP))
-
-                            {
-                                length: (mathScale damageHP 5 64 60 220 50)
-                                width: (mathScale damageHP 5 64 6 22 50)
-                                intensity: 30
-                                }
-                            )
-                    </GetParameters>
-                </Events>
-            </Ray>
+            <ParticleSystem
+                    style=              "jet"
+                    fixedPos=           "true"
+                    emitRate=           "40"
+                    tangentSpeed=       "-4-4"
+                    particleLifetime=   "1-6"
+                    XformTime=          "0"
+                    >
+                <ParticleEffect>
+                    <Particle
+                            style=          "plain"
+                            minWidth=       "1"
+                            maxWidth=       "3"
+                            primaryColor=   "#FFECD8"
+                            secondaryColor= "#ff7f00"
+                            />
+                </ParticleEffect>
+            </ParticleSystem>
             <Orb
                     style=              "smooth"
                     spikeCount=         "6"
@@ -275,8 +269,8 @@
                             (damageHP (@ gData 'damageHP))
                             )
                             {
-                                radius: (mathScale damageHP 50 680 20 120 50)
-                                intensity: (mathScale damageHP 50 680 20 50 50)
+                                radius: (mathScale damageHP 50 680 20 40 50)
+                                intensity: (mathScale damageHP 50 680 20 25 50)
                                 }
                             )
                     </GetParameters>
