@@ -9,6 +9,8 @@
     <!ENTITY itSiegeLordPlasmaTorpedoLauncher     "0xD0120016">
     <!ENTITY itSiegeLordPlasmaTorpedo             "0xD0120017">
     <!ENTITY efSiegeLordXortekPlasmaProjBig       "0xD0120018">
+    <!ENTITY itSiegeLordPlasmaTorpedoVirt         "0xD012001B">
+    <!ENTITY itSiegeLordPlasmaCapsuleVirt         "0xD012001C">
     ]>
 
 <TranscendenceModule>
@@ -39,48 +41,12 @@
                 counterUpdateRate=  "5"
                 >
             <Missiles>
-                <Missile ammoID="&itSiegeLordPlasmaCapsule;"
-                        type=           "missile"
-
-                        damage=         "plasma:10d8+20; WMD1"
-                        missileSpeed=   "50"
-                        lifetime=       "60"
-                        interaction=    "50"
-                        maneuverRate=   "6"
-                        hitPoints=      "20"
-
-                        sound=          "&snRecoillessCannon;"
-                        effect=         "&efSiegeLordXortekPlasmaProj;"
-                        hitEffect=      "&efPlasmaHitDefault;"
-                        fireEffect=     "&efSiegeLordXortekPlasmaFire;"
-                        >
-                    <Events>
 <!--
-                        <OnDamageShields>
-                            (block (
-                                        (lifeLeft (objGetProperty aCause 'lifeLeft))
-                                        (lifetime (objGetProperty aCause 'lifetime))
-                                        scaledDamage
-                                        )
-                                (setq scaledDamage (mathScale lifeLeft 0 lifetime 0 aDamageHP 50))
-                                (dbgOutput "Shields damaged by " scaledDamage " lifeLeft " lifeLeft "lifetime " lifetime)
-                                scaledDamage
-                            )
-                        </OnDamageShields>
-                        <OnDamageArmor>
-                            (block (
-                                        (lifeLeft (objGetProperty aCause 'lifeLeft))
-                                        (lifetime (objGetProperty aCause 'lifetime))
-                                        scaledDamage
-                                        )
-                                (setq scaledDamage (mathScale lifeLeft 0 lifetime 0 aDamageHP 50))
-                                (dbgOutput "Armor damaged by " scaledDamage " lifeLeft " lifeLeft "lifetime " lifetime)
-                                scaledDamage
-                            )
-                        </OnDamageArmor>
+                <Missile ammoID="&itSiegeLordPlasmaCapsule;"/>
 -->
-                    </Events>
-                </Missile>
+<!--
+                <Missile ammoID="&itSiegeLordPlasmaCapsuleVirt;"/>
+-->
             </Missiles>
         </Weapon>
     </ItemType>
@@ -100,8 +66,67 @@
             >
 
         <Image imageID="&rsItemsRasiermesser1;" imageX="0" imageY="96" imageWidth="96" imageHeight="96"/>
+        <Missile
+                    type=           "missile"
+
+                    damage=         "plasma:10d8+20; WMD1"
+                    missileSpeed=   "50"
+                    lifetime=       "60"
+                    interaction=    "50"
+                    maneuverRate=   "6"
+                    hitPoints=      "20"
+
+                    sound=          "&snRecoillessCannon;"
+                    effect=         "&efSiegeLordXortekPlasmaProj;"
+                    hitEffect=      "&efPlasmaHitDefault;"
+                    fireEffect=     "&efSiegeLordXortekPlasmaFire;"
+                    >
+        </Missile>
     </ItemType>
     
+<!--
+    <ItemType UNID="&itSiegeLordPlasmaCapsuleVirt;"
+        inherit="&itSiegeLordPlasmaCapsule;"
+        virtual="true"
+        level="9"/>
+-->
+    
+    <ItemType UNID="&itSiegeLordPlasmaTorpedoLauncher;"
+        name=               "MAG launcher"
+            attributes=         "commonwealth, majorItem, rasiermesser"
+
+            level=              "4"
+            frequency=          "uncommon"
+
+            value=              "3000"
+            mass=               "1000"
+
+            description=        "The MAG launcher is a flexible and sophisticated grenade launcher that is compatible with a large range of MAG munitions."
+            >
+
+        <Image imageID="&rsItemsRasiermesser2;" imageX="0" imageY="0" imageWidth="96" imageHeight="96"/>
+
+        <Weapon
+                fireRate=           "20"
+                powerUse=           "10"
+                launcher=           "true"
+                >
+
+            <Missiles>
+                <Missile ammoID="&it400HexageneMAG;"/>
+                <Missile ammoID="&it600HexageneMAG;"/>
+                <Missile ammoID="&it800HexageneMAG;"/>
+                <Missile ammoID="&itJB2ShieldBusterMAG;"/>
+                <Missile ammoID="&itZG24ClusterMAG;"/>
+                <Missile ammoID="&it3KSiegeMAG;"/>
+                <Missile ammoID="&itHighFluxMAG;"/>
+
+                <Missile ammoID="&itPX3HexageneMAG;"/>
+                <Missile ammoID="&itPX19OblivionMAG;"/>
+            </Missiles>
+        </Weapon>
+    </ItemType>
+<!--
     <ItemType UNID="&itSiegeLordPlasmaTorpedoLauncher;"
             name=               "Plasma Torpedo Launcher"
             attributes=         "majorItem, specialty, xortek"
@@ -118,7 +143,6 @@
         <Image imageID="&rsItemsNAMI4;" imageX="0" imageY="96" imageWidth="96" imageHeight="96"/>
 
         <Weapon
-                type=               "missile"
                 launcher=           "true"
                 fireRate=           "45"
                 powerUse=           "50"
@@ -130,25 +154,12 @@
                 counterUpdateRate=  "5"
                 >
             <Missiles>
-                <Missile ammoID="&itSiegeLordPlasmaTorpedo;"
-                        type=           "missile"
-
-                        damage=         "plasma:15d12+50; WMD5"
-                        missileSpeed=   "20"
-                        lifetime=       "80"
-                        interaction=    "50"
-                        maneuverRate=   "3"
-                        hitPoints=      "30"
-
-                        sound=          "&snMissileLauncher;"
-                        effect=         "&efSiegeLordXortekPlasmaProjBig;"
-                        hitEffect=      "&efPlasmaHitDefault;"
-                        fireEffect=     "&efSiegeLordXortekPlasmaFire;"
-                        >
-                </Missile>
+                <Missile ammoID="&itSiegeLordPlasmaTorpedo;"/>
+                <Missile ammoID="&itSiegeLordPlasmaTorpedoVirt;"/>
             </Missiles>
         </Weapon>
     </ItemType>
+-->
 
     <ItemType UNID="&itSiegeLordPlasmaTorpedo;"
             name=               "Plasma Torpedo"
@@ -165,7 +176,31 @@
             >
 
         <Image imageID="&rsItemsRasiermesser1;" imageX="0" imageY="96" imageWidth="96" imageHeight="96"/>
+        
+        <Missile
+                type=           "missile"
+
+                damage=         "plasma:15d12+50; WMD5"
+                missileSpeed=   "20"
+                lifetime=       "80"
+                interaction=    "50"
+                maneuverRate=   "3"
+                hitPoints=      "30"
+
+                sound=          "&snMissileLauncher;"
+                effect=         "&efSiegeLordXortekPlasmaProjBig;"
+                hitEffect=      "&efPlasmaHitDefault;"
+                fireEffect=     "&efSiegeLordXortekPlasmaFire;"
+                >
+        </Missile>
     </ItemType>
+    
+<!--
+    <ItemType UNID="&itSiegeLordPlasmaTorpedoVirt;"
+        inherit="&itSiegeLordPlasmaTorpedo;"
+        virtual="true"
+        level="9"/>
+-->
     
     <EffectType UNID="&efSiegeLordXortekPlasmaProjBig;"
             instance=           "creator"

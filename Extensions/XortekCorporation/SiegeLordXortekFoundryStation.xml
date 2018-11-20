@@ -101,18 +101,17 @@
 
             multiHull=          "true"
             armorID=            "&itLightGusokuArmor;"
-            hitPoints=          "300"
-            regen=              "4"
+            hitPoints=          "2400"
+            regen=              "24"
             fireRateAdj=        "20"
             explosionType=      "&vtPlasmaExplosion3;"
             ejectaType=         "&vtWreckEjecta;"
 
-            attributes=         "xortek, corporate, corporateArms, corporateCustoms, envAir, envEarth, envFire, envWater, friendly, independent, generic, human, populated"
-            enemyExclusionRadius="50"
+            attributes=         "xortek, corporate, corporateArms, corporateCustoms, envAir, envEarth, envFire, envAvoidsWater, friendly, independent, generic, human, populated"
             >
         
         <Encounter
-                levelFrequency=     "---ru rv--- ----- ----- -----"
+                levelFrequency=     "----- --rur ----- ----- -----"
                 locationCriteria=   "+planetary"
                 unique=             "inSystem"
                 enemyExclusionRadius="75"
@@ -172,8 +171,10 @@
         </Devices>
 
         <Items>
+<!--
             <Item count="100" item="&itSiegeLordPlasmaCapsule;"/>
             <Item count="100" item="&itSiegeLordPlasmaTorpedo;"/>
+-->
 
             <RandomItem count="10"
                     criteria=       "ad L:1-5; -Illegal; -Military; -Alien; -Specialty; -NotStandard; -NotForSale;"
