@@ -99,10 +99,8 @@
 
         <Items>
             <Item count="4d6" item="&itHelium3FuelRod;"/>
-<!--
             <Item count="100" item="&itSiegeLordPlasmaCapsule;"/>
             <Item count="100" item="&itSiegeLordPlasmaTorpedo;"/>
--->
             <Item count="100" item="&itSmartCannonShell;"/>
             <Item count="1" item="&itTargetingComputerROM;"/>
         </Items>

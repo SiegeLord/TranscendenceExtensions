@@ -10,7 +10,7 @@
     <!ENTITY itSiegeLordPlasmaTorpedo             "0xD0120017">
     <!ENTITY efSiegeLordXortekPlasmaProjBig       "0xD0120018">
     <!ENTITY itSiegeLordPlasmaTorpedoVirt         "0xD012001B">
-    <!ENTITY itSiegeLordPlasmaCapsuleVirt         "0xD012001C">
+    <!ENTITY itSiegeLordPlasmaCapsuleVirt         "0xD012000A">
     ]>
 
 <TranscendenceModule>
@@ -84,49 +84,11 @@
         </Missile>
     </ItemType>
     
-<!--
     <ItemType UNID="&itSiegeLordPlasmaCapsuleVirt;"
         inherit="&itSiegeLordPlasmaCapsule;"
         virtual="true"
         level="9"/>
--->
-    
-    <ItemType UNID="&itSiegeLordPlasmaTorpedoLauncher;"
-        name=               "MAG launcher"
-            attributes=         "commonwealth, majorItem, rasiermesser"
 
-            level=              "4"
-            frequency=          "uncommon"
-
-            value=              "3000"
-            mass=               "1000"
-
-            description=        "The MAG launcher is a flexible and sophisticated grenade launcher that is compatible with a large range of MAG munitions."
-            >
-
-        <Image imageID="&rsItemsRasiermesser2;" imageX="0" imageY="0" imageWidth="96" imageHeight="96"/>
-
-        <Weapon
-                fireRate=           "20"
-                powerUse=           "10"
-                launcher=           "true"
-                >
-
-            <Missiles>
-                <Missile ammoID="&it400HexageneMAG;"/>
-                <Missile ammoID="&it600HexageneMAG;"/>
-                <Missile ammoID="&it800HexageneMAG;"/>
-                <Missile ammoID="&itJB2ShieldBusterMAG;"/>
-                <Missile ammoID="&itZG24ClusterMAG;"/>
-                <Missile ammoID="&it3KSiegeMAG;"/>
-                <Missile ammoID="&itHighFluxMAG;"/>
-
-                <Missile ammoID="&itPX3HexageneMAG;"/>
-                <Missile ammoID="&itPX19OblivionMAG;"/>
-            </Missiles>
-        </Weapon>
-    </ItemType>
-<!--
     <ItemType UNID="&itSiegeLordPlasmaTorpedoLauncher;"
             name=               "Plasma Torpedo Launcher"
             attributes=         "majorItem, specialty, xortek"
@@ -159,7 +121,6 @@
             </Missiles>
         </Weapon>
     </ItemType>
--->
 
     <ItemType UNID="&itSiegeLordPlasmaTorpedo;"
             name=               "Plasma Torpedo"
@@ -195,12 +156,10 @@
         </Missile>
     </ItemType>
     
-<!--
     <ItemType UNID="&itSiegeLordPlasmaTorpedoVirt;"
         inherit="&itSiegeLordPlasmaTorpedo;"
         virtual="true"
         level="9"/>
--->
     
     <EffectType UNID="&efSiegeLordXortekPlasmaProjBig;"
             instance=           "creator"

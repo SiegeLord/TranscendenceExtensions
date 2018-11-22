@@ -2,7 +2,7 @@
 
 <!DOCTYPE TranscendenceModule
     [
-    <!ENTITY stSiegeLordXortekFoundry                "0xD012000A">
+    <!ENTITY stSiegeLordXortekFoundry                "0xD012001C">
     <!ENTITY rsSiegeLordXortekFoundryImage           "0xD012000B">
     <!ENTITY rsSiegeLordXortekFoundryImageHero       "0xD012000C">
     <!ENTITY stSiegeLordXortekProvingGroundsBeacon   "0xD012001A">
@@ -171,10 +171,8 @@
         </Devices>
 
         <Items>
-<!--
             <Item count="100" item="&itSiegeLordPlasmaCapsule;"/>
             <Item count="100" item="&itSiegeLordPlasmaTorpedo;"/>
--->
 
             <RandomItem count="10"
                     criteria=       "ad L:1-5; -Illegal; -Military; -Alien; -Specialty; -NotStandard; -NotForSale;"
