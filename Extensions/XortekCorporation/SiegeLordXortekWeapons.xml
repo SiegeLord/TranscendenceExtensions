@@ -9,8 +9,6 @@
     <!ENTITY itSiegeLordPlasmaTorpedoLauncher     "0xD0120016">
     <!ENTITY itSiegeLordPlasmaTorpedo             "0xD0120017">
     <!ENTITY efSiegeLordXortekPlasmaProjBig       "0xD0120018">
-    <!ENTITY itSiegeLordPlasmaTorpedoVirt         "0xD012001B">
-    <!ENTITY itSiegeLordPlasmaCapsuleVirt         "0xD012000A">
     ]>
 
 <TranscendenceModule>
@@ -41,12 +39,7 @@
                 counterUpdateRate=  "5"
                 >
             <Missiles>
-<!--
                 <Missile ammoID="&itSiegeLordPlasmaCapsule;"/>
--->
-<!--
-                <Missile ammoID="&itSiegeLordPlasmaCapsuleVirt;"/>
--->
             </Missiles>
         </Weapon>
     </ItemType>
@@ -83,11 +76,6 @@
                     >
         </Missile>
     </ItemType>
-    
-    <ItemType UNID="&itSiegeLordPlasmaCapsuleVirt;"
-        inherit="&itSiegeLordPlasmaCapsule;"
-        virtual="true"
-        level="9"/>
 
     <ItemType UNID="&itSiegeLordPlasmaTorpedoLauncher;"
             name=               "Plasma Torpedo Launcher"
@@ -117,7 +105,6 @@
                 >
             <Missiles>
                 <Missile ammoID="&itSiegeLordPlasmaTorpedo;"/>
-                <Missile ammoID="&itSiegeLordPlasmaTorpedoVirt;"/>
             </Missiles>
         </Weapon>
     </ItemType>
@@ -155,11 +142,6 @@
                 >
         </Missile>
     </ItemType>
-    
-    <ItemType UNID="&itSiegeLordPlasmaTorpedoVirt;"
-        inherit="&itSiegeLordPlasmaTorpedo;"
-        virtual="true"
-        level="9"/>
     
     <EffectType UNID="&efSiegeLordXortekPlasmaProjBig;"
             instance=           "creator"

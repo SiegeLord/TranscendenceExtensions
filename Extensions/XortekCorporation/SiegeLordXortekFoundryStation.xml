@@ -2,18 +2,18 @@
 
 <!DOCTYPE TranscendenceModule
     [
-    <!ENTITY stSiegeLordXortekFoundry                "0xD012001C">
+    <!ENTITY stSiegeLordXortekFoundry                "0xD012001E">
     <!ENTITY rsSiegeLordXortekFoundryImage           "0xD012000B">
     <!ENTITY rsSiegeLordXortekFoundryImageHero       "0xD012000C">
     <!ENTITY stSiegeLordXortekProvingGroundsBeacon   "0xD012001A">
 <!--
   External
 -->
-    <!ENTITY scSiegeLordGarnet                       "0xD0120001">
-    <!ENTITY itSiegeLordPlasmaCapsuleCannon          "0xD0120010">
-    <!ENTITY itSiegeLordPlasmaCapsule                "0xD0120011">
-    <!ENTITY itSiegeLordPlasmaTorpedoLauncher        "0xD0120016">
-    <!ENTITY itSiegeLordPlasmaTorpedo                "0xD0120017">
+    <!ENTITY scSiegeLordGarnet                    "0xD0120001">
+    <!ENTITY itSiegeLordPlasmaCapsuleCannon       "0xD0120010">
+    <!ENTITY itSiegeLordPlasmaCapsule             "0xD0120011">
+    <!ENTITY itSiegeLordPlasmaTorpedoLauncher     "0xD0120016">
+    <!ENTITY itSiegeLordPlasmaTorpedo             "0xD0120017">
     ]>
 
 <TranscendenceModule>
@@ -117,7 +117,7 @@
                 enemyExclusionRadius="75"
                 />
 
-        <Image          imageID="&rsSiegeLordXortekFoundryImage;" imageWidth="840" imageHeight="840" />
+        <Image          imageID="&rsSiegeLordXortekFoundryImage;" viewportRatio="0.105" imageWidth="840" imageHeight="840" />
         <HeroImage      imageID="&rsSiegeLordXortekFoundryImageHero;" imageWidth="712" imageHeight="528" />
 
         <DockingPorts>
@@ -292,15 +292,17 @@
             
             <OnFlash1>
                 (block Nil
-                    ;(slRedFlash gSource 48 312)
-                    (slRedFlash gSource 0 128)
-                    (slRedFlash gSource 128 128)
-                    (slRedFlash gSource 128 -128)
-                    (slRedFlash gSource 0 -128)
-                    (slRedFlash gSource -128 -128)
-                    (slRedFlash gSource -128 128)
-                    (slRedFlash gSource 128 0)
-                    (slRedFlash gSource -128 0)
+                    (slRedFlash gSource 386 -65)
+                    (slRedFlash gSource -249 -302)
+                    (slRedFlash gSource -137 367)
+                    ;(slRedFlash gSource 0 128)
+                    ;(slRedFlash gSource 128 128)
+                    ;(slRedFlash gSource 128 -128)
+                    ;(slRedFlash gSource 0 -128)
+                    ;(slRedFlash gSource -128 -128)
+                    ;(slRedFlash gSource -128 128)
+                    ;(slRedFlash gSource 128 0)
+                    ;(slRedFlash gSource -128 0)
                     )
             </OnFlash1>
             
