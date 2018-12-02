@@ -34,7 +34,7 @@
                 reportAmmo=         "true"
 
                 counter=            "capacitor"
-                counterActivate=    "-15"
+                counterActivate=    "-5"
                 counterUpdate=      "2"
                 counterUpdateRate=  "5"
                 >
