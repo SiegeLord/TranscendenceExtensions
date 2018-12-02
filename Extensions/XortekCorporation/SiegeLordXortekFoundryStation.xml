@@ -372,6 +372,7 @@
     <Globals>
         (block Nil
             (setq slXorStation (lambda () (sysCreateStation &stSiegeLordXortekFoundry; gPlayerShip)))
+            (setq slElysium (lambda () (objGateTo gPlayerShip "Elysium" "Start" &efStargateOut;)))
             (setq slRange (lambda (end) (block (ret)
                     (setq ret (list))
                     (for i 0 end
