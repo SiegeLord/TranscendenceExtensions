@@ -60,7 +60,7 @@
             />
 -->
         <Armor
-            armorID=            "&itP210HexphaseArmor;"
+            armorID=            "&itHexaCarbideArmor;"
             count=              "4"
             />
 
@@ -85,7 +85,7 @@
             <Device deviceID="&itClass1Deflector;"/>
 -->
             <Device deviceID="&itPlasmaShieldGenerator;"/>
-            <Device deviceID="&it150MWReactor;"/>
+            <Device deviceID="&it250MWReactor;"/>
 <!--
             <Device deviceID="&it15MWReactor;"/>
 -->
@@ -98,11 +98,14 @@
             />
 
         <Items>
+<!--
             <Item count="4d6" item="&itHelium3FuelRod;"/>
-            <Item count="100" item="&itSiegeLordPlasmaCapsule;"/>
-            <Item count="100" item="&itSiegeLordPlasmaTorpedo;"/>
-            <Item count="100" item="&itSmartCannonShell;"/>
+-->
+            <Item count="300" item="&itPteracniumFuelRod;"/>
+            <Item count="200" item="&itSiegeLordPlasmaCapsule;"/>
+            <Item count="200" item="&itSiegeLordPlasmaTorpedo;"/>
             <Item count="1" item="&itTargetingComputerROM;"/>
+            <Item count="20" item="&itSystemMapROM;"/>
         </Items>
 
         <Image imageID="&rsSiegeLordGarnetGameImage;"      imageWidth="64" imageHeight="64" rotationCount="120"/>

@@ -117,7 +117,7 @@
                 enemyExclusionRadius="75"
                 />
 
-        <Image          imageID="&rsSiegeLordXortekFoundryImage;" viewportRatio="0.105" imageWidth="840" imageHeight="840" />
+        <Image          imageID="&rsSiegeLordXortekFoundryImage;" viewportRatio="0.135" imageWidth="840" imageHeight="840" />
         <HeroImage      imageID="&rsSiegeLordXortekFoundryImageHero;" imageWidth="712" imageHeight="528" />
 
         <DockingPorts>
@@ -292,17 +292,13 @@
             
             <OnFlash1>
                 (block Nil
-                    (slRedFlash gSource 386 -65)
-                    (slRedFlash gSource -249 -302)
-                    (slRedFlash gSource -137 367)
-                    ;(slRedFlash gSource 0 128)
-                    ;(slRedFlash gSource 128 128)
-                    ;(slRedFlash gSource 128 -128)
-                    ;(slRedFlash gSource 0 -128)
-                    ;(slRedFlash gSource -128 -128)
-                    ;(slRedFlash gSource -128 128)
-                    ;(slRedFlash gSource 128 0)
-                    ;(slRedFlash gSource -128 0)
+                    (slRedFlash gSource 386 -65 0)
+                    (slRedFlash gSource -249 -302 0)
+                    (slRedFlash gSource -137 367 0)
+                    
+                    (slRedFlash gSource 45 54 542)
+                    (slRedFlash gSource 24 -65 542)
+                    (slRedFlash gSource -70 11 542)
                     )
             </OnFlash1>
             
@@ -312,7 +308,16 @@
             
             <OnFlash2>
                 (block Nil
-                    ;(slRedFlash gSource 26 199)
+                    (slRedFlash gSource 55 66 452)
+                    (slRedFlash gSource 30 -82 452)
+                    (slRedFlash gSource -85 15 452)
+                    
+                    (slGreenFlash gSource -14 -180 0)
+                    (slGreenFlash gSource 64 -173 0)
+                    (slGreenFlash gSource 127 -128 0)
+                    (slGreenFlash gSource -181 31 0)
+                    (slGreenFlash gSource -174 -46 0)
+                    (slGreenFlash gSource 163 78 0)
                     )
             </OnFlash2>
         </Events>

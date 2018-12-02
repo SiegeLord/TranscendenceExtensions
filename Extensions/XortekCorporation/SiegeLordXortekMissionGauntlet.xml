@@ -297,8 +297,8 @@
             <Text id="AcceptReply">
                 The liason replies warmly:
                 
-                "Wonderful! Please travel to our proving grounds and 
-                make sure not to destroy our ships!"
+                "Wonderful! Please travel to our proving grounds and begin the
+                exercise. Remember, make sure not to destroy our ships!"
             </Text>
             
             <String id="DeclineReply">

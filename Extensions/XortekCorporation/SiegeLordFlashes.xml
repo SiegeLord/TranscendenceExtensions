@@ -4,16 +4,32 @@
     [
     <!ENTITY rsSiegeLordRedFlash                     "0xD0120014">
     <!ENTITY ovSiegeLordRedFlash                     "0xD0120015">
+    <!ENTITY rsSiegeLordGreenFlash                     "0xD012001F">
+    <!ENTITY ovSiegeLordGreenFlash                     "0xD0120020">
     ]>
 
 <TranscendenceModule>
     <Image UNID="&rsSiegeLordRedFlash;" bitmap="Resources/SiegeLordRedFlash.png" loadOnUse="true"/>
+    <Image UNID="&rsSiegeLordGreenFlash;" bitmap="Resources/SiegeLordGreenFlash.png" loadOnUse="true"/>
     
     <OverlayType UNID="&ovSiegeLordRedFlash;"
             attributes=         "temporary"
             >
-        <Effect UNID="&ovSiegeLordRedFlash;">
+        <Effect>
             <Image imageID="&rsSiegeLordRedFlash;" 
+                    imageX="0" 
+                    imageY="0" 
+                    imageWidth="32" 
+                    imageHeight="32"
+                    imageFrameCount="2"
+                    imageTicksPerFrame="30"/>
+        </Effect>
+    </OverlayType>
+    <OverlayType UNID="&ovSiegeLordGreenFlash;"
+            attributes=         "temporary"
+            >
+        <Effect>
+            <Image imageID="&rsSiegeLordGreenFlash;" 
                     imageX="0" 
                     imageY="0" 
                     imageWidth="32" 
@@ -25,23 +41,10 @@
 
     <Globals>
         (block Nil
-            (setq slRedFlash (lambda (source offX offY)
-                (objAddOverlay source &ovSiegeLordRedFlash; (sysVectorPixelOffset (objGetPos source) offX offY) 0 60)))
-                )
-            (setq slScreenToWorld (lambda (screenX screenY)
-                (block (
-                        rX
-                        rY
-                        (rD 2)
-                        rXp
-                        rYp
-                        (g_KlicksPerPixel)
-                        rDen
-                        (g_rK1)
-                        (g_rK2)
-                        )
-                    )
-                ))
+            (setq slRedFlash (lambda (source offX offY offZ)
+                (objAddOverlay source &ovSiegeLordRedFlash; (sysVectorPixelOffset (objGetPos source) offX offY) 0 60 offZ)))
+            (setq slGreenFlash (lambda (source offX offY offZ)
+                (objAddOverlay source &ovSiegeLordGreenFlash; (sysVectorPixelOffset (objGetPos source) offX offY) 0 60 offZ)))
             )
     </Globals>
 </TranscendenceModule>
