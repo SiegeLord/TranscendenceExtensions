@@ -49,7 +49,7 @@
                 (block ((beaconID (objGetData aOwnerObj 'provingGroundsID)))
                     (msnSetData gSource 'beaconID beaconID)
                     ; Compute reward
-                    (msnSetData gSource 'reward 4000)
+                    (msnSetData gSource 'reward 25000)
                     (msnSetData gSource 'status 'created)
                     (msnSetData gSource 'oobCounter 0)
                     )
@@ -63,19 +63,20 @@
 
 
                 (block (
+                        (num 1)
                         attacker
                         attackerIDs
                         (beacon (objGetObjByID (msnGetData gSource 'beaconID)))
                         )
                     (setq attackerIDs
-                        (map (slRange 3) i
-                            (block ((angle (* i 120)))
+                        (map (slRange num) i
+                            (block ((angle (* i (/ 360 num))))
                                 (setq attacker (sysCreateShip 
-                                    ;&scSiegeLordGarnet;
-                                    &scHornet;
+                                    &scSiegeLordGarnet;
                                     (sysVectorPolarOffset (objGetPos beacon) angle 35)
                                     &svCorporate;
                                     ))
+                                (dbgOutput "Creating attacker" i)
                                 
                                 (shpOrder attacker 'turnTo (modulo (+ angle 180) 360))
                                 (shpOrder attacker 'hold)

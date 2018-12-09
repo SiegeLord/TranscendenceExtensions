@@ -9,9 +9,14 @@
     <!ENTITY itSiegeLordPlasmaTorpedoLauncher     "0xD0120016">
     <!ENTITY itSiegeLordPlasmaTorpedo             "0xD0120017">
     <!ENTITY efSiegeLordXortekPlasmaProjBig       "0xD0120018">
+    <!ENTITY snSiegeLordXortekShort               "0xD0120021">
+    <!ENTITY snSiegeLordXortekLong                "0xD0120022">
     ]>
 
 <TranscendenceModule>
+    <Sound UNID="&snSiegeLordXortekShort;" filename="Resources/short.wav"/>
+    <Sound UNID="&snSiegeLordXortekLong;" filename="Resources/long.wav"/>
+    
     <ItemType UNID="&itSiegeLordPlasmaCapsuleCannon;"
             name=               "Plasma Capsule Cannon"
             attributes=         "majorItem, specialty, xortek"
@@ -69,7 +74,7 @@
                     maneuverRate=   "6"
                     hitPoints=      "20"
 
-                    sound=          "&snRecoillessCannon;"
+                    sound=          "&snSiegeLordXortekShort;"
                     effect=         "&efSiegeLordXortekPlasmaProj;"
                     hitEffect=      "&efPlasmaHitDefault;"
                     fireEffect=     "&efSiegeLordXortekPlasmaFire;"
@@ -135,7 +140,7 @@
                 maneuverRate=   "3"
                 hitPoints=      "30"
 
-                sound=          "&snMissileLauncher;"
+                sound=          "&snSiegeLordXortekLong;"
                 effect=         "&efSiegeLordXortekPlasmaProjBig;"
                 hitEffect=      "&efPlasmaHitDefault;"
                 fireEffect=     "&efSiegeLordXortekPlasmaFire;"

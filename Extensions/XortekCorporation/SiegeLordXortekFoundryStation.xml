@@ -172,7 +172,7 @@
 
         <Items>
             <Item count="100" item="&itSiegeLordPlasmaCapsule;"/>
-            <Item count="100" item="&itSiegeLordPlasmaTorpedo;"/>
+            <Item count="50" item="&itSiegeLordPlasmaTorpedo;"/>
 
             <RandomItem count="10"
                     criteria=       "ad L:1-5; -Illegal; -Military; -Alien; -Specialty; -NotStandard; -NotForSale;"
@@ -243,6 +243,7 @@
                 (block (stars firstStar planets bestDist groundsPos beacon)
                     ; Set up flashers.
                     (sysAddObjRecurringTimerEvent 120 gSource "OnFlash1")
+                    (sysAddObjRecurringTimerEvent 120 gSource "OnAmmoReplenish")
                     (sysAddObjTimerEvent 30 gSource "OnStartFlash2")
                     
                     ; Place the proving grounds.
@@ -320,6 +321,30 @@
                     (slGreenFlash gSource 163 78 0)
                     )
             </OnFlash2>
+            
+            <OnAmmoReplenish>
+                (block ((numCapsules 0)
+                        (numTorpedoes 0)
+                    )
+                    (objEnumItems gSource "* +unid:&itSiegeLordPlasmaCapsule;" item
+                        (setq numCapsules (itmGetCount item))
+                        )
+                    (objEnumItems gSource "* +unid:&itSiegeLordPlasmaTorpedo;" item
+                        (setq numTorpedoes (itmGetCount item))
+                        )
+                        
+                    ;(dbgOutput "num capsules " numCapsules)
+                    ;(dbgOutput "num tropedoes " numTorpedoes)
+                    
+                    (if (ls numCapsules 10)
+                        (objAddItem gSource (itmCreate &itSiegeLordPlasmaCapsule; (- 10 numCapsules)))
+                        )
+
+                    (if (ls numTorpedoes 10)
+                        (objAddItem gSource (itmCreate &itSiegeLordPlasmaTorpedo; (- 10 numTorpedoes)))
+                        )
+                    )
+            </OnAmmoReplenish>
         </Events>
 
         <Language>

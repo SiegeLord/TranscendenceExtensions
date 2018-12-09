@@ -103,9 +103,7 @@
 -->
             <Item count="300" item="&itPteracniumFuelRod;"/>
             <Item count="200" item="&itSiegeLordPlasmaCapsule;"/>
-            <Item count="200" item="&itSiegeLordPlasmaTorpedo;"/>
-            <Item count="1" item="&itTargetingComputerROM;"/>
-            <Item count="20" item="&itSystemMapROM;"/>
+            <Item count="50" item="&itSiegeLordPlasmaTorpedo;"/>
         </Items>
 
         <Image imageID="&rsSiegeLordGarnetGameImage;"      imageWidth="64" imageHeight="64" rotationCount="120"/>
@@ -190,6 +188,39 @@
             </WeaponDisplay>
             
         </PlayerSettings>
+        
+        <Events>
+            <OnCreate>
+                (block ((thisID (objGetID gSource))
+                        (playerID (objGetID gPlayerShip)))
+                        (if (not (eq thisID playerID))
+                            (sysAddObjRecurringTimerEvent 120 gSource "OnCheckAmmo")
+                            )
+                    )
+            </OnCreate>
+            <OnCheckAmmo>
+                (block ((numCapsules 0)
+                        (numTorpedoes 0)
+                    )
+                    (objEnumItems gSource "* +unid:&itSiegeLordPlasmaCapsule;" item
+                        (setq numCapsules (itmGetCount item))
+                        )
+                    (objEnumItems gSource "* +unid:&itSiegeLordPlasmaTorpedo;" item
+                        (setq numTorpedoes (itmGetCount item))
+                        )
+                    
+                    ;(dbgOutput "obj capsules/torps " gSource " " numCapsules " " numTorpedoes)
+                    
+                    (if (and (eq numCapsules 0) (eq numTorpedoes 0))
+                        (block ()
+                            ;(dbgOutput "Out of ammo!" gSource)
+                            (shpCancelOrders gSource)
+                            (shpOrder gSource 'gate)
+                            )
+                        )
+                    )
+            </OnCheckAmmo>
+        </Events>
     </ShipClass>
 
     <EffectType UNID="&rsSiegeLordGarnetBlueJet;"
