@@ -14,7 +14,11 @@
     <Module filename="SiegeLordGarnetShip.xml"/>
     <Module filename="SiegeLordXortekFoundryStation.xml"/>
     
+<!--
     <Module filename="SiegeLordXortekMissionDestroy.xml"/>
+-->
     <Module filename="SiegeLordXortekMissionSolarPlasma.xml"/>
+<!--
     <Module filename="SiegeLordXortekMissionGauntlet.xml"/>
+-->
 </TranscendenceExtension>

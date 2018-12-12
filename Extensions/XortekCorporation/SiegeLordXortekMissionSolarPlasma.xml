@@ -17,7 +17,7 @@
                 count=          "5d4+4"
 
                 configuration=  "spread5"
-                damage=         "plasma:50; WMD5"
+                damage=         "plasma:60; WMD5"
                 fireRate=       "20"
                 powerUse=       "6000"
                 noWorldHits=    "true"
@@ -85,7 +85,7 @@
 
                         (block Nil
                             (msnSetData gSource 'targetID (objGetID targetObj))
-                            (msnSetData gSource 'reward 4000)
+                            (msnSetData gSource 'reward 25000)
                             (msnSetData gSource 'plasmaCollected 0)
                             (msnSetData gSource 'plasmaReported 0)
                             (msnSetData gSource 'needPlasma 1)

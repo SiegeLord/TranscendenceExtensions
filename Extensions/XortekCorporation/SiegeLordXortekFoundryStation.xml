@@ -51,7 +51,10 @@
                             <Action id="actionUndock" cancel="1">
                                 (block ((mission (@ (msnFind "a +gauntlet") 0)))
                                         (if (objGetData gSource 'beginExercise)
-                                            (msnFireEvent mission "OnBeginExercise")
+                                            (block Nil
+                                                (objSetData gSource 'beginExercise Nil)
+                                                (msnFireEvent mission "OnBeginExercise")
+                                                )
                                             )
                                         (scrExitScreen gScreen 'forceUndock)
                                     )
@@ -369,7 +372,7 @@
 
             <Text id="descPhasedSmeltingWorksDenied">
                 The entryway to the phased smelting works is blocked
-                by a very large man, his arms enclosed by a powered
+                by a very large man, his arms encased in a powered
                 exoskeleton. Sweat drips from his large mustache. He
                 turns his eyes towards you, but makes no effort to
                 speak. You ask if you can enter, but get no
@@ -405,7 +408,7 @@
             (setq slElysium (lambda () (objGateTo gPlayerShip "Elysium" "Start" &efStargateOut;)))
             (setq slRange (lambda (end) (block (ret)
                     (setq ret (list))
-                    (for i 0 end
+                    (for i 0 (- end 1)
                         (setq ret (append ret i))
                         )
                 )))
