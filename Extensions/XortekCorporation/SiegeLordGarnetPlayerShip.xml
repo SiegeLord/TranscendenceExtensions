@@ -9,16 +9,26 @@
     <!ENTITY scSiegeLordGarnet                    "0xD0120001">
     ]>
 
-<!--
-TransData /extensions:0xD0120009 /extensionFolder:Extensions /weaponimages /output:test.bmp /criteria:"p +xortek"
--->
-
 <TranscendenceModule>   
     <ShipClass UNID="&scSiegeLordGarnetPlayer;"
             inherit=            "&scSiegeLordGarnet;"
 
             attributes=         "xortek 00200000_PlayerShip"
             characterClass=     "&unidPilgrimClass;"
-            >       
+            >
+        <Devices>
+            <Device deviceID="&itFastFireLaserCannon;"/>
+            <Device deviceID="&itClass1Deflector;"/>
+            <Device deviceID="&it15MWReactor;"/>
+        </Devices>
+
+        <Items>
+            <Item count="4d6" item="&itHelium3FuelRod;"/>
+        </Items>
+
+        <Armor
+            armorID=            "&itReactiveArmor;"
+            count=              "4"
+            />
     </ShipClass>
 </TranscendenceModule>

@@ -53,18 +53,7 @@
             maxSpeed=           "22"
             />
 
-<!--
-        <Armor
-            armorID=            "&itReactiveArmor;"
-            count=              "4"
-            />
--->
-        <Armor
-            armorID=            "&itHexaCarbideArmor;"
-            count=              "4"
-            />
-
-        <Devices>
+        <DeviceSlots>
             <DeviceSlot criteria="w +property:multiShot;" posAngle="0" posRadius="15"/>
             <DeviceSlot criteria="w" posAngle="0" posRadius="25"/>
             <DeviceSlot criteria="r">
@@ -75,26 +64,25 @@
                              />
                 </EnhancementAbilities>
             </DeviceSlot>
-<!--
-            <Device deviceID="&itFastFireLaserCannon;"/>
--->
-            <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"/>
-            <Device deviceID="&itSiegeLordPlasmaTorpedoLauncher;"/>
-<!--
-            <Device deviceID="&itClass1Deflector;"/>
--->
-            <Device deviceID="&itPlasmaShieldGenerator;"/>
-            <Device deviceID="&it250MWReactor;"/>
-<!--
-            <Device deviceID="&it15MWReactor;"/>
--->
-        </Devices>
-
+        </DeviceSlots>
+        
         <Maneuver
             maxRotationRate=    "11.0"
             rotationAccel=      "2.5"
             rotationStopAccel=  "12.0"
             />
+
+        <Devices>
+            <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"/>
+            <Device deviceID="&itSiegeLordPlasmaTorpedoLauncher;"/>
+            <Device deviceID="&itPlasmaShieldGenerator;"/>
+            <Device deviceID="&it250MWReactor;"/>
+<!--
+            <Device deviceID="&itFastFireLaserCannon;"/>
+            <Device deviceID="&itClass1Deflector;"/>
+            <Device deviceID="&it15MWReactor;"/>
+-->
+        </Devices>
 
         <Items>
 <!--
@@ -104,6 +92,17 @@
             <Item count="200" item="&itSiegeLordPlasmaCapsule;"/>
             <Item count="64" item="&itSiegeLordPlasmaTorpedo;"/>
         </Items>
+
+<!--
+        <Armor
+            armorID=            "&itReactiveArmor;"
+            count=              "4"
+            />
+-->
+        <Armor
+            armorID=            "&itHexaCarbideArmor;"
+            count=              "4"
+            />
 
         <Image imageID="&rsSiegeLordGarnetGameImage;"      imageWidth="64" imageHeight="64" rotationCount="120"/>
         <HeroImage imageID="&rsSiegeLordGarnetLargeImage;" imageWidth="320" imageHeight="320"/>

@@ -4,5 +4,6 @@ weapon testing (temp control a ship)
 weapon testing (deploy explosive bomb)
 destroy some station
 
+TransData /extensions:0xD0120009 /extensionFolder:Extensions /weaponimages /output:test.bmp /criteria:"p +xortek"
 
 next id: 24
