@@ -78,7 +78,6 @@
 <!--
             <Device deviceID="&itFastFireLaserCannon;"/>
 -->
-            <Device deviceID="&itSmartCannon;"/>
             <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"/>
             <Device deviceID="&itSiegeLordPlasmaTorpedoLauncher;"/>
 <!--
@@ -101,9 +100,9 @@
 <!--
             <Item count="4d6" item="&itHelium3FuelRod;"/>
 -->
-            <Item count="300" item="&itPteracniumFuelRod;"/>
+            <Item count="16" item="&itPteracniumFuelRod;"/>
             <Item count="200" item="&itSiegeLordPlasmaCapsule;"/>
-            <Item count="50" item="&itSiegeLordPlasmaTorpedo;"/>
+            <Item count="64" item="&itSiegeLordPlasmaTorpedo;"/>
         </Items>
 
         <Image imageID="&rsSiegeLordGarnetGameImage;"      imageWidth="64" imageHeight="64" rotationCount="120"/>

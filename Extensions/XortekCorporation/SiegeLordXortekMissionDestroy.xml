@@ -23,7 +23,7 @@
             name=               "Heated Negotiations"
             attributes=         "xortek"
 
-            level=              "1-10"
+            level=              "7-10"
             scope=              "system"
             >
 
@@ -64,6 +64,7 @@
 
                             ; Compute reward
                             (msnSetData gSource 'reward (add 2000 (multiply (objGetLevel targetObj) 2000)))
+                            (msnSetData gSource 'xp 1)
                             )
                         )
                     )
@@ -136,7 +137,7 @@
                 ; gSource is mission object
                 ; gData is data passed to msnReward
 
-                (rpgMissionRewardPayment (msnGetData gSource 'reward))
+                (slXorGiveReward gSource)
             </OnReward>
 
             <OnDestroy>

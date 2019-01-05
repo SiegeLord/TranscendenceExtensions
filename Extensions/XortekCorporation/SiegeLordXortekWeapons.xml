@@ -18,24 +18,24 @@
     <Sound UNID="&snSiegeLordXortekLong;" filename="Resources/long.wav"/>
     
     <ItemType UNID="&itSiegeLordPlasmaCapsuleCannon;"
-            name=               "Plasma Capsule Cannon"
+            name=               "plasma capsule cannon"
             attributes=         "majorItem, specialty, xortek"
 
             level=              "8"
             frequency=          "uncommon"
 
-            value=              "1300"
+            value=              "95000"
             mass=               "3000"
 
             description=        "A miniaturized version of the Xortek plasma torpedo launcher, small enough to fit in standard weapon mounts. Uses magnetic capsules to contain plasma. Venting minute amounts of plasma allows the capsules to home in on their targets."
             >
 
-        <Image imageID="&rsItemsRasiermesser1;" imageX="288" imageY="0" imageWidth="96" imageHeight="96"/>
+        <Image imageID="&rsItems10;" imageX="192" imageY="0" imageWidth="96" imageHeight="96"/>
 
         <Weapon
                 type=               "missile"
                 fireRate=           "15"
-                powerUse=           "30"
+                powerUse=           "600"
                 reportAmmo=         "true"
 
                 counter=            "capacitor"
@@ -50,14 +50,14 @@
     </ItemType>
 
     <ItemType UNID="&itSiegeLordPlasmaCapsule;"
-            name=               "Plasma Capsule"
+            name=               "plasma capsule"
             attributes=         "premiumAmmo, consumable, missile, xortek"
 
             level=              "8"
             frequency=          "uncommon"
             numberAppearing=    "12d40"
 
-            value=              "1"
+            value=              "100"
             mass=               "10"
 
             description=        "Plasma capsules are filled with plasma by the Xortek plasma capsule cannon. Venting minute amounts of plasma allows the capsules to home in on their targets."
@@ -67,12 +67,12 @@
         <Missile
                     type=           "missile"
 
-                    damage=         "plasma:10d8+20; WMD1"
+                    damage=         "plasma:9d8+20; WMD1"
                     missileSpeed=   "50"
                     lifetime=       "60"
                     interaction=    "50"
                     maneuverRate=   "6"
-                    hitPoints=      "20"
+                    hitPoints=      "40"
 
                     sound=          "&snSiegeLordXortekShort;"
                     effect=         "&efSiegeLordXortekPlasmaProj;"
@@ -83,24 +83,24 @@
     </ItemType>
 
     <ItemType UNID="&itSiegeLordPlasmaTorpedoLauncher;"
-            name=               "Plasma Torpedo Launcher"
+            name=               "plasma torpedo launcher"
             attributes=         "majorItem, specialty, xortek"
 
             level=              "8"
             frequency=          "uncommon"
 
-            value=              "1300"
+            value=              "135000"
             mass=               "3000"
 
             description=        "The fearsome Xortek plasma torpedo launcher is the pinnacle of Xortek corporation weapon and plasma research. Venting minute amounts of plasma allows the torpedoes to home in on their targets."
             >
 
-        <Image imageID="&rsItemsNAMI4;" imageX="0" imageY="96" imageWidth="96" imageHeight="96"/>
+        <Image imageID="&rsItems10;" imageX="0" imageY="192" imageWidth="96" imageHeight="96"/>
 
         <Weapon
                 launcher=           "true"
                 fireRate=           "45"
-                powerUse=           "50"
+                powerUse=           "1600"
                 reportAmmo=         "true"
 
                 counter=            "capacitor"
@@ -115,14 +115,14 @@
     </ItemType>
 
     <ItemType UNID="&itSiegeLordPlasmaTorpedo;"
-            name=               "Plasma Torpedo"
+            name=               "plasma torpedo"
             attributes=         "premiumAmmo, consumable, missile, xortek"
 
             level=              "8"
             frequency=          "uncommon"
             numberAppearing=    "10d40"
 
-            value=              "1"
+            value=              "250"
             mass=               "10"
 
             description=        "Plasma torpedoes are filled with plasma by the Xortek plasma torpedo launcher. Venting minute amounts of plasma allows the torpedoes to home in on their targets."
@@ -133,12 +133,12 @@
         <Missile
                 type=           "missile"
 
-                damage=         "plasma:15d12+50; WMD5"
+                damage=         "plasma:80d12+50; WMD5"
                 missileSpeed=   "20"
                 lifetime=       "80"
                 interaction=    "50"
                 maneuverRate=   "3"
-                hitPoints=      "30"
+                hitPoints=      "45"
 
                 sound=          "&snSiegeLordXortekLong;"
                 effect=         "&efSiegeLordXortekPlasmaProjBig;"

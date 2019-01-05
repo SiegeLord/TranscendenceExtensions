@@ -6,6 +6,7 @@
     <!ENTITY rsSiegeLordXortekFoundryImage           "0xD012000B">
     <!ENTITY rsSiegeLordXortekFoundryImageHero       "0xD012000C">
     <!ENTITY stSiegeLordXortekProvingGroundsBeacon   "0xD012001A">
+    <!ENTITY dsSiegeLordXortekPromotion              "0xD0120023">
 <!--
   External
 -->
@@ -103,7 +104,7 @@
             canAttack=          "true"
 
             multiHull=          "true"
-            armorID=            "&itLightGusokuArmor;"
+            armorID=            "&itMassiveHexaCarbideArmor;"
             hitPoints=          "2400"
             regen=              "24"
             fireRateAdj=        "20"
@@ -176,24 +177,26 @@
         <Items>
             <Item count="100" item="&itSiegeLordPlasmaCapsule;"/>
             <Item count="50" item="&itSiegeLordPlasmaTorpedo;"/>
+            <Item count="1d2" item="&itSiegeLordPlasmaCapsuleCannon;"/>
+            <Item count="1d2" item="&itSiegeLordPlasmaTorpedoLauncher;"/>
+            <Item count="3d2" item="&itPlasmaTorch;"/>
+            <Item count="1d2" item="&itPlasmaShieldGenerator;"/>
 
             <RandomItem count="10"
-                    criteria=       "ad L:1-5; -Illegal; -Military; -Alien; -Specialty; -NotStandard; -NotForSale;"
+                    criteria=       "ad L:7-9; -Illegal; -NotForSale;"
                     levelFrequency= "systemLevel:r|c|cur"
                     />
             <RandomItem count="10"
-                    criteria=       "*~ad -Illegal; -Military; -Alien; -Specialty; -NotStandard; -NotForSale;"
+                    criteria=       "*~ad -Illegal; -NotForSale;"
                     levelFrequency= "systemLevel:ru|c|cur"
                     />
         </Items>
 
         <Trade currency="credit" max="50000" replenish="2500">
-            <Sell   criteria="m +bushido; -illegal; -notForSale;" priceAdj="100" inventoryAdj="300" levelFrequency="systemLevel:ruc|c|cur"/>
+            <Sell   criteria="m +xortek; -illegal; -notForSale;" priceAdj="100" inventoryAdj="300" levelFrequency="systemLevel:ruc|c|cur"/>
             <Sell   criteria="*NU -Illegal; -ID; -NotForSale;"  priceAdj="100"/>
 
-            <RepairArmor    criteria="a L:1-9;" priceAdj="100"/>
-            <ReplaceArmor   criteria="a +bushido; L:1-10;" priceAdj="100"/>
-            <InstallDevice  criteria="d +bushido; L:1-10;" priceAdj="100"/>
+            <InstallDevice  criteria="d +xortek; L:1-10;" priceAdj="100"/>
             <RemoveDevice   criteria="d L:1-10;" priceAdj="100"/>
 
             <ReplaceArmor   criteria="a L:1-10;" priceAdj="unavailable" messageID="descNoInstall"/>
@@ -210,7 +213,14 @@
                     <Default descID="descWelcome">
                         <Actions>
                             <Action id="actionPhasedSmeltingWorks" default="1">
-                                (scrShowScreen gScreen &dsRPGMessage; { textID:'descPhasedSmeltingWorksDenied })
+                                (block ((level (objGetData gPlayerShip 'xortekLevel)))
+                                    (if (geq level 1)
+                                        (scrShowScreen gScreen &dsRPGCommoditiesExchange; {
+                                            checkMilitaryID: True
+                                            })
+                                        (scrShowScreen gScreen &dsRPGMessage; { textID:'descPhasedSmeltingWorksDenied })
+                                        )
+                                    )
                             </Action>
 
                             <Action id="actionPlasmaCore">
@@ -225,11 +235,17 @@
                                     noMissionTextID: 'descMercenaryLiasonNoMissions
                                     })
                             </Action>
-
+                            
                             <Action id="actionDockServices">
-                                (rpgDockServices gPlayerShip {
-                                    checkMilitaryID: True
-                                    })
+                                (block ((level (objGetData gPlayerShip 'xortekLevel)))
+                                    (if (geq level 1)
+                                        (rpgDockServices gPlayerShip {
+                                                checkMilitaryID: True
+                                                upgradeInstallOnly: True
+                                                })
+                                        (scrShowScreen gScreen &dsRPGMessage; { textID:'descDockDenied })
+                                        )
+                                    )
                             </Action>
 
                             <Action id="actionUndock" cancel="1">
@@ -397,10 +413,57 @@
                 time."
             </Text>
 
-            <Text id="descPlasmaCoreDenied">descPlasmaCoreDenied
+            <Text id="descPlasmaCoreDenied">
+                A massive door blocks your way. On its side is a terminal
+                requesting authorization... which you do not have. You turn
+                away and leave.
+            </Text>
+
+            <Text id="descDockDenied">
+                You approach a mechanic. She looks at you, your ship and then
+                her datapad. She is profusely sweating. She unsticks her lips to
+                say:
+                
+                "Sorry captain, dock services are only available to corporation
+                mercenaries with good standing. Please see the liason on level
+                233 for more information."
             </Text>
         </Language>
     </StationType>
+    
+    <DockScreen UNID="&dsSiegeLordXortekPromotion;"
+            nestedScreen=   "true"
+            inherit=        "&dsDockScreenBase;"
+            >
+        <Panes>
+            <Default>
+                <OnPaneInit>
+                    (block (
+                        (newLevel (slXorPromotion))
+                        )
+                        (scrSetDescTranslate gScreen (cat "Promotion:" newLevel))
+                        (objSetData gPlayerShip 'xortekLevel newLevel)
+                        )
+                </OnPaneInit>
+
+                <Actions>
+                    <Action id="actionContinue" default="1" cancel="1">
+                        (scrExitScreen gScreen)
+                    </Action>
+                </Actions>
+            </Default>
+        </Panes>
+
+        <Language>
+            <Text id="Promotion:2">
+                The liason glances at her data pad:
+                
+                "Ah! Your services to the Xortek Corporation have been exemplary!
+                I am happy to invite you to use our smelting works, as well
+                as dock services. We look forward to working with you in the future."
+            </Text>
+        </Language>
+    </DockScreen>
 
     <Globals>
         (block Nil
@@ -412,6 +475,37 @@
                         (setq ret (append ret i))
                         )
                 )))
+
+            (setq slXorGiveReward (lambda (missionObj)
+                (block Nil
+                    (rpgMissionRewardPayment (msnGetData missionObj 'reward))
+                    (objIncData gPlayerShip 'xortekXP (msnGetData missionObj 'xp))
+
+                    ;   dsRPGMission checks for a well-known data member in the mission
+                    ;   object to see if it should navigate to an additional screen.
+                    (if (and missionObj (slXorPromotion))
+                        (msnSetData missionObj 'rewardNextScreen &dsSiegeLordXortekPromotion;)
+                        )
+                    )
+                ))
+            (setq slXorPromotion (lambda Nil
+                ; Returns level that the player is promoted to (or Nil)
+
+                (block (xp newLevel)
+                    (setq xp (objGetData gPlayerShip 'xortekXP))
+                    (switch
+                        (geq xp 4)
+                            (setq newLevel 2)
+
+                        (setq newLevel 1)
+                        )
+
+                    (if (eq (objGetData gPlayerShip 'xortekLevel) newLevel)
+                        Nil
+                        newLevel
+                        )
+                    )
+                ))
             )
     </Globals>
 </TranscendenceModule>

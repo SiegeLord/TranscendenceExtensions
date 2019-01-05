@@ -30,7 +30,7 @@
             name=               "Heated Negotiations"
             attributes=         "xortek gauntlet"
 
-            level=              "1-10"
+            level=              "7-10"
             scope=              "system"
             >
 
@@ -49,7 +49,8 @@
                 (block ((beaconID (objGetData aOwnerObj 'provingGroundsID)))
                     (msnSetData gSource 'beaconID beaconID)
                     ; Compute reward
-                    (msnSetData gSource 'reward 25000)
+                    (msnSetData gSource 'reward 35000)
+                    (msnSetData gSource 'xp 2)
                     (msnSetData gSource 'status 'created)
                     (msnSetData gSource 'oobCounter 0)
                     )
@@ -159,7 +160,7 @@
                 ; gSource is mission object
                 ; gData is data passed to msnReward
 
-                (rpgMissionRewardPayment (msnGetData gSource 'reward))
+                (slXorGiveReward gSource)
             </OnReward>
 
             <OnDestroy>
