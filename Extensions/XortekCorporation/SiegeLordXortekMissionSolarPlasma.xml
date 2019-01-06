@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE TranscendenceModule
-    [
-    <!ENTITY msSiegeLordXortekMissionSolarPlasma                "0xD012000E">
-    <!ENTITY itSunPlasma                                        "0xD012000F">
-    ]>
-
 <TranscendenceModule>
     <ItemType UNID="&itSunPlasma;"
             name=               "Sun Flare Plasma"

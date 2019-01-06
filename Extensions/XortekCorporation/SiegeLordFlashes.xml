@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE TranscendenceModule
-    [
-    <!ENTITY rsSiegeLordRedFlash                     "0xD0120014">
-    <!ENTITY ovSiegeLordRedFlash                     "0xD0120015">
-    <!ENTITY rsSiegeLordGreenFlash                     "0xD012001F">
-    <!ENTITY ovSiegeLordGreenFlash                     "0xD0120020">
-    ]>
-
 <TranscendenceModule>
     <Image UNID="&rsSiegeLordRedFlash;" bitmap="Resources/SiegeLordRedFlash.png" loadOnUse="true"/>
     <Image UNID="&rsSiegeLordGreenFlash;" bitmap="Resources/SiegeLordGreenFlash.png" loadOnUse="true"/>

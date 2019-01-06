@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE TranscendenceModule
-    [
-    <!ENTITY stSiegeLordXortekFoundry                "0xD012001E">
-    <!ENTITY rsSiegeLordXortekFoundryImage           "0xD012000B">
-    <!ENTITY rsSiegeLordXortekFoundryImageHero       "0xD012000C">
-    <!ENTITY stSiegeLordXortekProvingGroundsBeacon   "0xD012001A">
-    <!ENTITY dsSiegeLordXortekPromotion              "0xD0120023">
-<!--
-  External
--->
-    <!ENTITY scSiegeLordGarnet                    "0xD0120001">
-    <!ENTITY itSiegeLordPlasmaCapsuleCannon       "0xD0120010">
-    <!ENTITY itSiegeLordPlasmaCapsule             "0xD0120011">
-    <!ENTITY itSiegeLordPlasmaTorpedoLauncher     "0xD0120016">
-    <!ENTITY itSiegeLordPlasmaTorpedo             "0xD0120017">
-    ]>
-
 <TranscendenceModule>
     <Image UNID="&rsSiegeLordXortekFoundryImage;" bitmap="Resources/SiegeLordXortekFoundry.png" loadOnUse="true"/>
     <Image UNID="&rsSiegeLordXortekFoundryImageHero;" bitmap="Resources/SiegeLordXortekFoundryHero.png" loadOnUse="true"/>

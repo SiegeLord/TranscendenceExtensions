@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE TranscendenceModule
-    [
-    <!ENTITY msSiegeLordXortekMissionGauntlet                "0xD0120019">
-    <!--
-      External
-    -->
-    <!ENTITY scSiegeLordGarnet                               "0xD0120001">
-    ]>
-
 <TranscendenceModule>
     
     <!-- Gauntlet ================================

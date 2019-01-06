@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE TranscendenceModule
-    [
-    <!ENTITY itSiegeLordPlasmaCapsuleCannon       "0xD0120010">
-    <!ENTITY itSiegeLordPlasmaCapsule             "0xD0120011">
-    <!ENTITY efSiegeLordXortekPlasmaProj          "0xD0120012">
-    <!ENTITY efSiegeLordXortekPlasmaFire          "0xD0120013">
-    <!ENTITY itSiegeLordPlasmaTorpedoLauncher     "0xD0120016">
-    <!ENTITY itSiegeLordPlasmaTorpedo             "0xD0120017">
-    <!ENTITY efSiegeLordXortekPlasmaProjBig       "0xD0120018">
-    <!ENTITY snSiegeLordXortekShort               "0xD0120021">
-    <!ENTITY snSiegeLordXortekLong                "0xD0120022">
-    ]>
-
 <TranscendenceModule>
     <Sound UNID="&snSiegeLordXortekShort;" filename="Resources/short.wav"/>
     <Sound UNID="&snSiegeLordXortekLong;" filename="Resources/long.wav"/>

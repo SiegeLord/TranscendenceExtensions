@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE TranscendenceModule
-    [
-    <!ENTITY scSiegeLordGarnetPlayer              "0xD0120009">
-<!--
-  External  
--->
-    <!ENTITY scSiegeLordGarnet                    "0xD0120001">
-    ]>
-
 <TranscendenceModule>   
     <ShipClass UNID="&scSiegeLordGarnetPlayer;"
             inherit=            "&scSiegeLordGarnet;"

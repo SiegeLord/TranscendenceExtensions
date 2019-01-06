@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE TranscendenceModule
-    [
-    <!ENTITY scSiegeLordGarnet                    "0xD0120001">
-    <!ENTITY rsSiegeLordGarnetGameImage           "0xD0120002">
-    <!ENTITY rsSiegeLordGarnetLargeImage          "0xD0120003">
-    <!ENTITY rsSiegeLordGarnetBlueJet             "0xD0120004">
-    <!ENTITY rsSiegeLordGarnetArmorHUDCenter      "0xD0120005">
-    <!ENTITY rsSiegeLordGarnetArmorHUDSides       "0xD0120006">
-<!--
-    External
--->
-    <!ENTITY itSiegeLordPlasmaCapsuleCannon       "0xD0120010">
-    <!ENTITY itSiegeLordPlasmaCapsule             "0xD0120011">
-    <!ENTITY itSiegeLordPlasmaTorpedoLauncher     "0xD0120016">
-    <!ENTITY itSiegeLordPlasmaTorpedo             "0xD0120017">
-    ]>
-
 <TranscendenceModule>
     <Image UNID="&rsSiegeLordGarnetGameImage;" bitmap="Resources/SiegeLordGarnetGame.png" loadOnUse="true"/>
     <Image UNID="&rsSiegeLordGarnetLargeImage;" bitmap="Resources/SiegeLordGarnetLarge.png" loadOnUse="true"/>
