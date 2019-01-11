@@ -55,7 +55,7 @@
 
 
                 (block (
-                        (num 1)
+                        (num (rollDice 1 2))
                         attacker
                         attackerIDs
                         (beacon (objGetObjByID (msnGetData gSource 'beaconID)))
@@ -68,7 +68,6 @@
                                     (sysVectorPolarOffset (objGetPos beacon) angle 35)
                                     &svCorporate;
                                     ))
-                                (dbgOutput "Creating attacker" i)
                                 
                                 (shpOrder attacker 'turnTo (modulo (+ angle 180) 360))
                                 (shpOrder attacker 'hold)

@@ -13,7 +13,10 @@
             attributes=         "xortek, genericClass"
             inherit=            "&baHumanTechShip;"
             >
-
+<!--
+stdArmor: light
+maxArmor: medium
+-->
         <Hull
             size=               "24"
             mass=               "32"
@@ -31,7 +34,7 @@
             />
 
         <Drive
-            PowerUse=      "20"
+            PowerUse=           "20"
             thrustRatio=        "8.2"
             maxSpeed=           "22"
             />
@@ -60,28 +63,14 @@
             <Device deviceID="&itSiegeLordPlasmaTorpedoLauncher;"/>
             <Device deviceID="&itPlasmaShieldGenerator;"/>
             <Device deviceID="&it250MWReactor;"/>
-<!--
-            <Device deviceID="&itFastFireLaserCannon;"/>
-            <Device deviceID="&itClass1Deflector;"/>
-            <Device deviceID="&it15MWReactor;"/>
--->
         </Devices>
 
         <Items>
-<!--
-            <Item count="4d6" item="&itHelium3FuelRod;"/>
--->
-            <Item count="16" item="&itPteracniumFuelRod;"/>
-            <Item count="200" item="&itSiegeLordPlasmaCapsule;"/>
-            <Item count="64" item="&itSiegeLordPlasmaTorpedo;"/>
+            <Item count="2d8" item="&itPteracniumFuelRod;"/>
+            <Item count="10d10+50" item="&itSiegeLordPlasmaCapsule;"/>
+            <Item count="8d8+4" item="&itSiegeLordPlasmaTorpedo;"/>
         </Items>
-
-<!--
-        <Armor
-            armorID=            "&itReactiveArmor;"
-            count=              "4"
-            />
--->
+        
         <Armor
             armorID=            "&itHexaCarbideArmor;"
             count=              "4"

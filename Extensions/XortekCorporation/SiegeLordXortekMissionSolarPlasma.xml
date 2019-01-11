@@ -114,12 +114,13 @@
 
                 (block Nil
                     (msnAddRecurringTimerEvent gSource 20 "OnFirePlasma") 
+                    (msnAddRecurringTimerEvent gSource 18 "OnPlasmaCollect")
                     (msnAddTimerEvent gSource 5400 "OnStopPlasma") 
                     (objSetKnown (objGetObjByID (msnGetData gSource 'targetID)))
                     )
             </OnStarted>
             
-            <OnFirePlasma>
+            <OnPlasmaCollect>
                 (block (
                     (plasmaCollected (msnGetData gSource 'plasmaCollected))
                     (plasmaReported (msnGetData gSource 'plasmaReported))
@@ -158,16 +159,22 @@
                                     )
                                 )
                             )
-                        
-                        (for i 1 15
-                            (sysCreateWeaponFire
-                                    &itSunPlasma;
-                                    starObj
-                                    (objGetPos gSource)
-                                    (random 0 360) ; dir
-                                    (random 40 50) ; speed
-                                    Nil
-                                )
+                        )
+                    )
+            </OnPlasmaCollect>
+            
+            <OnFirePlasma>
+                (block (
+                    (starObj (objGetObjByID (msnGetData gSource 'targetID)))
+                    )
+                    (for i 1 15
+                        (sysCreateWeaponFire
+                                &itSunPlasma;
+                                starObj
+                                (objGetPos gSource)
+                                (random 0 360) ; dir
+                                (random 40 50) ; speed
+                                Nil
                             )
                         )
                     )

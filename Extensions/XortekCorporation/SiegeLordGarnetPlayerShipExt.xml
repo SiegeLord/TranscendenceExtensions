@@ -6,7 +6,11 @@
         <!ENTITY unidSiegeLordLibrary                  "0x00000024">
     ]>
 
-<TranscendenceExtension UNID= "&exSiegeLordGarnetPlayerShipExt;" apiVersion= "43" name= "Garnet Playership v0.2" >
+<TranscendenceExtension UNID= "&exSiegeLordGarnetPlayerShipExt;"
+        apiVersion= "43"
+        name= "Garnet Playership"
+        version= "0.2.0"
+        >
     <Library UNID="&unidHumanSpaceLibrary;"/>
     <Library UNID="&unidSiegeLordLibrary;"/>
 

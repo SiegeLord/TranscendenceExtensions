@@ -98,6 +98,9 @@
             >
         
         <Encounter
+                systemCriteria=     "+corporateSpace;"
+                systemAffinity=     "*"
+        
                 levelFrequency=     "----- --rur ----- ----- -----"
                 locationCriteria=   "+planetary"
                 unique=             "inSystem"
@@ -134,27 +137,29 @@
         </Reinforcements>
 
         <Devices>
+<!--
             <Device deviceID="&itSiegeLordPlasmaTorpedoLauncher;"
                 fireAngle="292.5" fireArc="270" posAngle="292.5" posRadius="170" posZ="0"/>
             <Device deviceID="&itSiegeLordPlasmaTorpedoLauncher;"
                 fireAngle="172.5" fireArc="270" posAngle="172.5" posRadius="170" posZ="0"/>
             <Device deviceID="&itSiegeLordPlasmaTorpedoLauncher;"
                 fireAngle="52.5" fireArc="270" posAngle="52.5" posRadius="170" posZ="0"/>
+-->
 
             <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"
-                fireAngle="270" fireArc="120" posAngle="270" posRadius="170" posZ="0"/>
+                fireAngle="228" fireArc="120" posAngle="228" posRadius="385" posZ="0"/>
             <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"
-                fireAngle="315" fireArc="120" posAngle="315" posRadius="170" posZ="0"/>
+                fireAngle="232" fireArc="120" posAngle="232" posRadius="385" posZ="0"/>
 
             <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"
-                fireAngle="150" fireArc="120" posAngle="150" posRadius="170" posZ="0"/>
+                fireAngle="108" fireArc="120" posAngle="108" posRadius="385" posZ="0"/>
             <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"
-                fireAngle="195" fireArc="120" posAngle="195" posRadius="170" posZ="0"/>
+                fireAngle="112" fireArc="120" posAngle="112" posRadius="385" posZ="0"/>
 
             <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"
-                fireAngle="30" fireArc="120" posAngle="30" posRadius="170" posZ="0"/>
+                fireAngle="348" fireArc="120" posAngle="348" posRadius="385" posZ="0"/>
             <Device deviceID="&itSiegeLordPlasmaCapsuleCannon;"
-                fireAngle="75" fireArc="120" posAngle="75" posRadius="170" posZ="0"/>
+                fireAngle="352" fireArc="120" posAngle="352" posRadius="385" posZ="0"/>
         </Devices>
 
         <Items>
@@ -176,7 +181,7 @@
         </Items>
 
         <Trade currency="credit" max="50000" replenish="2500">
-            <Sell   criteria="m +xortek; -illegal; -notForSale;" priceAdj="100" inventoryAdj="300" levelFrequency="systemLevel:ruc|c|cur"/>
+            <Sell   criteria="m +xortek; -illegal; -NotForSale;" priceAdj="100" inventoryAdj="300" levelFrequency="systemLevel:ruc|c|cur"/>
             <Sell   criteria="*NU -Illegal; -ID; -NotForSale;"  priceAdj="100"/>
 
             <InstallDevice  criteria="d +xortek; L:1-10;" priceAdj="100"/>
@@ -198,7 +203,7 @@
                             <Action id="actionPhasedSmeltingWorks" default="1">
                                 (block ((level (objGetData gPlayerShip 'xortekLevel)))
                                     (if (geq level 1)
-                                        (scrShowScreen gScreen &dsRPGCommoditiesExchange; {
+                                        (scrShowScreen gScreen &dsRPGCommoditiesExchangeBuy; {
                                             checkMilitaryID: True
                                             })
                                         (scrShowScreen gScreen &dsRPGMessage; { textID:'descPhasedSmeltingWorksDenied })
@@ -331,9 +336,9 @@
                     (objEnumItems gSource "* +unid:&itSiegeLordPlasmaCapsule;" item
                         (setq numCapsules (itmGetCount item))
                         )
-                    (objEnumItems gSource "* +unid:&itSiegeLordPlasmaTorpedo;" item
-                        (setq numTorpedoes (itmGetCount item))
-                        )
+                    ;(objEnumItems gSource "* +unid:&itSiegeLordPlasmaTorpedo;" item
+                    ;    (setq numTorpedoes (itmGetCount item))
+                    ;    )
                         
                     ;(dbgOutput "num capsules " numCapsules)
                     ;(dbgOutput "num tropedoes " numTorpedoes)
@@ -342,12 +347,16 @@
                         (objAddItem gSource (itmCreate &itSiegeLordPlasmaCapsule; (- 10 numCapsules)))
                         )
 
-                    (if (ls numTorpedoes 10)
-                        (objAddItem gSource (itmCreate &itSiegeLordPlasmaTorpedo; (- 10 numTorpedoes)))
-                        )
+                    ;(if (ls numTorpedoes 10)
+                    ;    (objAddItem gSource (itmCreate &itSiegeLordPlasmaTorpedo; (- 10 numTorpedoes)))
+                    ;    )
                     )
             </OnAmmoReplenish>
         </Events>
+        
+        <AttributeDesc>
+            <ItemAttribute label="Xortek" criteria="* +xortek;"/>
+        </AttributeDesc>
 
         <Language>
             <Text id="actionPhasedSmeltingWorks">[P]hased Smelting Works</Text>
@@ -483,7 +492,7 @@
                         (setq newLevel 1)
                         )
 
-                    (if (eq (objGetData gPlayerShip 'xortekLevel) newLevel)
+                    (if (or (eq (objGetData gPlayerShip 'xortekLevel) newLevel) (leq newLevel 1))
                         Nil
                         newLevel
                         )

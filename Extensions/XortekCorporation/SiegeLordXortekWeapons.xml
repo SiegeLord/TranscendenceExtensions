@@ -26,7 +26,7 @@
                 reportAmmo=         "true"
 
                 counter=            "capacitor"
-                counterActivate=    "-5"
+                counterActivate=    "-10"
                 counterUpdate=      "2"
                 counterUpdateRate=  "5"
                 >
@@ -45,7 +45,7 @@
             numberAppearing=    "12d40"
 
             value=              "100"
-            mass=               "10"
+            mass=               "20"
 
             description=        "Plasma capsules are filled with plasma by the Xortek plasma capsule cannon. Venting minute amounts of plasma allows the capsules to home in on their targets."
             >
@@ -91,7 +91,7 @@
                 reportAmmo=         "true"
 
                 counter=            "capacitor"
-                counterActivate=    "-30"
+                counterActivate=    "-50"
                 counterUpdate=      "2"
                 counterUpdateRate=  "5"
                 >
@@ -109,8 +109,8 @@
             frequency=          "uncommon"
             numberAppearing=    "10d40"
 
-            value=              "250"
-            mass=               "10"
+            value=              "800"
+            mass=               "100"
 
             description=        "Plasma torpedoes are filled with plasma by the Xortek plasma torpedo launcher. Venting minute amounts of plasma allows the torpedoes to home in on their targets."
             >
@@ -121,7 +121,7 @@
                 type=           "missile"
 
                 damage=         "plasma:80d12+50; WMD5"
-                missileSpeed=   "20"
+                missileSpeed=   "18"
                 lifetime=       "80"
                 interaction=    "50"
                 maneuverRate=   "3"
