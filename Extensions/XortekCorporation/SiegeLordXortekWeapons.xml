@@ -3,6 +3,7 @@
 <TranscendenceModule>
     <Sound UNID="&snSiegeLordXortekShort;" filename="Resources/short.wav"/>
     <Sound UNID="&snSiegeLordXortekLong;" filename="Resources/long.wav"/>
+    <Image UNID="&rsSiegeLordPlasmaCapsule;" bitmap="Resources/SiegeLordPlasmaCapsule.png" loadOnUse="true"/>
     
     <ItemType UNID="&itSiegeLordPlasmaCapsuleCannon;"
             name=               "plasma capsule cannon"
@@ -50,7 +51,7 @@
             description=        "Plasma capsules are filled with plasma by the Xortek plasma capsule cannon. Venting minute amounts of plasma allows the capsules to home in on their targets."
             >
 
-        <Image imageID="&rsItemsRasiermesser1;" imageX="0" imageY="96" imageWidth="96" imageHeight="96"/>
+        <Image imageID="&rsSiegeLordPlasmaCapsule;" imageX="0" imageY="0" imageWidth="96" imageHeight="96"/>
         <Missile
                     type=           "missile"
 
@@ -115,7 +116,7 @@
             description=        "Plasma torpedoes are filled with plasma by the Xortek plasma torpedo launcher. Venting minute amounts of plasma allows the torpedoes to home in on their targets."
             >
 
-        <Image imageID="&rsItemsRasiermesser1;" imageX="0" imageY="96" imageWidth="96" imageHeight="96"/>
+        <Image imageID="&rsSiegeLordPlasmaCapsule;" imageX="0" imageY="0" imageWidth="96" imageHeight="96"/>
         
         <Missile
                 type=           "missile"

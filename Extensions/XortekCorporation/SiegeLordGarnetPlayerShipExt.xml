@@ -3,13 +3,13 @@
 <!DOCTYPE TranscendenceExtension
     [
         <!ENTITY exSiegeLordGarnetPlayerShipExt        "0xD0120008">
-        <!ENTITY unidSiegeLordLibrary                  "0x00000024">
+        <!ENTITY unidSiegeLordLibrary                  "0xD0120024">
     ]>
 
 <TranscendenceExtension UNID= "&exSiegeLordGarnetPlayerShipExt;"
         apiVersion= "43"
         name= "Garnet Playership"
-        version= "0.2.0"
+        version= "0.2.1"
         >
     <Library UNID="&unidHumanSpaceLibrary;"/>
     <Library UNID="&unidSiegeLordLibrary;"/>

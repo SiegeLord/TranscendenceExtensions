@@ -3,13 +3,13 @@
 <!DOCTYPE TranscendenceExtension
     [
         <!ENTITY exSiegeLordXortekCorporationExt       "0xD0120009">
-        <!ENTITY unidSiegeLordLibrary                  "0x00000024">
+        <!ENTITY unidSiegeLordLibrary                  "0xD0120024">
     ]>
 
 <TranscendenceExtension UNID= "&exSiegeLordXortekCorporationExt;"
         apiVersion= "43"
         name= "Xortek Corporation"
-        version= "0.2.0"
+        version= "0.2.1"
         >
     <Library UNID="&unidHumanSpaceLibrary;"/>
     <Library UNID="&unidSiegeLordLibrary;"/>

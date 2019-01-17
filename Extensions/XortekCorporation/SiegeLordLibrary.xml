@@ -33,14 +33,16 @@
     <!ENTITY snSiegeLordXortekShort                "0xD0120021">
     <!ENTITY snSiegeLordXortekLong                 "0xD0120022">
     <!ENTITY dsSiegeLordXortekPromotion            "0xD0120023">
-    <!ENTITY unidSiegeLordLibrary                  "0x00000024">
+    <!ENTITY unidSiegeLordLibrary                  "0xD0120024">
+    <!ENTITY rsSiegeLordPlasmaCapsule              "0xD0120025">
     ]>
 
 <TranscendenceLibrary
         UNID=               "&unidSiegeLordLibrary;"
-        name=               "SiegeLord's Library v0.1"
+        name=               "SiegeLord's Library"
         release=            "1"
         private=            "true"
         apiVersion=         "43" 
+        version=            "0.2.1"
         >
 </TranscendenceLibrary>
