@@ -10,7 +10,7 @@
             attributes=         "majorItem, specialty, xortek"
 
             level=              "8"
-            frequency=          "uncommon"
+            frequency=          "veryrare"
 
             value=              "95000"
             mass=               "3000"
@@ -42,8 +42,8 @@
             attributes=         "premiumAmmo, consumable, missile, xortek"
 
             level=              "8"
-            frequency=          "uncommon"
-            numberAppearing=    "12d40"
+            frequency=          "veryrare"
+            numberAppearing=    "5d10"
 
             value=              "100"
             mass=               "20"
@@ -75,7 +75,7 @@
             attributes=         "majorItem, specialty, xortek"
 
             level=              "8"
-            frequency=          "uncommon"
+            frequency=          "veryrare"
 
             value=              "135000"
             mass=               "3000"
@@ -107,8 +107,8 @@
             attributes=         "premiumAmmo, consumable, missile, xortek"
 
             level=              "8"
-            frequency=          "uncommon"
-            numberAppearing=    "10d40"
+            frequency=          "veryrare"
+            numberAppearing=    "2d4"
 
             value=              "800"
             mass=               "100"
