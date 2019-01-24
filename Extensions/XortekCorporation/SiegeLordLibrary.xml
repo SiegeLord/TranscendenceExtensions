@@ -35,6 +35,7 @@
     <!ENTITY dsSiegeLordXortekPromotion            "0xD0120023">
     <!ENTITY unidSiegeLordLibrary                  "0xD0120024">
     <!ENTITY rsSiegeLordPlasmaCapsule              "0xD0120025">
+    <!ENTITY rsSiegeLordPlasmaTorpedo              "0xD0120026">
     ]>
 
 <TranscendenceLibrary

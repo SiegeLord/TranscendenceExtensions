@@ -4,6 +4,7 @@
     <Sound UNID="&snSiegeLordXortekShort;" filename="Resources/short.wav"/>
     <Sound UNID="&snSiegeLordXortekLong;" filename="Resources/long.wav"/>
     <Image UNID="&rsSiegeLordPlasmaCapsule;" bitmap="Resources/SiegeLordPlasmaCapsule.png" loadOnUse="true"/>
+    <Image UNID="&rsSiegeLordPlasmaTorpedo;" bitmap="Resources/SiegeLordPlasmaTorpedo.png" loadOnUse="true"/>
     
     <ItemType UNID="&itSiegeLordPlasmaCapsuleCannon;"
             name=               "plasma capsule cannon"
@@ -116,7 +117,7 @@
             description=        "Plasma torpedoes are filled with plasma by the Xortek plasma torpedo launcher. Venting minute amounts of plasma allows the torpedoes to home in on their targets."
             >
 
-        <Image imageID="&rsSiegeLordPlasmaCapsule;" imageX="0" imageY="0" imageWidth="96" imageHeight="96"/>
+        <Image imageID="&rsSiegeLordPlasmaTorpedo;" imageX="0" imageY="0" imageWidth="96" imageHeight="96"/>
         
         <Missile
                 type=           "missile"
