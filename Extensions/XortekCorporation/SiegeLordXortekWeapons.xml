@@ -137,6 +137,36 @@
         </Missile>
     </ItemType>
     
+    <ItemType UNID="&itSiegeLordXortekPlasmaBeam;"
+        name=               "plasma beam cannon"
+        level=              "9"
+        value=              "275000"
+        mass=               "34000"
+        frequency=          "notrandom"
+        attributes=         "Xortek; EnergyWeapon; MajorItem; NotForSale;"
+
+        description=        "."
+        >
+
+        <Image imageID="&rsItems8;" imageX="288" imageY="96" imageWidth="96" imageHeight="96"/>
+
+        <Weapon
+                type=               "beam"
+
+                damage=             "plasma:12d12+10"
+                repeating=          "10"
+                fireRate=           "100"
+                lifetime=           "60"
+                powerUse=           "6000"
+
+                effect=             "&efSiegeLordXortekPlasmaBeam;"
+                sound=              "&snLaserCannon;"
+                hitEffect=          "&efPlasmaHitDefault;"
+                fireEffect=         "&efSiegeLordXortekPlasmaFire;"
+                >
+        </Weapon>
+    </ItemType>
+    
     <EffectType UNID="&efSiegeLordXortekPlasmaProjBig;"
             instance=           "creator"
             >
@@ -276,6 +306,21 @@
                     </GetParameters>
                 </Events>
             </Ray>
+        </Effect>
+    </EffectType>
+    
+    <EffectType UNID="&efSiegeLordXortekPlasmaBeam;"
+                instance=           "owner">
+        <Effect>
+            <Ray
+                    style=          "smooth"
+                    shape=          "straight"
+                    length=         "49"
+                    width=          "30"
+                    intensity=      "35"
+                    primaryColor=   "#FFC294"
+                    secondaryColor= "#f2a329"
+                    />
         </Effect>
     </EffectType>
 </TranscendenceModule>

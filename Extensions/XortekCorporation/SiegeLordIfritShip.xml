@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TranscendenceModule>
+    <Image UNID="&rsSiegeLordIfritImage;" bitmap="Resources/SiegeLordIfritGame.png" loadOnUse="true"/>
+
+    <ShipClass UNID="&scSiegeLordIfrit;"
+            manufacturer=       "Xortek Corporation"
+            class=              "Ifrit"
+            type=               "cruiser"
+            defaultSovereign=   "&svCorporate;"
+
+            attributes=         "capitalShip, genericClass, xortek, 00200000_PlayerShip"
+            characterClass=     "&unidPilgrimClass;"
+            inherit=            "&baHumanTechShip;"
+            >
+<!--
+                    attributes=         "capitalShip, genericClass, xortek, 00200000_PlayerShip"
+                    characterClass=     "&unidPilgrimClass;"
+                    attributes=         "capitalShip, genericClass, xortek"
+-->
+
+        <!-- Hull -->
+
+        <Hull
+            size=               "275"
+            mass=               "24000"
+            cargoSpace=         "900"
+
+            cyberDefenseLevel=  "8"
+            />
+
+        <Drive
+            maxSpeed=           "15"
+            thrustRatio=        "0.8"
+            />
+
+        <Maneuver
+            maxRotationRate=    "3.0"
+            rotationAccel=      "0.5"
+            />
+
+        <DeviceSlots>
+            <DeviceSlot id="upper_forward" criteria="w" posAngle="0" posRadius="36" posZ="34" fireAngle="0" fireArc="220" secondaryWeapon="true"/>
+            <DeviceSlot id="lower_forward" criteria="w" posAngle="0" posRadius="36" posZ="-34" fireAngle="0" fireArc="220" secondaryWeapon="true"/>
+            <DeviceSlot id="forward" criteria="w" posAngle="0" posRadius="40" posZ="0" fireAngle="0" sendToBack="*"/>
+            <DeviceSlot id="rear" criteria="w" posAngle="180" posRadius="2" posZ="0" fireAngle="180" fireArc="220" secondaryWeapon="true"/>
+        </DeviceSlots>
+
+        <Interior>
+            <Compartment name="interior"
+                    hitPoints=  "300"
+                    />
+            
+            <Compartment name="main drive"
+                    type=       "mainDrive"
+                    hitPoints=  "100"
+
+                    posX=       "-13"
+                    posY=       "0"
+                    sizeX=      "50"
+                    sizeY=      "40"
+                    />
+        </Interior>
+
+        <Wreck
+            explosionType=      "&vtThermoExplosion3;"
+            />
+
+        <!-- Configuration -->
+        
+        <Armor
+            armorID=            "&itMassiveHexaCarbideArmor;"
+            count=              "16"
+            />
+        
+        <Devices>
+            <Device slotID="upper_forward"  deviceID="&itSiegeLordPlasmaCapsuleCannon;"/>
+            <Device slotID="lower_forward"  deviceID="&itSiegeLordPlasmaCapsuleCannon;"/>
+            <Device slotID="rear"  deviceID="&itSiegeLordPlasmaCapsuleCannon;"/>
+            <Device slotID="forward"  deviceID="&itSiegeLordXortekPlasmaBeam;"/>
+            <Device deviceID="&itPlasmaShieldGenerator;"/>
+            <Device deviceID="&it1GWReactor;"/>
+        </Devices>
+
+        <Items>
+            <Item count="100d20" item="&itSiegeLordPlasmaCapsule;"/>
+        </Items>
+
+        <!-- Image and Effects -->
+
+        <Image imageID="&rsSiegeLordIfritImage;" imageWidth="195" imageHeight="195" rotationCount="120" rotationColumns="12" viewportRatio="0.035"/>
+
+        <Effects>
+            <Effect type="thrustMain" posAngle="180" posRadius="13" posZ="-30" rotation="180" effect="&efMainThrusterLarge;"/>
+            <Effect type="thrustMain" posAngle="180" posRadius="13" posZ="-46" rotation="180" effect="&efMainThrusterLarge;"/>
+            <Effect type="thrustMain" posAngle="180" posRadius="13" posZ="-62" rotation="180" effect="&efMainThrusterLarge;"/>
+            
+            <Effect type="thrustMain" posAngle="180" posRadius="13" posZ="30" rotation="180" effect="&efMainThrusterLarge;"/>
+            <Effect type="thrustMain" posAngle="180" posRadius="13" posZ="46" rotation="180" effect="&efMainThrusterLarge;"/>
+            <Effect type="thrustMain" posAngle="180" posRadius="13" posZ="62" rotation="180" effect="&efMainThrusterLarge;"/>
+        </Effects>
+        
+        <!-- AI and Behavior -->
+        
+        <AISettings
+            fireRateAdj=        "40"
+            fireAccuracy=       "95"
+            perception=         "4"
+
+            ignoreShieldsDown=  "true"
+            />
+        
+        <PlayerSettings
+            desc=               "Ifrit"
+            largeImage=         "&rsSiegeLordGarnetLargeImage;"
+            initialClass=       "true"
+            startingCredits=    "10d100+1300"
+            >
+            <ArmorDisplay style= "circular"
+                armorColor="#A0F0FF"
+                shieldsColor="#007FFF"
+                />
+
+            <ReactorDisplay style= "circular"
+                backgroundColor="#000000"
+                fuelColor="#9AB973"
+                powerColor="#808000"
+                warningColor="#F5DEB3"
+                />
+
+            <WeaponDisplay style= "circular"
+                backgroundColor="#000000"
+                targetColor="#FFFFFF"
+                weaponColor="#FFFFFF"
+                />
+        </PlayerSettings>
+    </ShipClass>
+
+</TranscendenceModule>

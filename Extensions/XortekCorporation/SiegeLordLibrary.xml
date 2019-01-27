@@ -36,6 +36,10 @@
     <!ENTITY unidSiegeLordLibrary                  "0xD0120024">
     <!ENTITY rsSiegeLordPlasmaCapsule              "0xD0120025">
     <!ENTITY rsSiegeLordPlasmaTorpedo              "0xD0120026">
+    <!ENTITY scSiegeLordIfrit                      "0xD0120027">
+    <!ENTITY rsSiegeLordIfritImage                 "0xD0120028">
+    <!ENTITY itSiegeLordXortekPlasmaBeam           "0xD0120029">
+    <!ENTITY efSiegeLordXortekPlasmaBeam           "0xD012002A">
     ]>
 
 <TranscendenceLibrary
