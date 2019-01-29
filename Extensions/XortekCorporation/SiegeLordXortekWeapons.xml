@@ -56,7 +56,7 @@
         <Missile
                     type=           "missile"
 
-                    damage=         "plasma:9d8+20; WMD1"
+                    damage=         "plasma:8d8+20; WMD1"
                     missileSpeed=   "50"
                     lifetime=       "60"
                     interaction=    "50"
@@ -151,13 +151,14 @@
         <Image imageID="&rsItems8;" imageX="288" imageY="96" imageWidth="96" imageHeight="96"/>
 
         <Weapon
-                type=               "beam"
+                type=               "continuousBeam"
 
-                damage=             "plasma:12d12+10"
+                damage=             "plasma:12d12+10; WMD1"
                 repeating=          "10"
                 fireRate=           "100"
-                lifetime=           "60"
+                lifetime=           "90"
                 powerUse=           "6000"
+                missileSpeed=       "70"
 
                 effect=             "&efSiegeLordXortekPlasmaBeam;"
                 sound=              "&snLaserCannon;"

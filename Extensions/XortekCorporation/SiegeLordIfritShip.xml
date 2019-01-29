@@ -78,6 +78,7 @@
             <Device slotID="lower_forward"  deviceID="&itSiegeLordPlasmaCapsuleCannon;"/>
             <Device slotID="rear"  deviceID="&itSiegeLordPlasmaCapsuleCannon;"/>
             <Device slotID="forward"  deviceID="&itSiegeLordXortekPlasmaBeam;"/>
+            <Device deviceID="&itMissileDefense;" omnidirectional="true" />
             <Device deviceID="&itPlasmaShieldGenerator;"/>
             <Device deviceID="&it1GWReactor;"/>
         </Devices>
