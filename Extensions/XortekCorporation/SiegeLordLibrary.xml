@@ -40,6 +40,7 @@
     <!ENTITY rsSiegeLordIfritImage                 "0xD0120028">
     <!ENTITY itSiegeLordXortekPlasmaBeam           "0xD0120029">
     <!ENTITY efSiegeLordXortekPlasmaBeam           "0xD012002A">
+    <!ENTITY snSiegeLordBeam                       "0xD012002B">
     ]>
 
 <TranscendenceLibrary

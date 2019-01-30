@@ -3,6 +3,7 @@
 <TranscendenceModule>
     <Sound UNID="&snSiegeLordXortekShort;" filename="Resources/short.wav"/>
     <Sound UNID="&snSiegeLordXortekLong;" filename="Resources/long.wav"/>
+    <Sound UNID="&snSiegeLordBeam;" filename="Resources/beam.wav"/>
     <Image UNID="&rsSiegeLordPlasmaCapsule;" bitmap="Resources/SiegeLordPlasmaCapsule.png" loadOnUse="true"/>
     <Image UNID="&rsSiegeLordPlasmaTorpedo;" bitmap="Resources/SiegeLordPlasmaTorpedo.png" loadOnUse="true"/>
     
@@ -153,7 +154,7 @@
         <Weapon
                 type=               "continuousBeam"
 
-                damage=             "plasma:12d12+10; WMD1"
+                damage=             "plasma:9d12+10; WMD1"
                 repeating=          "10"
                 fireRate=           "100"
                 lifetime=           "90"
@@ -161,7 +162,7 @@
                 missileSpeed=       "70"
 
                 effect=             "&efSiegeLordXortekPlasmaBeam;"
-                sound=              "&snLaserCannon;"
+                sound=              "&snSiegeLordBeam;"
                 hitEffect=          "&efPlasmaHitDefault;"
                 fireEffect=         "&efSiegeLordXortekPlasmaFire;"
                 >
