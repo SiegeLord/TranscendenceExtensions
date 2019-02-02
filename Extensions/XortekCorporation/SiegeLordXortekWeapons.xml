@@ -8,7 +8,7 @@
     <Image UNID="&rsSiegeLordPlasmaTorpedo;" bitmap="Resources/SiegeLordPlasmaTorpedo.png" loadOnUse="true"/>
     
     <ItemType UNID="&itSiegeLordPlasmaCapsuleCannon;"
-            name=               "plasma capsule cannon"
+            name=               "Xortek plasma mortar"
             attributes=         "majorItem, specialty, xortek"
 
             level=              "8"
@@ -40,7 +40,7 @@
     </ItemType>
 
     <ItemType UNID="&itSiegeLordPlasmaCapsule;"
-            name=               "plasma capsule"
+            name=               "Xortek plasma shell"
             attributes=         "premiumAmmo, consumable, missile, xortek"
 
             level=              "8"
@@ -50,7 +50,7 @@
             value=              "100"
             mass=               "20"
 
-            description=        "Plasma capsules are filled with plasma by the Xortek plasma capsule cannon. Venting minute amounts of plasma allows the capsules to home in on their targets."
+            description=        "Plasma shells are filled with plasma by the Xortek plasma mortar. Venting minute amounts of plasma allows the shells to home in on their targets."
             >
 
         <Image imageID="&rsSiegeLordPlasmaCapsule;" imageX="0" imageY="0" imageWidth="96" imageHeight="96"/>
@@ -58,10 +58,10 @@
                     type=           "missile"
 
                     damage=         "plasma:8d8+20; WMD1"
-                    missileSpeed=   "50"
-                    lifetime=       "60"
+                    missileSpeed=   "40"
+                    lifetime=       "70"
                     interaction=    "50"
-                    maneuverRate=   "6"
+                    maneuverRate=   "3"
                     hitPoints=      "40"
 
                     sound=          "&snSiegeLordXortekShort;"
@@ -73,7 +73,7 @@
     </ItemType>
 
     <ItemType UNID="&itSiegeLordPlasmaTorpedoLauncher;"
-            name=               "plasma torpedo launcher"
+            name=               "Xortek plasma torpedo launcher"
             attributes=         "majorItem, specialty, xortek"
 
             level=              "8"
@@ -90,7 +90,7 @@
         <Weapon
                 launcher=           "true"
                 fireRate=           "45"
-                powerUse=           "1600"
+                powerUse=           "1200"
                 reportAmmo=         "true"
 
                 counter=            "capacitor"
@@ -105,7 +105,7 @@
     </ItemType>
 
     <ItemType UNID="&itSiegeLordPlasmaTorpedo;"
-            name=               "plasma torpedo"
+            name=               "Xortek plasma torpedo"
             attributes=         "premiumAmmo, consumable, missile, xortek"
 
             level=              "8"
@@ -123,11 +123,11 @@
         <Missile
                 type=           "missile"
 
-                damage=         "plasma:80d12+50; WMD5"
-                missileSpeed=   "18"
-                lifetime=       "80"
+                damage=         "plasma:50d12+50; WMD5"
+                missileSpeed=   "9"
+                lifetime=       "160"
                 interaction=    "50"
-                maneuverRate=   "3"
+                maneuverRate=   "2"
                 hitPoints=      "45"
 
                 sound=          "&snSiegeLordXortekLong;"
@@ -139,12 +139,12 @@
     </ItemType>
     
     <ItemType UNID="&itSiegeLordXortekPlasmaBeam;"
-        name=               "plasma beam cannon"
+        name=               "Xortek plasma beam cannon"
         level=              "9"
         value=              "275000"
         mass=               "34000"
         frequency=          "notrandom"
-        attributes=         "Xortek; EnergyWeapon; MajorItem; NotForSale;"
+        attributes=         "xortek; EnergyWeapon; MajorItem; NotForSale;"
 
         description=        "."
         >
@@ -177,9 +177,9 @@
                     style=              "jet"
                     fixedPos=           "true"
                     emitRate=           "40"
-                    tangentSpeed=       "-12-12"
-                    particleLifetime=   "1-6"
-                    XformTime=          "0"
+                    tangentSpeed=       "-15-15"
+                    particleLifetime=   "2-4"
+                    XformTime=          "60"
                     >
                 <ParticleEffect>
                     <Particle
@@ -243,9 +243,9 @@
                     style=              "jet"
                     fixedPos=           "true"
                     emitRate=           "40"
-                    tangentSpeed=       "-4-4"
-                    particleLifetime=   "1-6"
-                    XformTime=          "0"
+                    tangentSpeed=       "-15-15"
+                    particleLifetime=   "2-4"
+                    XformTime=          "60"
                     >
                 <ParticleEffect>
                     <Particle

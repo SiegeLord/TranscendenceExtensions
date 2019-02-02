@@ -89,6 +89,7 @@ maxArmor: medium
             fireRateAdj=        "50"
             fireAccuracy=       "90"
             perception=         "4"
+            combatStyle=        "flyby"
             />
         
         <PlayerSettings
