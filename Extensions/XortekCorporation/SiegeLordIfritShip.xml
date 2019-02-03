@@ -2,6 +2,7 @@
 
 <TranscendenceModule>
     <Image UNID="&rsSiegeLordIfritImage;" bitmap="Resources/SiegeLordIfritGame.png" loadOnUse="true"/>
+    <Image UNID="&rsSiegeLordIfritHeroImage;" bitmap="Resources/SiegeLordIfritHero.png" loadOnUse="true"/>
 
     <ShipClass UNID="&scSiegeLordIfrit;"
             manufacturer=       "Xortek Corporation"
@@ -57,8 +58,8 @@
 
                     posX=       "-13"
                     posY=       "0"
-                    sizeX=      "50"
-                    sizeY=      "40"
+                    sizeX=      "20"
+                    sizeY=      "60"
                     />
         </Interior>
 
@@ -90,6 +91,7 @@
         <!-- Image and Effects -->
 
         <Image imageID="&rsSiegeLordIfritImage;" imageWidth="195" imageHeight="195" rotationCount="120" rotationColumns="12" viewportRatio="0.035"/>
+        <HeroImage imageID="&rsSiegeLordIfritHeroImage;" imageWidth="320" imageHeight="320"/>
 
         <Effects>
             <Effect type="thrustMain" posAngle="180" posRadius="26" posZ="-30" rotation="180" effect="&efMainThrusterLarge;"/>
@@ -113,7 +115,6 @@
         
         <PlayerSettings
             desc=               "Ifrit"
-            largeImage=         "&rsSiegeLordGarnetLargeImage;"
             initialClass=       "true"
             startingCredits=    "10d100+1300"
             >
