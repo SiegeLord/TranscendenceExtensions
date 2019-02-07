@@ -154,7 +154,7 @@
         <Weapon
                 type=               "continuousBeam"
 
-                damage=             "plasma:9d12+10; WMD1"
+                damage=             "plasma:7d12+10; WMD1"
                 repeating=          "10"
                 fireRate=           "100"
                 lifetime=           "90"
