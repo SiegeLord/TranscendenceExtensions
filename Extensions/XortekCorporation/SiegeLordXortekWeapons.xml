@@ -6,6 +6,7 @@
     <Sound UNID="&snSiegeLordBeam;" filename="Resources/beam.wav"/>
     <Image UNID="&rsSiegeLordPlasmaCapsule;" bitmap="Resources/SiegeLordPlasmaCapsule.png" loadOnUse="true"/>
     <Image UNID="&rsSiegeLordPlasmaTorpedo;" bitmap="Resources/SiegeLordPlasmaTorpedo.png" loadOnUse="true"/>
+    <Image UNID="&rsSiegeLordXortekMortar;" bitmap="Resources/SiegeLordPlasmaMortar.png" loadOnUse="true"/>
     
     <ItemType UNID="&itSiegeLordPlasmaCapsuleCannon;"
             name=               "Xortek plasma mortar"
@@ -20,7 +21,7 @@
             description=        "A miniaturized version of the Xortek plasma torpedo launcher, small enough to fit in standard weapon mounts. Uses magnetic capsules to contain plasma. Venting minute amounts of plasma allows the capsules to home in on their targets."
             >
 
-        <Image imageID="&rsItems10;" imageX="192" imageY="0" imageWidth="96" imageHeight="96"/>
+        <Image imageID="&rsSiegeLordXortekMortar;" imageX="0" imageY="0" imageWidth="96" imageHeight="96"/>
 
         <Weapon
                 type=               "missile"
