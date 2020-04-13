@@ -19,6 +19,7 @@
     
     <Module filename="SiegeLordGarnetShip.xml"/>
     <Module filename="SiegeLordIfritShip.xml"/>
+    <Module filename="SiegeLordDevourerShip.xml"/>
     <Module filename="SiegeLordXortekFoundryStation.xml"/>
     
     <Module filename="SiegeLordXortekMissionDestroy.xml"/>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TranscendenceModule>
+    <Image UNID="&rsSiegeLordDevourerImage;" bitmap="Resources/SiegeLordDevourerGame.png" loadOnUse="true"/>
+    <Image UNID="&rsSiegeLordDevourerHeroImage;" bitmap="Resources/SiegeLordDevourerHero.png" loadOnUse="true"/>
+
+    <ShipClass UNID="&scSiegeLordDevourer;"
+            manufacturer=       "Xortek Corporation"
+            class=              "Devourer"
+            type=               "cruiser"
+            defaultSovereign=   "&svCorporate;"
+
+            attributes=         "capitalShip, genericClass, xortek, 00200000_PlayerShip"
+            characterClass=     "&unidPilgrimClass;"
+            inherit=            "&baHumanTechShip;"
+            >
+<!--
+                    attributes=         "capitalShip, genericClass, xortek, 00200000_PlayerShip"
+                    characterClass=     "&unidPilgrimClass;"
+                    attributes=         "capitalShip, genericClass, xortek"
+-->
+
+        <!-- Hull -->
+
+        <Hull
+            size=               "390"
+            mass=               "60000"
+            cargoSpace=         "1500"
+
+            cyberDefenseLevel=  "8"
+            />
+
+        <Drive
+            maxSpeed=           "10"
+            thrustRatio=        "0.8"
+            powerUse=           "300"
+            />
+
+        <Maneuver
+            maxRotationRate=    "2.0"
+            rotationAccel=      "0.5"
+            />
+
+        <DeviceSlots>
+            <DeviceSlot id="forward" criteria="w" posAngle="0" posRadius="31" posZ="0" fireAngle="0" sendToBack="*"/>
+        </DeviceSlots>
+
+        <Interior>
+            <Compartment name="interior"
+                    hitPoints=  "400"
+                    />
+            
+            <Compartment name="main drive"
+                    type=       "mainDrive"
+                    hitPoints=  "100"
+
+                    posX=       "-13"
+                    posY=       "0"
+                    sizeX=      "20"
+                    sizeY=      "60"
+                    />
+        </Interior>
+
+        <Wreck
+            explosionType=      "&vtThermoExplosion3;"
+            />
+
+        <!-- Configuration -->
+        
+        <Armor
+            armorID=            "&itMassiveHexaCarbideArmor;"
+            count=              "16"
+            />
+        
+        <Devices>
+            <Device slotID="forward"  deviceID="&itSiegeLordXortekPlasmaBeam;"/>
+            <Device deviceID="&itPlasmaShieldGenerator;"/>
+            <Device deviceID="&it1GWReactor;"/>
+        </Devices>
+
+        <!-- Image and Effects -->
+
+        <Image imageID="&rsSiegeLordDevourerImage;" imageWidth="320" imageHeight="320" rotationCount="120" rotationColumns="12" viewportRatio="0.04"/>
+        <HeroImage imageID="&rsSiegeLordDevourerHeroImage;" imageWidth="320" imageHeight="320"/>
+
+        <Effects>
+            <Effect type="thrustMain" posAngle="217" posRadius="49" posZ="  0" rotation="180" effect="&efMainThrusterLarge;"/>
+            <Effect type="thrustMain" posAngle="200" posRadius="41" posZ="-25" rotation="180" effect="&efMainThrusterLarge;"/>
+            <Effect type="thrustMain" posAngle="159" posRadius="41" posZ="-25" rotation="180" effect="&efMainThrusterLarge;"/>
+            <Effect type="thrustMain" posAngle="142" posRadius="49" posZ="  0" rotation="180" effect="&efMainThrusterLarge;"/>
+            <Effect type="thrustMain" posAngle="158" posRadius="41" posZ=" 25" rotation="180" effect="&efMainThrusterLarge;"/>
+            <Effect type="thrustMain" posAngle="201" posRadius="41" posZ=" 25" rotation="180" effect="&efMainThrusterLarge;"/>
+        </Effects>
+        
+        <!-- AI and Behavior -->
+        
+        <AISettings
+            fireRateAdj=        "40"
+            fireAccuracy=       "95"
+            perception=         "4"
+
+            ignoreShieldsDown=  "true"
+            />
+        
+        <PlayerSettings
+            desc=               "Devourer"
+            initialClass=       "true"
+            startingCredits=    "10d100+1300"
+            >
+            <ArmorDisplay style= "circular"
+                armorColor="#A0F0FF"
+                shieldsColor="#007FFF"
+                />
+
+            <ReactorDisplay style= "circular"
+                backgroundColor="#000000"
+                fuelColor="#9AB973"
+                powerColor="#808000"
+                warningColor="#F5DEB3"
+                />
+
+            <WeaponDisplay style= "circular"
+                backgroundColor="#000000"
+                targetColor="#FFFFFF"
+                weaponColor="#FFFFFF"
+                />
+        </PlayerSettings>
+    </ShipClass>
+
+</TranscendenceModule>

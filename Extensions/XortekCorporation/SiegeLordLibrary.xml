@@ -44,6 +44,9 @@
     <!ENTITY rsSiegeLordIfritHeroImage              "0xD012002C">
     <!ENTITY rsSiegeLordXortekMortar                "0xD012002D">
     <!ENTITY rsSiegeLordXortekPlasmaTorpedoLauncher "0xD012002E">
+    <!ENTITY scSiegeLordDevourer                    "0xD012002F">
+    <!ENTITY rsSiegeLordDevourerImage               "0xD0120030">
+    <!ENTITY rsSiegeLordDevourerHeroImage           "0xD0120031">
     ]>
 
 <TranscendenceLibrary
