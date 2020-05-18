@@ -73,7 +73,7 @@
             />
         
         <Devices>
-            <Device slotID="forward"  deviceID="&itSiegeLordXortekPlasmaBeam;"/>
+            <Device slotID="forward"  deviceID="&itCircleOfWrathPower;"/>
             <Device deviceID="&itPlasmaShieldGenerator;"/>
             <Device deviceID="&it1GWReactor;"/>
         </Devices>

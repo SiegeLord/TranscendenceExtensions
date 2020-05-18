@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TranscendenceModule>
+    <Image UNID="&rsSiegeLordSilverfishImage;" bitmap="Resources/SiegeLordSilverfishGame.png" loadOnUse="true"/>
+    <Image UNID="&rsSiegeLordSilverfishHeroImage;" bitmap="Resources/SiegeLordSilverfishHero.png" loadOnUse="true"/>
+    <Image UNID="&rsSiegeLordSilverfishArmorHudCenterImage;" bitmap="Resources/SiegeLordSilverfishArmorHudCenter.png" loadOnUse="true"/>
+    <Image UNID="&rsSiegeLordSilverfishArmorHudSidesImage;" bitmap="Resources/SiegeLordSilverfishArmorHudSides.png" loadOnUse="true"/>
+
+    <ShipClass UNID="&scSiegeLordSilverfish;"
+            manufacturer=       "Mastodon Ventures"
+            class=              "Silverfish"
+            type=               "shuttle"
+            attributes=         "xortek, genericClass"
+            inherit=            "&baHumanTechShip;"
+            characterClass=     "&unidPilgrimClass;"
+            >
+
+        <Hull
+            size=               "42"
+            mass=               "80"
+            cargoSpace=         "60"
+
+            maxReactorPower=    "10000"
+            maxCargoSpace=      "175"
+            maxDevices=         "7"
+            maxWeapons=         "4"
+
+            stdArmor=           "3000"
+            maxArmor=           "6000"
+            maxArmorSpeedAdj=   "-3"
+            minArmorSpeedAdj=   "+3"
+            />
+
+        <Drive
+            PowerUse=           "40"
+            thrustRatio=        "12.2"
+            maxSpeed=           "30"
+            />
+
+        <DeviceSlots>
+            <DeviceSlot criteria="w" posAngle="0" posRadius="30" posZ="-1"/>
+        </DeviceSlots>
+        
+        <Maneuver
+            maxRotationRate=    "7.0"
+            rotationAccel=      "1.5"
+            rotationStopAccel=  "10.0"
+            />
+
+        <Devices>
+            <Device deviceID="&it15MWReactor;"/>
+        </Devices>
+
+        <Items>
+            <Item count="4d6" item="&itHelium3FuelRod;"/>
+            <Item count="5d10+10" item="&itLaudanumAmpule;"/>
+            <Item count="1d4" item="&itLeatherBoots;"/>
+            <Item count="1d4" item="&itMartianNori;"/>
+        </Items>
+        
+        <Armor>
+            <ArmorSection start="0" span="70" armorID="&itCeramicPlate;" />
+            <ArmorSection start="70" span="65" armorID="&itCeramicPlate;" />
+            <ArmorSection start="135" span="90" armorID="&itCeramicPlate;" />
+            <ArmorSection start="225" span="65" armorID="&itCeramicPlate;" />
+            <ArmorSection start="290" span="70" armorID="&itCeramicPlate;" />
+        </Armor>
+
+        <Image imageID="&rsSiegeLordSilverfishImage;"         imageWidth="80" imageHeight="80" rotationColumns="12" rotationCount="120"/>
+        <HeroImage imageID="&rsSiegeLordSilverfishHeroImage;" imageWidth="320" imageHeight="320"/>
+
+        <Effects>
+            <Effect type="thrustMain" posAngle="152" posRadius="37" posZ="-3" rotation="180"/>
+            <Effect type="thrustMain" posAngle="208" posRadius="37" posZ="-3" rotation="180"/>
+            <Effect type="thrustMain" posAngle="162" posRadius="21" posZ="-3" rotation="180"/>
+            <Effect type="thrustMain" posAngle="198" posRadius="21" posZ="-3" rotation="180"/>
+        </Effects>
+        
+        <PlayerSettings
+            desc=               "A heavily modified corporate shuttle, the Silverfish provides young executives a way to get their adrenaline fix when Laudanum no longer suffices."
+            largeImage=         "&rsSiegeLordSilverfishHeroImage;"
+            initialClass=       "true"
+            startingCredits=    "10d10+1000"
+            >
+
+            <ArmorDisplay>
+                <ShipImage imageID="&rsSiegeLordSilverfishArmorHudCenterImage;" imageWidth="136" imageHeight="136"/>
+                
+                <ArmorSection name="forward-port"
+                        segment="0"
+                        imageID="&rsSiegeLordSilverfishArmorHudSidesImage;" 
+                        imageX="0" imageY="0" imageWidth="31" imageHeight="38"
+                        destX="32" destY="16" hpX="28" hpY="24"
+                        nameY="8" nameBreakWidth="200" nameDestX="0" nameDestY="0" />
+                
+                <ArmorSection name="forward-starboard"
+                        segment="4"
+                        imageID="&rsSiegeLordSilverfishArmorHudSidesImage;" 
+                        imageX="31" imageY="0" imageWidth="32" imageHeight="38"
+                        destX="71" destY="16" hpX="80" hpY="24"
+                        nameY="30" nameBreakWidth="200" nameDestX="10" nameDestY="20" />
+                
+                <ArmorSection name="port"
+                        segment="1"
+                        imageID="&rsSiegeLordSilverfishArmorHudSidesImage;" 
+                        imageX="64" imageY="0" imageWidth="14" imageHeight="43"
+                        destX="27" destY="60" hpX="17" hpY="70"
+                        nameY="52" nameBreakWidth="200" nameDestX="0" nameDestY="0" />
+                
+                <ArmorSection name="starboard"
+                        segment="3"
+                        imageID="&rsSiegeLordSilverfishArmorHudSidesImage;" 
+                        imageX="78" imageY="0" imageWidth="13" imageHeight="43"
+                        destX="94" destY="60" hpX="92" hpY="70"
+                        nameY="74" nameBreakWidth="200" nameDestX="10" nameDestY="20" />
+                
+                <ArmorSection name="aft"
+                        segment="2"
+                        imageID="&rsSiegeLordSilverfishArmorHudSidesImage;" 
+                        imageX="91" imageY="0" imageWidth="64" imageHeight="14"
+                        destX="35" destY="102" hpX="55" hpY="105"
+                        nameY="96" nameBreakWidth="200" nameDestX="0" nameDestY="0" />
+
+            </ArmorDisplay>
+
+            <ReactorDisplay>
+                <Image imageID="&rsZubrinReactor;" 
+                        imageX="0" imageY="0" imageWidth="256" imageHeight="60"/>
+
+                <PowerLevelImage imageID="&rsZubrinReactor;"
+                        imageX="0" imageY="60" imageWidth="202" imageHeight="14"
+                        destX="54" destY="9"/>
+
+                <FuelLevelImage imageID="&rsZubrinReactor;"
+                        imageX="0" imageY="74" imageWidth="194" imageHeight="14"
+                        destX="54" destY="37"/>
+
+                <FuelLowLevelImage imageID="&rsZubrinReactor;"
+                        imageX="0" imageY="88" imageWidth="194" imageHeight="14"/>
+
+                <ReactorText x="62" y="22" width="154" height="14"/>
+                <PowerLevelText x="62" y="0" width="154" height="9"/>
+                <FuelLevelText x="62" y="51" width="154" height="9"/>
+            </ReactorDisplay>
+            
+            <WeaponDisplay>
+                <Image imageID="&rsZubrinTargeting;" imageX="0" imageY="0" imageWidth="360" imageHeight="120"/>
+            </WeaponDisplay>
+            
+        </PlayerSettings>
+    </ShipClass>
+</TranscendenceModule>

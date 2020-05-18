@@ -2,51 +2,58 @@
 
 <!DOCTYPE TranscendenceLibrary
     [
-    <!ENTITY scSiegeLordGarnet                      "0xD0120001">
-    <!ENTITY rsSiegeLordGarnetGameImage             "0xD0120002">
-    <!ENTITY rsSiegeLordGarnetLargeImage            "0xD0120003">
-    <!ENTITY rsSiegeLordGarnetBlueJet               "0xD0120004">
-    <!ENTITY rsSiegeLordGarnetArmorHUDCenter        "0xD0120005">
-    <!ENTITY rsSiegeLordGarnetArmorHUDSides         "0xD0120006">
-    <!ENTITY scSiegeLordGarnetPlayer                "0xD0120007">
-    <!ENTITY exSiegeLordGarnetPlayerShipExt         "0xD0120008">
-    <!ENTITY exSiegeLordXortekCorporationExt        "0xD0120009">
-    <!ENTITY rsSiegeLordXortekFoundryImage          "0xD012000B">
-    <!ENTITY rsSiegeLordXortekFoundryImageHero      "0xD012000C">
-    <!ENTITY msSiegeLordXortekMissionDestroy        "0xD012000D">
-    <!ENTITY msSiegeLordXortekMissionSolarPlasma    "0xD012000E">
-    <!ENTITY itSunPlasma                            "0xD012000F">
-    <!ENTITY itSiegeLordPlasmaCapsuleCannon         "0xD0120010">
-    <!ENTITY itSiegeLordPlasmaCapsule               "0xD0120011">
-    <!ENTITY efSiegeLordXortekPlasmaProj            "0xD0120012">
-    <!ENTITY efSiegeLordXortekPlasmaFire            "0xD0120013">
-    <!ENTITY rsSiegeLordRedFlash                    "0xD0120014">
-    <!ENTITY ovSiegeLordRedFlash                    "0xD0120015">
-    <!ENTITY itSiegeLordPlasmaTorpedoLauncher       "0xD0120016">
-    <!ENTITY itSiegeLordPlasmaTorpedo               "0xD0120017">
-    <!ENTITY efSiegeLordXortekPlasmaProjBig         "0xD0120018">
-    <!ENTITY msSiegeLordXortekMissionGauntlet       "0xD0120019">
-    <!ENTITY stSiegeLordXortekProvingGroundsBeacon  "0xD012001A">
-    <!ENTITY stSiegeLordXortekFoundry               "0xD012001E">
-    <!ENTITY rsSiegeLordGreenFlash                  "0xD012001F">
-    <!ENTITY ovSiegeLordGreenFlash                  "0xD0120020">
-    <!ENTITY snSiegeLordXortekShort                 "0xD0120021">
-    <!ENTITY snSiegeLordXortekLong                  "0xD0120022">
-    <!ENTITY dsSiegeLordXortekPromotion             "0xD0120023">
-    <!ENTITY unidSiegeLordLibrary                   "0xD0120024">
-    <!ENTITY rsSiegeLordPlasmaCapsule               "0xD0120025">
-    <!ENTITY rsSiegeLordPlasmaTorpedo               "0xD0120026">
-    <!ENTITY scSiegeLordIfrit                       "0xD0120027">
-    <!ENTITY rsSiegeLordIfritImage                  "0xD0120028">
-    <!ENTITY itSiegeLordXortekPlasmaBeam            "0xD0120029">
-    <!ENTITY efSiegeLordXortekPlasmaBeam            "0xD012002A">
-    <!ENTITY snSiegeLordBeam                        "0xD012002B">
-    <!ENTITY rsSiegeLordIfritHeroImage              "0xD012002C">
-    <!ENTITY rsSiegeLordXortekMortar                "0xD012002D">
-    <!ENTITY rsSiegeLordXortekPlasmaTorpedoLauncher "0xD012002E">
-    <!ENTITY scSiegeLordDevourer                    "0xD012002F">
-    <!ENTITY rsSiegeLordDevourerImage               "0xD0120030">
-    <!ENTITY rsSiegeLordDevourerHeroImage           "0xD0120031">
+    <!ENTITY scSiegeLordGarnet                        "0xD0120001">
+    <!ENTITY rsSiegeLordGarnetGameImage               "0xD0120002">
+    <!ENTITY rsSiegeLordGarnetLargeImage              "0xD0120003">
+    <!ENTITY rsSiegeLordGarnetBlueJet                 "0xD0120004">
+    <!ENTITY rsSiegeLordGarnetArmorHUDCenter          "0xD0120005">
+    <!ENTITY rsSiegeLordGarnetArmorHUDSides           "0xD0120006">
+    <!ENTITY scSiegeLordGarnetPlayer                  "0xD0120007">
+    <!ENTITY exSiegeLordGarnetPlayerShipExt           "0xD0120008">
+    <!ENTITY exSiegeLordXortekCorporationExt          "0xD0120009">
+    <!ENTITY rsSiegeLordXortekFoundryImage            "0xD012000B">
+    <!ENTITY rsSiegeLordXortekFoundryImageHero        "0xD012000C">
+    <!ENTITY msSiegeLordXortekMissionDestroy          "0xD012000D">
+    <!ENTITY msSiegeLordXortekMissionSolarPlasma      "0xD012000E">
+    <!ENTITY itSunPlasma                              "0xD012000F">
+    <!ENTITY itSiegeLordPlasmaCapsuleCannon           "0xD0120010">
+    <!ENTITY itSiegeLordPlasmaCapsule                 "0xD0120011">
+    <!ENTITY efSiegeLordXortekPlasmaProj              "0xD0120012">
+    <!ENTITY efSiegeLordXortekPlasmaFire              "0xD0120013">
+    <!ENTITY rsSiegeLordRedFlash                      "0xD0120014">
+    <!ENTITY ovSiegeLordRedFlash                      "0xD0120015">
+    <!ENTITY itSiegeLordPlasmaTorpedoLauncher         "0xD0120016">
+    <!ENTITY itSiegeLordPlasmaTorpedo                 "0xD0120017">
+    <!ENTITY efSiegeLordXortekPlasmaProjBig           "0xD0120018">
+    <!ENTITY msSiegeLordXortekMissionGauntlet         "0xD0120019">
+    <!ENTITY stSiegeLordXortekProvingGroundsBeacon    "0xD012001A">
+    <!ENTITY stSiegeLordXortekFoundry                 "0xD012001E">
+    <!ENTITY rsSiegeLordGreenFlash                    "0xD012001F">
+    <!ENTITY ovSiegeLordGreenFlash                    "0xD0120020">
+    <!ENTITY snSiegeLordXortekShort                   "0xD0120021">
+    <!ENTITY snSiegeLordXortekLong                    "0xD0120022">
+    <!ENTITY dsSiegeLordXortekPromotion               "0xD0120023">
+    <!ENTITY unidSiegeLordLibrary                     "0xD0120024">
+    <!ENTITY rsSiegeLordPlasmaCapsule                 "0xD0120025">
+    <!ENTITY rsSiegeLordPlasmaTorpedo                 "0xD0120026">
+    <!ENTITY scSiegeLordIfrit                         "0xD0120027">
+    <!ENTITY rsSiegeLordIfritImage                    "0xD0120028">
+    <!ENTITY itSiegeLordXortekPlasmaBeam              "0xD0120029">
+    <!ENTITY efSiegeLordXortekPlasmaBeam              "0xD012002A">
+    <!ENTITY snSiegeLordBeam                          "0xD012002B">
+    <!ENTITY rsSiegeLordIfritHeroImage                "0xD012002C">
+    <!ENTITY rsSiegeLordXortekMortar                  "0xD012002D">
+    <!ENTITY rsSiegeLordXortekPlasmaTorpedoLauncher   "0xD012002E">
+    <!ENTITY scSiegeLordDevourer                      "0xD012002F">
+    <!ENTITY rsSiegeLordDevourerImage                 "0xD0120030">
+    <!ENTITY rsSiegeLordDevourerHeroImage             "0xD0120031">
+    <!ENTITY scSiegeLordSilverfish                    "0xD0120032">
+    <!ENTITY rsSiegeLordSilverfishImage               "0xD0120033">
+    <!ENTITY rsSiegeLordSilverfishHeroImage           "0xD0120034">
+    <!ENTITY exSiegeLordSilverfishPlayerShipExt       "0xD0120035">
+    <!ENTITY rsSiegeLordSilverfishArmorHudCenterImage "0xD0120036">
+    <!ENTITY rsSiegeLordSilverfishArmorHudSidesImage  "0xD0120037">
+    <!ENTITY scSiegeLordSilverfishPlayer              "0xD0120038">
     ]>
 
 <TranscendenceLibrary
@@ -55,6 +62,6 @@
         release=            "1"
         private=            "true"
         apiVersion=         "43" 
-        version=            "0.2.1"
+        version=            "0.2.2"
         >
 </TranscendenceLibrary>

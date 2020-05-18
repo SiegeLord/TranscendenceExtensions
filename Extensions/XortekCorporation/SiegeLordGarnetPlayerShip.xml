@@ -7,7 +7,7 @@
             attributes=         "xortek 00200000_PlayerShip"
             characterClass=     "&unidPilgrimClass;"
             >
-<!--
+
         <Devices>
             <Device deviceID="&itFastFireLaserCannon;"/>
             <Device deviceID="&itClass1Deflector;"/>
@@ -22,6 +22,6 @@
             armorID=            "&itReactiveArmor;"
             count=              "4"
             />
--->
+
     </ShipClass>
 </TranscendenceModule>

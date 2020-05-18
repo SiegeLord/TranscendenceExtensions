@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TranscendenceModule>   
+    <ShipClass UNID="&scSiegeLordSilverfishPlayer;"
+            inherit=            "&scSiegeLordSilverfish;"
+            attributes=         "00200000_PlayerShip"
+            characterClass=     "&unidPilgrimClass;"
+            >
+    </ShipClass>
+</TranscendenceModule>

@@ -16,3 +16,4 @@ fi
 ${WINE} ./TransCompiler.exe /input:${BASE}/SiegeLordLibrary.xml /output:Extensions/SiegeLordLib.tdb
 ${WINE} ./TransCompiler.exe /input:${BASE}/SiegeLordXortekCorporationExt.xml /output:Extensions/XortekCorporation.tdb /entities:Extensions/SiegeLordLib.tdb
 ${WINE} ./TransCompiler.exe /input:${BASE}/SiegeLordGarnetPlayerShipExt.xml /output:Extensions/GarnetPlayership.tdb /entities:Extensions/SiegeLordLib.tdb
+${WINE} ./TransCompiler.exe /input:${BASE}/SiegeLordSilverfishPlayerShipExt.xml /output:Extensions/SilverfishPlayership.tdb /entities:Extensions/SiegeLordLib.tdb
