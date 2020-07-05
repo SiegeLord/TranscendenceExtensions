@@ -54,6 +54,10 @@
     <!ENTITY rsSiegeLordSilverfishArmorHudCenterImage "0xD0120036">
     <!ENTITY rsSiegeLordSilverfishArmorHudSidesImage  "0xD0120037">
     <!ENTITY scSiegeLordSilverfishPlayer              "0xD0120038">
+    <!ENTITY stSiegeLordTwoRingHabitat                "0xD0120039">
+    <!ENTITY rsSiegeLordTwoRingHabitatImage           "0xD012003A">
+    <!ENTITY exSiegeLordTwoRingHabitatExt             "0xD012003B">
+    <!ENTITY rsSiegeLordTwoRingHabitatHeroImage       "0xD012003C">
     ]>
 
 <TranscendenceLibrary
@@ -62,6 +66,6 @@
         release=            "1"
         private=            "true"
         apiVersion=         "43" 
-        version=            "0.2.2"
+        version=            "0.2.3"
         >
 </TranscendenceLibrary>

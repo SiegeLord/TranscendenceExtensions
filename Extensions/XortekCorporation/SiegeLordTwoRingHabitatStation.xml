@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TranscendenceModule>
+    <Image UNID="&rsSiegeLordTwoRingHabitatImage;" bitmap="Resources/SiegeLordTwoRingHabitat.png" loadOnUse="true"/>
+    <Image UNID="&rsSiegeLordTwoRingHabitatHeroImage;" bitmap="Resources/SiegeLordTwoRingHabitatHero.png" loadOnUse="true"/>
+    
+    <StationType UNID="&stSiegeLordTwoRingHabitat;"
+            name=               "Two-ring Habitat"
+            sovereign=          "&svCommonwealth;"
+            inherit=            "&baCommonwealthStation;"
+                 
+            attributes=         "commonwealth, commonwealthCustoms, friendly, generic, human, majorStation, primary, populated"
+                 
+            dockScreen=         "Main"
+            abandonedScreen=    "&dsRPGAbandonedStation;"
+
+            level=              "5"
+            size=               "390"
+            armorID=            "&itPlasteelPlate;"
+            hitPoints=          "1570"
+            multiHull=          "true"
+            regen=              "6"
+            shipRegen=          "4"
+                 
+            explosionType=      "&vtBlastExplosion4;"
+            ejectaType=         "&vtWreckEjecta;"
+            >
+        
+        <!-- Encounter Info -->
+
+        <Encounter
+                systemCriteria=         "+commonwealthSpace;"
+                systemAffinity=         "+commonwealthCore;"
+                levelFrequency=         "-urrr ----- ----- ----- -----"
+
+                locationCriteria=       "-outerSystem, +planetary"
+                enemyExclusionRadius=   "80"
+                />
+
+        <Names noArticle="true">
+            Putu Colony; Wembo Nyama Station; Usumba Station;
+            Liete Station; Akau Colony; Yohu Colony; Bokungu Station;
+            Mioka Station; Mame Colony; Bosobolo Colony; Gibi Station;
+        </Names>
+        
+        <!-- Trade and Items -->
+
+        <Trade currency="credit">
+            <Sell   criteria="m +commonwealth; +basicAmmo; -defective; -illegal; -notForSale; -notStandard;" priceAdj="100" inventoryAdj="200" levelFrequency="systemLevel:ruc|c|cur"/>
+            <Sell   criteria="*NU -defective; -Illegal; -ID; -NotForSale;"  priceAdj="100"/>
+            <Buy    criteria="amdNU -Illegal; -NotForSale;"     priceAdj="50"/>
+            <Buy    criteria="*NU -Illegal; -ID; -NotForSale;"  priceAdj="90"/>
+            <Buy    criteria="*NU -Illegal; -ID;"               priceAdj="10"/>
+            
+            <Refuel         criteria="f +BasicFuel; L:1-5;" priceAdj="100"/>
+            <RepairArmor    criteria="a L:1-5;" priceAdj="100"/>
+            <ReplaceArmor   criteria="a L:1-5;" priceAdj="100"/>
+            <InstallDevice  criteria="d L:1-5;" priceAdj="100"/>
+            <RemoveDevice   criteria="d L:1-5;" priceAdj="100"/>
+
+            <ConsumeTrade   criteria="{core.fusionFuel}"        impact="2"/>
+            <ConsumeTrade   criteria="{human.basicFood}"    impact="2"/>
+            <ConsumeTrade   criteria="{human.lux}"      impact="5"/>
+            <ConsumeTrade   criteria="{human.meds}"     impact="2"/>
+            <ConsumeTrade   criteria="{human.res}"      impact="1"/>
+            <ConsumeTrade   criteria="{core.ore}"           impact="4"/>
+        </Trade>
+
+        <Items>
+            <RandomItem count="10" 
+                    criteria=       "ad L:1-5; -Illegal; -Military; -Alien; -Specialty; -NotStandard; -NotForSale;"
+                    levelFrequency= "systemLevel:r|c|cur"
+                    />
+            <RandomItem count="10" 
+                    criteria=       "*~ad -Illegal; -Military; -Alien; -Specialty; -NotStandard; -NotForSale;"
+                    levelFrequency= "systemLevel:ru|c|cur"
+                    />
+            <Item count="4d12"  item="&itHelium3FuelRod;" />
+        </Items>
+        
+        <!-- Configuration -->
+        
+        <Devices>
+            <Device deviceID="&itTeV9Blaster;"  omnidirectional="true"/>
+        </Devices>
+        
+        <!-- Ships and Defenses -->
+
+        <Ships>
+            <Lookup count="2" table="&tbCommDefenders;"/>
+            <Lookup count="1d4" table="&tbCommPrivateCrafts;"/>
+        </Ships>
+
+        <Reinforcements minShips="5">
+            <Table>
+                <Lookup chance="75" table="&tbCommDefenders;"/>
+                <Lookup chance="25" table="&tbCommPrivateCrafts;"/>
+            </Table>
+        </Reinforcements>
+        
+        <!-- Image and Effects -->
+        
+        <Image imageID="&rsSiegeLordTwoRingHabitatImage;" imageWidth="622" imageHeight="622"/>
+        <HeroImage imageID="&rsSiegeLordTwoRingHabitatHeroImage;" imageWidth="800" imageHeight="650" />
+
+        <DockingPorts>
+            <Port posAngle="168"   posRadius="160" />
+            <Port posAngle="150"   posRadius="189" />
+            <Port posAngle="120"   posRadius="183" />
+            <Port posAngle="103"   posRadius="161" />
+            <Port posAngle="285"   posRadius="170" />
+            <Port posAngle="305"   posRadius="184" />
+            <Port posAngle="330"   posRadius="189" />
+            <Port posAngle="347"   posRadius="180" />
+        </DockingPorts>
+        
+        <!-- Dock Screen -->
+
+        <DockScreens>
+            <Main>
+                <Panes>
+                    <Default descID="descWelcome">
+                        <Actions>
+                            <Action id="actionMainHall" default="1">
+                                (rpgMissionAssignment {
+                                    missionCriteria: (cat "n +commonwealthColony; =" (sysGetLevel) ";")
+                                    maxPerStation: 1
+                                    noMissionTextID: 'descHallEmpty
+                                    })
+                            </Action>
+                    
+                            <Action id="actionCommoditiesExchange">
+                                (scrShowScreen gScreen &dsRPGCommoditiesExchange;)
+                            </Action>
+                    
+                            <Action id="actionTerrariumA">
+                                (scrShowPane gScreen "TerrariumA")
+                            </Action>
+                    
+                            <Action id="actionTerrariumB">
+                                (block Nil
+                                    (setq nextRaceTime (objGetTypeData gSource 'nextRaceTime))
+                                    (setq noMoreRace (objGetTypeData gSource 'noMoreRace))
+                                    (dbgOutput "nextRaceTime " nextRaceTime "noMoreRace " noMoreRace)
+                                    (switch
+                                        (or noMoreRace (gr nextRaceTime (unvGetTick)))
+                                            (scrShowPane gScreen "TerrariumA")
+                                        (scrShowPane gScreen "TerrariumB")
+                                        )
+                                    )
+                            </Action>
+
+                            <Action id="actionDockServices">
+                                (rpgDockServices gPlayerShip {
+                                    checkMilitaryID: True
+                                    })
+                            </Action>
+
+                            <Action id="actionUndock" cancel="1">
+                                <Exit/>
+                            </Action>
+                        </Actions>
+                    </Default>
+                    
+                    <TerrariumA descID="descTerrariumA">
+                        <Actions>
+                            <Action id="actionLeave" cancel="1">
+                                (scrShowPane gScreen "Default")
+                            </Action>
+                        </Actions>
+                    </TerrariumA>
+                    
+                    <TerrariumB descID="descTerrariumB">
+                        <Actions>
+                            <Action id="actionApproach">
+                                (scrShowPane gScreen "RaceIntro")
+                            </Action>
+                            
+                            <Action id="actionLeave" cancel="1">
+                                (scrShowPane gScreen "Default")
+                            </Action>
+                        </Actions>
+                    </TerrariumB>
+                    
+                    <RaceIntro descID="descRaceIntro">
+                        <Actions>                            
+                            <Action id="actionSure">
+                                (block Nil
+                                    (setq slFitness (objGetData gPlayerShip 'slFitness))
+                                    (switch
+                                        (and (gr (rollDice 1 3 slFitness) 2))
+                                            (scrShowPane gScreen "Lap1Good")
+                                        (scrShowPane gScreen "Lap1Bad")
+                                        )
+                                    )
+                            </Action>
+                            <Action id="actionNoThanks" cancel="1">
+                                (scrShowPane gScreen "TerrariumB")
+                            </Action>
+                        </Actions>
+                    </RaceIntro>
+                    
+                    <Lap1Bad descID="descLap1Bad">
+                        <Actions>
+                            <Action id="actionLeave" cancel="1">
+                                (slLeaveRace)
+                            </Action>
+                        </Actions>
+                    </Lap1Bad>
+                        
+                    <Lap1Good descID="descLap1Good">
+                        <Actions>
+                            <Action id="actionContinue" cancel="1">
+                                (block Nil
+                                    (setq slFitness (objGetData gPlayerShip 'slFitness))
+                                    (switch
+                                        (and (gr (rollDice 1 3 slFitness) 4))
+                                            (scrShowPane gScreen "Lap2Good")
+                                        (scrShowPane gScreen "Lap2Bad")
+                                        )
+                                    )
+                            </Action>
+                        </Actions>
+                    </Lap1Good>
+                    
+                    <Lap2Bad descID="descLap2Bad">
+                        <Actions>
+                            <Action id="actionLeave" cancel="1">
+                                (slLeaveRace)
+                            </Action>
+                        </Actions>
+                    </Lap2Bad>
+                    
+                    <Lap2Good descID="descLap2Good">
+                        <Actions>
+                            <Action id="actionContinue" cancel="1">
+                                (block Nil
+                                    (setq slFitness (objGetData gPlayerShip 'slFitness))
+                                    (switch
+                                        (and (gr (rollDice 1 3 slFitness) 6))
+                                            (scrShowPane gScreen "Lap3Good")
+                                        (scrShowPane gScreen "Lap3Bad")
+                                        )
+                                    )
+                            </Action>
+                        </Actions>
+                    </Lap2Good>
+                    
+                    <Lap3Bad descID="descLap3Bad">
+                        <Actions>
+                            <Action id="actionLeave" cancel="1">
+                                (slLeaveRace)
+                            </Action>
+                        </Actions>
+                    </Lap3Bad>
+                    
+                    <Lap3Good descID="descLap3Good">
+                        <Actions>
+                            <Action id="actionLeave" cancel="1">
+                                (block Nil
+                                    (objSetTypeData gSource 'noMoreRace 1)
+                                    (objAddItem gPlayerShip (itmCreate &itCaliforniaCabernet; 2))
+                                    (slLeaveRace)
+                                    )
+                            </Action>
+                        </Actions>
+                    </Lap3Good>
+                </Panes>
+            </Main>
+        </DockScreens>
+        
+        <!-- Events and Data -->
+
+        <StaticData>
+            <NPCService>
+                (   ;   service                 level   margin
+                    (   'repairArmor            7       100     )
+                    )
+            </NPCService>
+        </StaticData>
+
+        <Events>
+            <OnCreate>
+                (sysAddObjRecurringTimerEvent 150 gSource "OnTrafficControl")
+            </OnCreate>
+            
+            <OnTrafficControl>
+                (comTrafficControl gSource 10)
+            </OnTrafficControl>
+        </Events>
+        
+        <Language>
+            <Text id="descWelcome">
+
+                You are in the docking bay of a Commonwealth Station. Drones
+                are inspecting freighters and load-lifters are offloading
+                goods. The floor is worn and dirty. The central section of the
+                station is dedicated to industry and commerce. Station
+                inhabitants prefer to spend most of their time in the rotating 
+                terrariums.
+
+            </Text>
+            
+            <Text id="descTerrariumA">
+              
+                The shuttle accelerates to the rotational speed of the ring and 
+                after a few seconds, the doors open up. You take a minute to 
+                adjust to the coriolis effect, and look around. Plant and small 
+                animal life surround you, thriving in the artificial gravity.
+                
+                You see people walking around on some trailways; some are
+                having a picnic. A few are fishing in the artificial lakes.
+                
+            </Text>
+            
+            <Text id="descTerrariumB">
+              
+                The shuttle accelerates to the rotational speed of the ring and 
+                after a few seconds, the doors open up. You take a minute to 
+                adjust to the coriolis effect, and look around. Plant and small 
+                animal life surround you, thriving in the artificial gravity.
+                
+                You notice a group of people in athletic clothing assembled
+                near one of the trails.
+                
+            </Text>
+            
+            <Text id="descRaceIntro">
+              
+                It appears that they're about to do a race. One of the racers
+                notices you, and beckons you to come over. He says:
+                
+                "Did you arrive on that spaceship? That's amazing, I haven't 
+                set a foot off this station for nearly a decade. We're about to 
+                do a little race, one loops around the ring, about 1800 meters. 
+                Want to join? It'll be fun!"
+                
+            </Text>
+            
+            <Text id="descLap1Bad">
+              
+                You line up next to the other racers, the maneuver already
+                causing you to become short of breath. A nearby drone emits a
+                tone and the race is off! Things seem to go well for the first
+                four strides, when your legs start feeling as if they're about 
+                to disconnect at the hip. You push through the pain, but 
+                half-way through the loop the ring starts spinning around a 
+                different axis than the engineers intended.
+                
+                When you come to, you see the racers from looking at you with 
+                gentle smiles. One of them helps you up:
+                
+                "It's rough to jump into racing straight off a long time in a 
+                spacecraft. With a bit more practice, maybe you'll enjoy
+                yourself more next time!"
+                
+                You reflect on your lack of fitness as you stumble away.
+                
+            </Text>
+            
+            <Text id="descLap1Good">
+              
+                You run up to the start line, eager to begin. A nearby drone
+                emits a tone and the race is off! You start off strong, weaving 
+                between the other racers as you run through the forested area.
+                The terrarium ceiling is a blur as you accelerate and make your
+                way past the lake.
+                
+            </Text>
+            
+            <Text id="descLap2Bad">
+              
+                As you keep running, you perceive a racer you have hitherto not 
+                noticed, but who is now rapidly catching up to you: it is your 
+                fatigue. Your limbs, which were so spry only a minute earlier, 
+                now feel clunkier than an Antares I freighter. You start 
+                hallucinating hull breach warning sirens, and in that 
+                distracted state you misjudge a step and ragdroll into a nearby 
+                pond.
+                
+                It takes some time for others to notice your plight, but soon 
+                enough they help you out of the water. You thank them, and then 
+                shuffle towards the shuttle station.
+                
+            </Text>
+            
+            <Text id="descLap2Good">
+              
+                Your muscles feel sore, but to you, it's just a minor 
+                annoyance. While you move slower than before, the other 
+                races move slower still. You pass by a pair of picnickers that 
+                cheer you on as you advance in the rank, with only a few races 
+                in front of you now. You think to yourself:
+                
+                "Truly, this is a metaphor for my journey! I shall reach the
+                finish line as surely as I will reach the Galactic Core!"
+                
+                Distracted by the realization, you trip over a loose rock, but 
+                maintain balance and resume running.
+                
+            </Text>
+            
+            <Text id="descLap3Bad">
+              
+                At least, you meant to resume running: you've twisted your
+                ankle! Each step on the affected side sends waves of pain up 
+                your leg. You try to continue anyway, but soon progress becomes 
+                impossible. As you're about to give up, you recall you Galactic 
+                quest. In a now familiar yet quixotic fashion, the time slows 
+                down and you call out in the coreward direction:
+                
+                "Domina! Sustain me!"
+                
+                A nearby bird, startled, flutters away. The time resumes its 
+                normal flow, and words materialize in your mind:
+                
+                "Allowing you to struggle is the best help I can offer..."
+                
+                You grimace as you fall to the ground, partly in pain, and 
+                partly at your patron's betrayal in your most trying time. A 
+                concerned posse approaches you, and soon enough you're carried 
+                out a drone stretcher. After injesting a few drugs, you're good 
+                to go.
+                
+            </Text>
+            
+            <Text id="descLap3Good">
+              
+                Your near-fall jolts your body into overdrive. Ignoring all 
+                your pain, all your fatigue and all your doubts you focus 
+                entirely on the race. Your feet move as if posessed by the 
+                spirit of Domina herself, left in front of right, right in 
+                front of left. The world falls away.
+                
+                When you come to, you're surrounded by the other racers.
+                
+                "That was incredible, you've finished it in record time!"
+                
+                You celebrate with your newfound friends at a bar, but as the 
+                adrenaline retreats and pain returns, you vow never to do 
+                something like this ever again.
+                
+            </Text>
+            
+            <Text id="actionApproach">[A]pproach the group</Text>
+            <Text id="actionTerrariumA">Terrarium [A]lpha</Text>
+            <Text id="actionTerrariumB">Terrarium [B]eta</Text>
+            <Text id="actionLeave">[L]eave</Text>
+            <Text id="actionContinue">[C]ontinue</Text>
+            <Text id="actionNoThanks">[N]o thanks... I think I twisted my ankle...</Text>
+            <Text id="actionSure">[S]ure, sounds like a grand time!</Text>
+        </Language>
+    </StationType>
+    
+    <Globals>
+        (block Nil
+            (setq slLeaveRace 
+                (lambda Nil
+                    (block Nil
+                        (scrShowPane gScreen "TerrariumA")
+                        (objSetTypeData gSource 'nextRaceTime (+ (unvGetTick) 5400))
+                        (objSetData gPlayerShip 'slFitnessTime (unvGetTick))
+                        (objIncData gPlayerShip 'slFitness 1)
+                        )
+                    )
+                )
+            )
+    </Globals>
+</TranscendenceModule>

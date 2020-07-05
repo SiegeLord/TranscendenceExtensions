@@ -76,7 +76,7 @@ maxArmor: medium
             count=              "4"
             />
 
-        <Image imageID="&rsSiegeLordGarnetGameImage;"      imageWidth="64" imageHeight="64" rotationCount="120"/>
+        <Image imageID="&rsSiegeLordGarnetGameImage;"      imageWidth="64" imageHeight="64" rotationCount="120" rotationColumns="12"/>
         <HeroImage imageID="&rsSiegeLordGarnetLargeImage;" imageWidth="320" imageHeight="320"/>
 
         <Effects>
