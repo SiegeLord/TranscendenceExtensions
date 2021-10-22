@@ -9,7 +9,7 @@
 <TranscendenceExtension UNID= "&exSiegeLordSilverfishPlayerShipExt;"
         apiVersion= "43"
         name= "Silverfish Playership"
-        version= "0.1.2"
+        version= "1.0.0"
         >
     <Library UNID="&unidHumanSpaceLibrary;"/>
     <Library UNID="&unidSiegeLordLibrary;"/>

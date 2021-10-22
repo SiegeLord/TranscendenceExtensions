@@ -9,7 +9,7 @@
 <TranscendenceExtension UNID= "&exSiegeLordXortekCorporationExt;"
         apiVersion= "43"
         name= "Xortek Corporation"
-        version= "0.2.1"
+        version= "1.0.0"
         >
     <Library UNID="&unidHumanSpaceLibrary;"/>
     <Library UNID="&unidSiegeLordLibrary;"/>

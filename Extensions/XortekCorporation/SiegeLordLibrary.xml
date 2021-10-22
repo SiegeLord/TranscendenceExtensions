@@ -66,6 +66,6 @@
         release=            "1"
         private=            "true"
         apiVersion=         "43" 
-        version=            "0.2.3"
+        version=            "1.0.0"
         >
 </TranscendenceLibrary>

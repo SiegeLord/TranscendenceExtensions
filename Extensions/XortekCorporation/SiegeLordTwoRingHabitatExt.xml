@@ -9,7 +9,7 @@
 <TranscendenceExtension UNID= "&exSiegeLordTwoRingHabitatExt;"
         apiVersion= "43"
         name= "Two Ring Habitat"
-        version= "0.1.0"
+        version= "1.0.0"
         >
     <Library UNID="&unidHumanSpaceLibrary;"/>
     <Library UNID="&unidSiegeLordLibrary;"/>
